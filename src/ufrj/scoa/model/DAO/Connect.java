@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public class Connect {
 	
-   public boolean connectDB() {
+   public static Connection connectDB() {
 	   
 	   Connection conn = null;
 	   
@@ -16,27 +16,30 @@ public class Connect {
             String url = "jdbc:mysql://localhost/scoa";
             Class.forName ("com.mysql.jdbc.Driver").newInstance();
             conn = DriverManager.getConnection (url, userName, password);
-            System.out.println ("Conexão com o BD estabelecida!");
-            return true;
+            
+            return conn;
         }
         catch (Exception e)
         {
             System.err.println ("Não foi possível estabelecer conexão com o BD");
-            return false;
-        }
-        finally
-        {
-            if (conn != null)
-            {
-                try
-                {
-                    conn.close ();
-                    System.out.println ("Conexão finalizada");
-                }
-                catch (Exception e) { /* ignore close errors */ }
-            }
+            return conn;
         }
         
    }
-        
+   
+   public static void close(Connection conn)
+   {
+   
+       try
+       {
+    	   if (conn != null)
+           {
+    		   conn.close ();
+           }
+           System.out.println ("Conexão finalizada");
+       }
+       catch (Exception e) { /* ignore close errors */ }
+   
+   }
+   
 }
