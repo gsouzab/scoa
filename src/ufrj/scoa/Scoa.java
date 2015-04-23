@@ -1,5 +1,6 @@
 package ufrj.scoa;
 
+import ufrj.scoa.view.CourseCreationView;
 import ufrj.scoa.view.StudentCreationView;
 
 public class Scoa {
@@ -8,8 +9,10 @@ public class Scoa {
 		// TODO Auto-generated method stub
 		
 		StudentCreationView studentCreationView = new StudentCreationView();
+		CourseCreationView courseCreationView = new CourseCreationView();
+		
        // new ControllerPrincipal(framePrincipal);
-        studentCreationView.setVisible(true);
+		courseCreationView.setVisible(true);
 
 	}
 

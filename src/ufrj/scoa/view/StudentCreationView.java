@@ -45,8 +45,9 @@ public class StudentCreationView extends JFrame {
 	 * Create the frame.
 	 */
 	public StudentCreationView() {
+		setTitle("Cadastro de Alunos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 640, 480);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -68,7 +69,7 @@ public class StudentCreationView extends JFrame {
 		
 		JPanel panelEmail = new JPanel();
 		panelEmail.setLayout(null);
-		panelEmail.setBounds(6, 167, 438, 31);
+		panelEmail.setBounds(6, 138, 438, 31);
 		contentPane.add(panelEmail);
 		
 		JLabel lblEmail = new JLabel("Email:");
@@ -82,7 +83,7 @@ public class StudentCreationView extends JFrame {
 		
 		JPanel panelBirthdate = new JPanel();
 		panelBirthdate.setLayout(null);
-		panelBirthdate.setBounds(6, 124, 438, 31);
+		panelBirthdate.setBounds(6, 103, 438, 31);
 		contentPane.add(panelBirthdate);
 		
 		MaskFormatter cpfMask = null;
@@ -110,7 +111,7 @@ public class StudentCreationView extends JFrame {
 		
 		JPanel panelCpf = new JPanel();
 		panelCpf.setLayout(null);
-		panelCpf.setBounds(6, 81, 438, 31);
+		panelCpf.setBounds(6, 70, 438, 31);
 		contentPane.add(panelCpf);
 		
 		JLabel lblCpf = new JLabel("CPF:");
