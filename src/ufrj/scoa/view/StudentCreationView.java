@@ -14,6 +14,10 @@ import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 
 import java.text.Format;
+import javax.swing.JList;
+import javax.swing.JComboBox;
+import javax.swing.JSeparator;
+import javax.swing.JButton;
 
 public class StudentCreationView extends JFrame {
 
@@ -54,7 +58,7 @@ public class StudentCreationView extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panelName = new JPanel();
-		panelName.setBounds(6, 38, 438, 31);
+		panelName.setBounds(6, 85, 628, 31);
 		contentPane.add(panelName);
 		panelName.setLayout(null);
 		
@@ -63,13 +67,13 @@ public class StudentCreationView extends JFrame {
 		panelName.add(lblName);
 		
 		tfName = new JTextField();
-		tfName.setBounds(147, 0, 285, 28);
+		tfName.setBounds(205, 0, 417, 28);
 		panelName.add(tfName);
 		tfName.setColumns(10);
 		
 		JPanel panelEmail = new JPanel();
 		panelEmail.setLayout(null);
-		panelEmail.setBounds(6, 138, 438, 31);
+		panelEmail.setBounds(6, 185, 628, 31);
 		contentPane.add(panelEmail);
 		
 		JLabel lblEmail = new JLabel("Email:");
@@ -78,12 +82,12 @@ public class StudentCreationView extends JFrame {
 		
 		tfEmail = new JTextField();
 		tfEmail.setColumns(10);
-		tfEmail.setBounds(147, 0, 285, 28);
+		tfEmail.setBounds(206, 0, 416, 28);
 		panelEmail.add(tfEmail);
 		
 		JPanel panelBirthdate = new JPanel();
 		panelBirthdate.setLayout(null);
-		panelBirthdate.setBounds(6, 103, 438, 31);
+		panelBirthdate.setBounds(6, 150, 628, 31);
 		contentPane.add(panelBirthdate);
 		
 		MaskFormatter cpfMask = null;
@@ -104,14 +108,14 @@ public class StudentCreationView extends JFrame {
 //		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		
 		JFormattedTextField tfDate = new JFormattedTextField();
-		tfDate.setBounds(149, 0, 135, 28);
+		tfDate.setBounds(204, 0, 135, 28);
 		panelBirthdate.add(tfDate);
 		
 		dateMask.install(tfDate);
 		
 		JPanel panelCpf = new JPanel();
 		panelCpf.setLayout(null);
-		panelCpf.setBounds(6, 70, 438, 31);
+		panelCpf.setBounds(6, 117, 628, 31);
 		contentPane.add(panelCpf);
 		
 		JLabel lblCpf = new JLabel("CPF:");
@@ -119,7 +123,37 @@ public class StudentCreationView extends JFrame {
 		panelCpf.add(lblCpf);
 		
 		JFormattedTextField tfCpf = new JFormattedTextField(cpfMask);
-		tfCpf.setBounds(149, 0, 135, 28);
+		tfCpf.setBounds(205, 0, 135, 28);
 		panelCpf.add(tfCpf);
+		
+		JPanel panelCurso = new JPanel();
+		panelCurso.setLayout(null);
+		panelCurso.setBounds(6, 50, 628, 31);
+		contentPane.add(panelCurso);
+		
+		JLabel lblCourse = new JLabel("Curso:");
+		lblCourse.setBounds(6, 6, 41, 16);
+		panelCurso.add(lblCourse);
+		
+		JComboBox cbCourse = new JComboBox();
+		cbCourse.setBounds(204, 2, 418, 27);
+		panelCurso.add(cbCourse);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(6, 383, 628, 12);
+		contentPane.add(separator);
+		
+		JPanel panelButtons = new JPanel();
+		panelButtons.setBounds(6, 398, 628, 54);
+		contentPane.add(panelButtons);
+		panelButtons.setLayout(null);
+		
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setBounds(376, 6, 117, 29);
+		panelButtons.add(btnSalvar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(505, 6, 117, 29);
+		panelButtons.add(btnCancelar);
 	}
 }
