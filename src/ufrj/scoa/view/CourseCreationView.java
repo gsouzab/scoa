@@ -25,26 +25,13 @@ public class CourseCreationView extends JFrame {
     private JPanel contentPane;
     private JTextField tfName;
     private JTextField tfCode;
-    
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    CourseCreationView frame = new CourseCreationView();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+    private JTextArea taDescription;
+    private JButton btnSalvar;
     
     /**
      * Create the frame.
      */
+    
     public CourseCreationView() {
         setTitle("Cadastro de Cursos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,7 +85,7 @@ public class CourseCreationView extends JFrame {
         lblDescription.setBounds(6, 6, 110, 16);
         panelDescription.add(lblDescription);
         
-        JTextArea taDescription = new JTextArea();
+        taDescription= new JTextArea();
         taDescription.setLineWrap(true);
         taDescription.setBounds(128, 6, 494, 179);
         panelDescription.add(taDescription);
@@ -108,7 +95,7 @@ public class CourseCreationView extends JFrame {
         contentPane.add(panelButtons);
         panelButtons.setLayout(null);
         
-        JButton btnSalvar = new JButton("Salvar");
+        btnSalvar = new JButton("Salvar");
         btnSalvar.setBounds(376, 6, 117, 29);
         panelButtons.add(btnSalvar);
         
@@ -116,4 +103,40 @@ public class CourseCreationView extends JFrame {
         btnCancelar.setBounds(505, 6, 117, 29);
         panelButtons.add(btnCancelar);
     }
+
+	public JButton getBtnSalvar() {
+		return btnSalvar;
+	}
+
+	public void setBtnSalvar(JButton btnSalvar) {
+		this.btnSalvar = btnSalvar;
+	}
+
+	public JTextField getTfName() {
+		return tfName;
+	}
+
+	public void setTfName(JTextField tfName) {
+		this.tfName = tfName;
+	}
+
+	public JTextField getTfCode() {
+		return tfCode;
+	}
+
+	public void setTfCode(JTextField tfCode) {
+		this.tfCode = tfCode;
+	}
+
+	public JTextArea getTaDescription() {
+		return taDescription;
+	}
+
+	public void setTaDescription(JTextArea taDescription) {
+		this.taDescription = taDescription;
+	}
+	
+	
+    
+    
 }
