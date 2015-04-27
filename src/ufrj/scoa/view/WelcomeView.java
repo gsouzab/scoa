@@ -5,6 +5,9 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class WelcomeView extends JPanel {
 	/**
@@ -19,17 +22,20 @@ public class WelcomeView extends JPanel {
 		setLayout(null);
 		
 		JLabel lblScoa = new JLabel("SCOA");
-		lblScoa.setBounds(284, 6, 71, 31);
+		lblScoa.setBounds(10, 0, 620, 33);
 		add(lblScoa);
 		lblScoa.setFont(new Font("Dialog", Font.BOLD, 25));
+		lblScoa.setHorizontalAlignment(JLabel.CENTER);
 		
-		JLabel lblSistemaControle = new JLabel("Sistema de Controle Acadêmico");
-		lblSistemaControle.setBounds(196, 45, 248, 20);
+		JLabel lblSistemaControle = new JLabel("Sistema de Controle Acad\u00EAmico");
+		lblSistemaControle.setBounds(10, 38, 620, 21);
 		add(lblSistemaControle);
 		lblSistemaControle.setFont(new Font("Dialog", Font.PLAIN, 16));
+		lblSistemaControle.setHorizontalAlignment(JLabel.CENTER);
 		
 		JLabel lblMenuAcima = new JLabel("Utilize o menu acima para navegar");
-		lblMenuAcima.setBounds(212, 418, 216, 16);
+		lblMenuAcima.setBounds(10, 433, 620, 16);
+		lblMenuAcima.setHorizontalAlignment(JLabel.CENTER);
 		add(lblMenuAcima);
 	}
 }

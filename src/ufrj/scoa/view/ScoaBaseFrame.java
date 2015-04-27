@@ -5,6 +5,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class ScoaBaseFrame extends JFrame {
 
@@ -24,7 +26,7 @@ public class ScoaBaseFrame extends JFrame {
 	
 	public ScoaBaseFrame(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 640, 480);
+        setBounds(100, 100, 640, 520);
         setResizable(false);
         
         this.generateMenu();
@@ -51,6 +53,16 @@ public class ScoaBaseFrame extends JFrame {
         
         menuBar.add(courseMenu);
         menuBar.add(studentsMenu);
+        GroupLayout groupLayout = new GroupLayout(getContentPane());
+        groupLayout.setHorizontalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addGap(0, 624, Short.MAX_VALUE)
+        );
+        groupLayout.setVerticalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addGap(0, 421, Short.MAX_VALUE)
+        );
+        getContentPane().setLayout(groupLayout);
         
         setVisible(true);
     	

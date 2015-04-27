@@ -9,6 +9,11 @@ import javax.swing.JButton;
 import javax.swing.border.EtchedBorder;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.DropMode;
+import javax.swing.JScrollPane;
 
 public class CourseCreationView extends JPanel {
     
@@ -25,56 +30,56 @@ public class CourseCreationView extends JPanel {
      */
     
     public CourseCreationView() {
-        setLayout(null);
         
         tfName = new JTextField();
-        tfName.setBounds(139, 6, 494, 28);
-        add(tfName);
+        tfName.setBounds(139, 25, 483, 28);
         tfName.setColumns(10);
         
         JSeparator separator = new JSeparator();
-        separator.setBounds(6, 392, 627, 12);
-        this.add(separator);
+        separator.setBounds(0, 397, 649, 12);
         
         JPanel panelDescription = new JPanel();
         panelDescription.setBounds(230, 10, 1, 1);
         panelDescription.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
         panelDescription.setLayout(null);
-        this.add(panelDescription);
         
         JPanel panelButtons = new JPanel();
         panelButtons.setBounds(236, 10, 1, 1);
-        this.add(panelButtons);
         panelButtons.setLayout(null);
         
         JLabel lblName = new JLabel("Nome*");
-        lblName.setBounds(6, 10, 110, 16);
-        add(lblName);
+        lblName.setBounds(10, 31, 110, 16);
         
-        JLabel lblCode = new JLabel("Código*");
-        lblCode.setBounds(6, 39, 110, 16);
-        add(lblCode);
+        JLabel lblCode = new JLabel("C\u00F3digo");
+        lblCode.setBounds(10, 70, 110, 16);
         
         tfCode = new JTextField();
-        tfCode.setBounds(139, 33, 110, 28);
-        add(tfCode);
+        tfCode.setBounds(139, 64, 483, 28);
         tfCode.setColumns(10);
         
-        JLabel lblDescription = new JLabel("Descrição*");
-        lblDescription.setBounds(6, 67, 110, 16);
-        add(lblDescription);
+        JLabel lblDescription = new JLabel("Descri\u00E7\u00E3o");
+        lblDescription.setBounds(10, 113, 110, 16);
         
         taDescription= new JTextArea();
-        taDescription.setBounds(139, 64, 494, 179);
-        add(taDescription);
+        taDescription.setBounds(139, 109, 483, 168);
         taDescription.setLineWrap(true);
         
         btnSalvar = new JButton("Salvar");
-        btnSalvar.setBounds(387, 405, 117, 29);
-        add(btnSalvar);
+        btnSalvar.setBounds(389, 420, 112, 29);
         
-        btnCancelar = new JButton("Cancelar");
-        btnCancelar.setBounds(516, 405, 117, 29);
+        btnCancelar = new JButton("Voltar");
+        btnCancelar.setBounds(510, 420, 112, 29);
+        setLayout(null);
+        add(tfName);
+        add(separator);
+        add(panelDescription);
+        add(panelButtons);
+        add(lblName);
+        add(lblCode);
+        add(tfCode);
+        add(lblDescription);
+        add(taDescription);
+        add(btnSalvar);
         add(btnCancelar);
         setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblName, tfName, lblCode, separator, panelDescription, lblDescription, panelButtons, btnCancelar}));
    	}
@@ -99,5 +104,4 @@ public class CourseCreationView extends JPanel {
 	public JTextArea getTaDescription() {
 		return taDescription;
 	}
-
 }

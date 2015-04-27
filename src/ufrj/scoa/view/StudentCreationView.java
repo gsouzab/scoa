@@ -49,62 +49,62 @@ public class StudentCreationView extends JPanel {
 		}
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(9, 384, 619, 9);
+		separator.setBounds(0, 400, 640, 9);
 		this.add(separator);
 		
 		JLabel lblName = new JLabel("Nome*");
-		lblName.setBounds(9, 77, 41, 16);
+		lblName.setBounds(9, 66, 131, 16);
 		add(lblName);
 		
 		tfName = new JTextField();
-		tfName.setBounds(166, 72, 462, 28);
+		tfName.setBounds(128, 60, 500, 28);
 		add(tfName);
 		tfName.setColumns(10);
 		
 		JLabel lblCourse = new JLabel("Curso*");
-		lblCourse.setBounds(9, 40, 41, 16);
+		lblCourse.setBounds(9, 22, 131, 16);
 		add(lblCourse);
 		
 		cbCourse = new JComboBox<Course>();
 		
 		populateComboBox();
 		
-		cbCourse.setBounds(166, 35, 462, 27);
+		cbCourse.setBounds(128, 17, 500, 28);
 		add(cbCourse);
 		
 		JLabel lblCpf = new JLabel("CPF*");
-		lblCpf.setBounds(9, 155, 131, 16);
+		lblCpf.setBounds(9, 144, 131, 16);
 		add(lblCpf);
 		
 		tfCpf = new JFormattedTextField(cpfMask);
-		tfCpf.setBounds(166, 150, 135, 28);
+		tfCpf.setBounds(128, 138, 116, 28);
 		add(tfCpf);
 		
 		JLabel lblBirthdate = new JLabel("Data de Nascimento*");
-		lblBirthdate.setBounds(313, 155, 145, 16);
+		lblBirthdate.setBounds(383, 144, 145, 16);
 		add(lblBirthdate);
 		
 //		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		
 		tfDate = new JFormattedTextField(dateMask);
-		tfDate.setBounds(493, 150, 135, 28);
+		tfDate.setBounds(538, 138, 90, 28);
 		add(tfDate);
 		
 		btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(372, 405, 117, 29);
+		btnSalvar.setBounds(384, 420, 117, 29);
 		add(btnSalvar);
 		
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(511, 405, 117, 29);
+		btnCancelar = new JButton("Voltar");
+		btnCancelar.setBounds(511, 420, 117, 29);
 		add(btnCancelar);
 		
 		tfEmail = new JTextField();
-		tfEmail.setBounds(166, 112, 462, 28);
+		tfEmail.setBounds(128, 99, 500, 28);
 		add(tfEmail);
 		tfEmail.setColumns(10);
 		
-		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setBounds(9, 117, 41, 16);
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setBounds(9, 105, 131, 16);
 		add(lblEmail);
 	}
 	
