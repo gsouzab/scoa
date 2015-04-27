@@ -1,27 +1,18 @@
 package ufrj.scoa.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-public class CourseCreationView extends JFrame {
+public class CourseCreationView extends ScoaBaseFrame {
     
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField tfName;
     private JTextField tfCode;
@@ -33,9 +24,9 @@ public class CourseCreationView extends JFrame {
      */
     
     public CourseCreationView() {
+    	
         setTitle("Cadastro de Cursos");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 640, 480);
+        
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -43,7 +34,7 @@ public class CourseCreationView extends JFrame {
         
         JPanel panelName = new JPanel();
         panelName.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-        panelName.setBounds(6, 81, 628, 29);
+        panelName.setBounds(6, 59, 628, 29);
         contentPane.add(panelName);
         panelName.setLayout(null);
         
@@ -59,7 +50,7 @@ public class CourseCreationView extends JFrame {
         JPanel panelCode = new JPanel();
         panelCode.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
         panelCode.setLayout(null);
-        panelCode.setBounds(6, 49, 628, 29);
+        panelCode.setBounds(6, 27, 628, 29);
         contentPane.add(panelCode);
         
         JLabel lblCode = new JLabel("Código");
@@ -72,13 +63,13 @@ public class CourseCreationView extends JFrame {
         panelCode.add(tfCode);
         
         JSeparator separator = new JSeparator();
-        separator.setBounds(6, 387, 628, 6);
+        separator.setBounds(6, 365, 628, 6);
         contentPane.add(separator);
         
         JPanel panelDescription = new JPanel();
         panelDescription.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
         panelDescription.setLayout(null);
-        panelDescription.setBounds(6, 113, 628, 191);
+        panelDescription.setBounds(6, 91, 628, 191);
         contentPane.add(panelDescription);
         
         JLabel lblDescription = new JLabel("Descrição:");
@@ -91,7 +82,7 @@ public class CourseCreationView extends JFrame {
         panelDescription.add(taDescription);
         
         JPanel panelButtons = new JPanel();
-        panelButtons.setBounds(6, 404, 628, 48);
+        panelButtons.setBounds(6, 382, 628, 48);
         contentPane.add(panelButtons);
         panelButtons.setLayout(null);
         
@@ -102,7 +93,7 @@ public class CourseCreationView extends JFrame {
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.setBounds(505, 6, 117, 29);
         panelButtons.add(btnCancelar);
-    }
+   	}
 
 	public JButton getBtnSalvar() {
 		return btnSalvar;
@@ -135,8 +126,4 @@ public class CourseCreationView extends JFrame {
 	public void setTaDescription(JTextArea taDescription) {
 		this.taDescription = taDescription;
 	}
-	
-	
-    
-    
 }
