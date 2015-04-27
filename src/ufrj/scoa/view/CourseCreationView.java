@@ -51,11 +51,11 @@ public class CourseCreationView extends JPanel {
         
         JLabel lblName = new JLabel("Nome*");
         lblName.setFont(new Font("Arial", Font.BOLD, 12));
-        lblName.setBounds(10, 31, 38, 15);
+        lblName.setBounds(10, 31, 119, 15);
         
         JLabel lblCode = new JLabel("C\u00F3digo");
         lblCode.setFont(new Font("Arial", Font.BOLD, 12));
-        lblCode.setBounds(10, 70, 39, 15);
+        lblCode.setBounds(10, 70, 119, 15);
         
         tfCode = new JTextField();
         tfCode.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -64,7 +64,7 @@ public class CourseCreationView extends JPanel {
         
         JLabel lblDescription = new JLabel("Descri\u00E7\u00E3o");
         lblDescription.setFont(new Font("Arial", Font.BOLD, 12));
-        lblDescription.setBounds(10, 113, 58, 15);
+        lblDescription.setBounds(10, 113, 119, 15);
         
         taDescription= new JTextArea();
         taDescription.setFont(new Font("Arial", Font.PLAIN, 13));

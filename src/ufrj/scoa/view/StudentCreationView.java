@@ -56,7 +56,7 @@ public class StudentCreationView extends JPanel {
 		
 		JLabel lblName = new JLabel("Nome*");
 		lblName.setFont(new Font("Arial", Font.BOLD, 12));
-		lblName.setBounds(9, 66, 38, 15);
+		lblName.setBounds(9, 66, 109, 15);
 		add(lblName);
 		
 		tfName = new JTextField();
@@ -67,7 +67,7 @@ public class StudentCreationView extends JPanel {
 		
 		JLabel lblCourse = new JLabel("Curso*");
 		lblCourse.setFont(new Font("Arial", Font.BOLD, 12));
-		lblCourse.setBounds(9, 22, 39, 15);
+		lblCourse.setBounds(9, 22, 109, 15);
 		add(lblCourse);
 		
 		cbCourse = new JComboBox<Course>();
@@ -80,7 +80,7 @@ public class StudentCreationView extends JPanel {
 		
 		JLabel lblCpf = new JLabel("CPF*");
 		lblCpf.setFont(new Font("Arial", Font.BOLD, 12));
-		lblCpf.setBounds(9, 144, 27, 15);
+		lblCpf.setBounds(9, 144, 109, 15);
 		add(lblCpf);
 		
 		tfCpf = new JFormattedTextField(cpfMask);
@@ -90,7 +90,7 @@ public class StudentCreationView extends JPanel {
 		
 		JLabel lblBirthdate = new JLabel("Data de Nascimento*");
 		lblBirthdate.setFont(new Font("Arial", Font.BOLD, 12));
-		lblBirthdate.setBounds(383, 144, 119, 15);
+		lblBirthdate.setBounds(369, 144, 159, 15);
 		add(lblBirthdate);
 		
 //		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -118,7 +118,7 @@ public class StudentCreationView extends JPanel {
 		
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setFont(new Font("Arial", Font.BOLD, 12));
-		lblEmail.setBounds(9, 105, 31, 15);
+		lblEmail.setBounds(9, 105, 109, 15);
 		add(lblEmail);
 	}
 	
@@ -155,5 +155,4 @@ public class StudentCreationView extends JPanel {
 	public JComboBox<Course> getCbCourse() {
 		return cbCourse;
 	}
-	
 }

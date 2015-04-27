@@ -22,20 +22,20 @@ public class WelcomeView extends JPanel {
 		setLayout(null);
 		
 		JLabel lblScoa = new JLabel("SCOA");
-		lblScoa.setBounds(284, 0, 71, 29);
+		lblScoa.setBounds(10, 0, 620, 29);
 		add(lblScoa);
 		lblScoa.setFont(new Font("Arial", Font.BOLD, 25));
 		lblScoa.setHorizontalAlignment(JLabel.CENTER);
 		
 		JLabel lblSistemaControle = new JLabel("Sistema de Controle Acad\u00EAmico");
-		lblSistemaControle.setBounds(206, 38, 227, 19);
+		lblSistemaControle.setBounds(10, 38, 620, 19);
 		add(lblSistemaControle);
 		lblSistemaControle.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblSistemaControle.setHorizontalAlignment(JLabel.CENTER);
 		
 		JLabel lblMenuAcima = new JLabel("Utilize o menu acima para navegar");
 		lblMenuAcima.setFont(new Font("Arial", Font.PLAIN, 12));
-		lblMenuAcima.setBounds(225, 433, 190, 15);
+		lblMenuAcima.setBounds(10, 433, 620, 15);
 		lblMenuAcima.setHorizontalAlignment(JLabel.CENTER);
 		add(lblMenuAcima);
 	}
