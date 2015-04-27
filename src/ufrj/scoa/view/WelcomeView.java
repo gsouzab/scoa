@@ -1,47 +1,35 @@
 package ufrj.scoa.view;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 
-public class WelcomeView extends ScoaBaseFrame {
-
-	private JPanel contentPane;
-
+public class WelcomeView extends JPanel {
 	/**
-	 * Launch the application.
+	 * 
 	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Create the frame.
+	 * Create the panel.
 	 */
 	public WelcomeView() {
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
+		setLayout(null);
 		
 		JLabel lblScoa = new JLabel("SCOA");
+		lblScoa.setBounds(284, 6, 71, 31);
+		add(lblScoa);
 		lblScoa.setFont(new Font("Dialog", Font.BOLD, 25));
-		lblScoa.setBounds(269, 0, 89, 30);
-		panel.add(lblScoa);
 		
 		JLabel lblSistemaControle = new JLabel("Sistema de Controle Acadêmico");
+		lblSistemaControle.setBounds(196, 45, 248, 20);
+		add(lblSistemaControle);
 		lblSistemaControle.setFont(new Font("Dialog", Font.PLAIN, 16));
-		lblSistemaControle.setBounds(186, 38, 256, 15);
-		panel.add(lblSistemaControle);
 		
 		JLabel lblMenuAcima = new JLabel("Utilize o menu acima para navegar");
-		lblMenuAcima.setBounds(186, 370, 256, 15);
-		panel.add(lblMenuAcima);
+		lblMenuAcima.setBounds(212, 418, 216, 16);
+		add(lblMenuAcima);
 	}
 }

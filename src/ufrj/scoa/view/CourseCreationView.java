@@ -6,124 +6,98 @@ import javax.swing.JTextField;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
 
-public class CourseCreationView extends ScoaBaseFrame {
+public class CourseCreationView extends JPanel {
     
 
 	private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
     private JTextField tfName;
     private JTextField tfCode;
     private JTextArea taDescription;
     private JButton btnSalvar;
+    private JButton btnCancelar;
     
     /**
      * Create the frame.
      */
     
     public CourseCreationView() {
-    	
-        setTitle("Cadastro de Cursos");
-        
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
-        
-        JPanel panelName = new JPanel();
-        panelName.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-        panelName.setBounds(6, 59, 628, 29);
-        contentPane.add(panelName);
-        panelName.setLayout(null);
-        
-        JLabel lblName = new JLabel("Nome:");
-        lblName.setBounds(6, 6, 110, 16);
-        panelName.add(lblName);
+        setLayout(null);
         
         tfName = new JTextField();
-        tfName.setBounds(128, 0, 494, 28);
-        panelName.add(tfName);
+        tfName.setBounds(139, 6, 494, 28);
+        add(tfName);
         tfName.setColumns(10);
         
-        JPanel panelCode = new JPanel();
-        panelCode.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-        panelCode.setLayout(null);
-        panelCode.setBounds(6, 27, 628, 29);
-        contentPane.add(panelCode);
-        
-        JLabel lblCode = new JLabel("Código");
-        lblCode.setBounds(6, 6, 110, 16);
-        panelCode.add(lblCode);
-        
-        tfCode = new JTextField();
-        tfCode.setColumns(10);
-        tfCode.setBounds(128, 0, 110, 28);
-        panelCode.add(tfCode);
-        
         JSeparator separator = new JSeparator();
-        separator.setBounds(6, 365, 628, 6);
-        contentPane.add(separator);
+        separator.setBounds(6, 392, 627, 12);
+        this.add(separator);
         
         JPanel panelDescription = new JPanel();
+        panelDescription.setBounds(230, 10, 1, 1);
         panelDescription.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
         panelDescription.setLayout(null);
-        panelDescription.setBounds(6, 91, 628, 191);
-        contentPane.add(panelDescription);
-        
-        JLabel lblDescription = new JLabel("Descrição:");
-        lblDescription.setBounds(6, 6, 110, 16);
-        panelDescription.add(lblDescription);
-        
-        taDescription= new JTextArea();
-        taDescription.setLineWrap(true);
-        taDescription.setBounds(128, 6, 494, 179);
-        panelDescription.add(taDescription);
+        this.add(panelDescription);
         
         JPanel panelButtons = new JPanel();
-        panelButtons.setBounds(6, 382, 628, 48);
-        contentPane.add(panelButtons);
+        panelButtons.setBounds(236, 10, 1, 1);
+        this.add(panelButtons);
         panelButtons.setLayout(null);
         
-        btnSalvar = new JButton("Salvar");
-        btnSalvar.setBounds(376, 6, 117, 29);
-        panelButtons.add(btnSalvar);
+        JLabel lblName = new JLabel("Nome*");
+        lblName.setBounds(6, 10, 110, 16);
+        add(lblName);
         
-        JButton btnCancelar = new JButton("Cancelar");
-        btnCancelar.setBounds(505, 6, 117, 29);
-        panelButtons.add(btnCancelar);
+        JLabel lblCode = new JLabel("Código*");
+        lblCode.setBounds(6, 39, 110, 16);
+        add(lblCode);
+        
+        tfCode = new JTextField();
+        tfCode.setBounds(139, 33, 110, 28);
+        add(tfCode);
+        tfCode.setColumns(10);
+        
+        JLabel lblDescription = new JLabel("Descrição*");
+        lblDescription.setBounds(6, 67, 110, 16);
+        add(lblDescription);
+        
+        taDescription= new JTextArea();
+        taDescription.setBounds(139, 64, 494, 179);
+        add(taDescription);
+        taDescription.setLineWrap(true);
+        
+        btnSalvar = new JButton("Salvar");
+        btnSalvar.setBounds(387, 405, 117, 29);
+        add(btnSalvar);
+        
+        btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(516, 405, 117, 29);
+        add(btnCancelar);
+        setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblName, tfName, lblCode, separator, panelDescription, lblDescription, panelButtons, btnCancelar}));
    	}
 
 	public JButton getBtnSalvar() {
 		return btnSalvar;
 	}
 
-	public void setBtnSalvar(JButton btnSalvar) {
-		this.btnSalvar = btnSalvar;
+	public JButton getBtnCancelar() {
+		return btnCancelar;
 	}
 
 	public JTextField getTfName() {
 		return tfName;
 	}
 
-	public void setTfName(JTextField tfName) {
-		this.tfName = tfName;
-	}
-
 	public JTextField getTfCode() {
 		return tfCode;
 	}
 
-	public void setTfCode(JTextField tfCode) {
-		this.tfCode = tfCode;
-	}
 
 	public JTextArea getTaDescription() {
 		return taDescription;
 	}
 
-	public void setTaDescription(JTextArea taDescription) {
-		this.taDescription = taDescription;
-	}
 }

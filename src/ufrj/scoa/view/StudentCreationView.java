@@ -19,7 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 
-public class StudentCreationView extends JFrame {
+public class StudentCreationView extends ScoaBaseFrame {
 
 	/**
 	 * 
