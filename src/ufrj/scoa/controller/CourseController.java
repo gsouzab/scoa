@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import ufrj.scoa.model.DAO.CourseDAO;
 import ufrj.scoa.model.VO.Course;

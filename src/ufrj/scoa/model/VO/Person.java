@@ -1,5 +1,7 @@
 package ufrj.scoa.model.VO;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 public class Person {
@@ -11,14 +13,36 @@ public class Person {
 	private Date birthdate;
 	private int entry;
 	
-	public Person(String name, String cpf, String email, Date birthdate) {
-		super();
+	public Person(String name, String cpf, String email, Date birthdate, int entry) {
+
 		this.name = name;
 		this.cpf = cpf;
 		this.email = email;
 		this.birthdate = birthdate;
+		this.entry = entry;
+		this.password = generateMD5Hash();
 	}
 
+	private String generateMD5Hash() {
+		
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+        md.update(cpf.getBytes());
+ 
+        byte byteData[] = md.digest();
+ 
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < byteData.length; i++) {
+        	sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        
+        return sb.toString();
+	}
+	
 	public String getName() {
 		return name;
 	}

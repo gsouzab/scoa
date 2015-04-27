@@ -51,7 +51,11 @@ public class CourseDAO {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				courseList.add(new Course(rs.getString("name"), rs.getString("code"), rs.getString("description")));
+				
+				Course course = new Course(rs.getString("name"), rs.getString("code"), rs.getString("description"));
+				course.setId(rs.getInt("id"));
+				
+				courseList.add(course);
 			}
 			
 			conn.close();

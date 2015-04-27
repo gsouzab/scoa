@@ -3,7 +3,6 @@ package ufrj.scoa.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import ufrj.scoa.view.CourseCreationView;
 import ufrj.scoa.view.ScoaBaseFrame;
 
 public class ScoaBaseController implements ActionListener {

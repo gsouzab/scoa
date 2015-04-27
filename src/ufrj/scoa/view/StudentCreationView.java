@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.text.MaskFormatter;
-import javax.swing.ComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
@@ -53,7 +52,7 @@ public class StudentCreationView extends JPanel {
 		separator.setBounds(9, 384, 619, 9);
 		this.add(separator);
 		
-		JLabel lblName = new JLabel("Nome:");
+		JLabel lblName = new JLabel("Nome*");
 		lblName.setBounds(9, 77, 41, 16);
 		add(lblName);
 		
@@ -62,7 +61,7 @@ public class StudentCreationView extends JPanel {
 		add(tfName);
 		tfName.setColumns(10);
 		
-		JLabel lblCourse = new JLabel("Curso:");
+		JLabel lblCourse = new JLabel("Curso*");
 		lblCourse.setBounds(9, 40, 41, 16);
 		add(lblCourse);
 		
@@ -73,7 +72,7 @@ public class StudentCreationView extends JPanel {
 		cbCourse.setBounds(166, 35, 462, 27);
 		add(cbCourse);
 		
-		JLabel lblCpf = new JLabel("CPF:");
+		JLabel lblCpf = new JLabel("CPF*");
 		lblCpf.setBounds(9, 155, 131, 16);
 		add(lblCpf);
 		
@@ -81,17 +80,15 @@ public class StudentCreationView extends JPanel {
 		tfCpf.setBounds(166, 150, 135, 28);
 		add(tfCpf);
 		
-		JLabel lblBirthdate = new JLabel("Data de Nascimento:");
+		JLabel lblBirthdate = new JLabel("Data de Nascimento*");
 		lblBirthdate.setBounds(313, 155, 145, 16);
 		add(lblBirthdate);
 		
 //		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		
-		tfDate = new JFormattedTextField();
+		tfDate = new JFormattedTextField(dateMask);
 		tfDate.setBounds(493, 150, 135, 28);
 		add(tfDate);
-		
-		dateMask.install(tfDate);
 		
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.setBounds(372, 405, 117, 29);
@@ -141,7 +138,7 @@ public class StudentCreationView extends JPanel {
 		return tfCpf;
 	}
 
-	public JComboBox getCbCourse() {
+	public JComboBox<Course> getCbCourse() {
 		return cbCourse;
 	}
 	
