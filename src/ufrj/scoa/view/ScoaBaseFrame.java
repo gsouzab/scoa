@@ -40,7 +40,7 @@ public class ScoaBaseFrame extends JFrame {
         
         JMenu courseMenu = new JMenu("Cursos");
         courseMenu.setFont(new Font("Arial", Font.PLAIN, 12));
-        newCourseMenuItem = new JMenuItem("Novo Curso");
+        newCourseMenuItem = new JMenuItem("Cadastrar Curso");
         newCourseMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         listCoursesMenuItem = new JMenuItem("Listar Cursos");
         listCoursesMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -50,7 +50,7 @@ public class ScoaBaseFrame extends JFrame {
         
         JMenu studentsMenu = new JMenu("Alunos");
         studentsMenu.setFont(new Font("Arial", Font.PLAIN, 12));
-        newStudentMenuItem = new JMenuItem("Novo Aluno");
+        newStudentMenuItem = new JMenuItem("Cadastrar Aluno");
         newStudentMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         listStudentsMenuItem = new JMenuItem("Listar Alunos");
         listStudentsMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));

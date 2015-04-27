@@ -2,22 +2,27 @@ package ufrj.scoa.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import ufrj.scoa.model.DAO.CourseDAO;
 import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.view.CourseCreationView;
+import ufrj.scoa.view.CoursesListView;
 import ufrj.scoa.view.WelcomeView;
 
 public class CourseController implements ActionListener {
 	
+	private static final String NEW_LINE = "\n";
 	private CourseCreationView courseCreationView;
 	private ScoaBaseController baseController;
+	private CoursesListView coursesListView;
 	
 	public CourseController(ScoaBaseController baseController) {
 		this.baseController = baseController;
 		this.courseCreationView = new CourseCreationView();
+		this.coursesListView = new CoursesListView();
 		this.courseCreationView.getBtnSalvar().addActionListener(this);
 		this.courseCreationView.getBtnCancelar().addActionListener(this);
 	}
@@ -63,8 +68,29 @@ public class CourseController implements ActionListener {
 		}
 	}
 	
+	public void listCourses() {
+		CourseDAO courseDAO = new CourseDAO();
+		ArrayList<Course> courses = courseDAO.list();
+		String courseListText = "";
+		
+		for(Course course: courses) {
+			
+			courseListText += course.toString();
+			courseListText += NEW_LINE;
+		}
+		
+		this.coursesListView.getTxtrAwcCurso().setText(courseListText);
+			
+	}
+	
 	public CourseCreationView getCourseCreationView() {
 		return courseCreationView;
 	}
+
+	public CoursesListView getCoursesListView() {
+		return coursesListView;
+	}
+	
+	
 
 }

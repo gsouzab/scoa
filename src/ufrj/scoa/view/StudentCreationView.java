@@ -116,7 +116,7 @@ public class StudentCreationView extends JPanel {
 		add(tfEmail);
 		tfEmail.setColumns(10);
 		
-		JLabel lblEmail = new JLabel("Email");
+		JLabel lblEmail = new JLabel("Email*");
 		lblEmail.setFont(new Font("Arial", Font.BOLD, 12));
 		lblEmail.setBounds(9, 105, 109, 15);
 		add(lblEmail);
