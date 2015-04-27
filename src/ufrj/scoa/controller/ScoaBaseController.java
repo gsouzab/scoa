@@ -30,7 +30,8 @@ public class ScoaBaseController implements ActionListener {
 	        
 		} else if(event.getSource() == baseFrame.getNewStudentMenuItem()) {
 			
-			System.out.println("Novo evento botao do menu 2");
+			StudentController studentController = new StudentController(this);
+			baseFrame.changePanel(studentController.getStudentCreationView(), "Novo aluno");
 		}
 		
 		

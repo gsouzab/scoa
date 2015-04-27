@@ -3,7 +3,9 @@ package ufrj.scoa.model.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import ufrj.scoa.model.VO.Course;
 
@@ -34,6 +36,31 @@ public class CourseDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+	}
+	
+	public ArrayList<Course> list() {
+		
+		ArrayList<Course> courseList = new ArrayList<Course>();
+		
+		try {
+			
+			conn = Connect.connectDB();
+			
+			ps = conn.prepareStatement("SELECT * FROM course");
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				courseList.add(new Course(rs.getString("name"), rs.getString("code"), rs.getString("description")));
+			}
+			
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return courseList; 
 	}
 
 }

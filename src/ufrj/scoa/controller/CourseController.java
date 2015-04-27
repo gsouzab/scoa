@@ -63,6 +63,7 @@ public class CourseController implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Preencha todos os campos marcados com *");
 		}
 	}
+	
 	public CourseCreationView getCourseCreationView() {
 		return courseCreationView;
 	}
