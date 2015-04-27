@@ -30,7 +30,7 @@ public class CourseController implements ActionListener {
 			saveCourse();
 			
 		} else if(event.getSource() == this.courseCreationView.getBtnCancelar()) {
-			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao Scoa");
+			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem-vindo ao SCOA");
 			
 		}
 	}

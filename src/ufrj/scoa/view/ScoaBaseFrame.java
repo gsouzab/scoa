@@ -7,6 +7,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import java.awt.Font;
 
 public class ScoaBaseFrame extends JFrame {
 
@@ -38,15 +39,21 @@ public class ScoaBaseFrame extends JFrame {
         setJMenuBar(menuBar);
         
         JMenu courseMenu = new JMenu("Cursos");
+        courseMenu.setFont(new Font("Arial", Font.PLAIN, 12));
         newCourseMenuItem = new JMenuItem("Novo Curso");
+        newCourseMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         listCoursesMenuItem = new JMenuItem("Listar Cursos");
+        listCoursesMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         
         courseMenu.add(newCourseMenuItem);
         courseMenu.add(listCoursesMenuItem);
         
         JMenu studentsMenu = new JMenu("Alunos");
+        studentsMenu.setFont(new Font("Arial", Font.PLAIN, 12));
         newStudentMenuItem = new JMenuItem("Novo Aluno");
+        newStudentMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         listStudentsMenuItem = new JMenuItem("Listar Alunos");
+        listStudentsMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         
         studentsMenu.add(newStudentMenuItem);
         studentsMenu.add(listStudentsMenuItem);

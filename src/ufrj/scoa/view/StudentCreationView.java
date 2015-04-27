@@ -51,12 +51,12 @@ public class StudentCreationView extends JPanel {
 		}
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(0, 400, 640, 9);
+		separator.setBounds(0, 397, 640, 9);
 		this.add(separator);
 		
 		JLabel lblName = new JLabel("Nome*");
 		lblName.setFont(new Font("Arial", Font.BOLD, 12));
-		lblName.setBounds(9, 66, 131, 16);
+		lblName.setBounds(9, 66, 38, 15);
 		add(lblName);
 		
 		tfName = new JTextField();
@@ -67,7 +67,7 @@ public class StudentCreationView extends JPanel {
 		
 		JLabel lblCourse = new JLabel("Curso*");
 		lblCourse.setFont(new Font("Arial", Font.BOLD, 12));
-		lblCourse.setBounds(9, 22, 131, 16);
+		lblCourse.setBounds(9, 22, 39, 15);
 		add(lblCourse);
 		
 		cbCourse = new JComboBox<Course>();
@@ -80,7 +80,7 @@ public class StudentCreationView extends JPanel {
 		
 		JLabel lblCpf = new JLabel("CPF*");
 		lblCpf.setFont(new Font("Arial", Font.BOLD, 12));
-		lblCpf.setBounds(9, 144, 131, 16);
+		lblCpf.setBounds(9, 144, 27, 15);
 		add(lblCpf);
 		
 		tfCpf = new JFormattedTextField(cpfMask);
@@ -90,7 +90,7 @@ public class StudentCreationView extends JPanel {
 		
 		JLabel lblBirthdate = new JLabel("Data de Nascimento*");
 		lblBirthdate.setFont(new Font("Arial", Font.BOLD, 12));
-		lblBirthdate.setBounds(383, 144, 145, 16);
+		lblBirthdate.setBounds(383, 144, 119, 15);
 		add(lblBirthdate);
 		
 //		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -102,12 +102,12 @@ public class StudentCreationView extends JPanel {
 		
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.setFont(new Font("Arial", Font.BOLD, 12));
-		btnSalvar.setBounds(384, 420, 117, 29);
+		btnSalvar.setBounds(400, 420, 110, 29);
 		add(btnSalvar);
 		
 		btnCancelar = new JButton("Voltar");
 		btnCancelar.setFont(new Font("Arial", Font.BOLD, 12));
-		btnCancelar.setBounds(511, 420, 117, 29);
+		btnCancelar.setBounds(520, 420, 110, 29);
 		add(btnCancelar);
 		
 		tfEmail = new JTextField();
@@ -118,7 +118,7 @@ public class StudentCreationView extends JPanel {
 		
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setFont(new Font("Arial", Font.BOLD, 12));
-		lblEmail.setBounds(9, 105, 131, 16);
+		lblEmail.setBounds(9, 105, 31, 15);
 		add(lblEmail);
 	}
 	

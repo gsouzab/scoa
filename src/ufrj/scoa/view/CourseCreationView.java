@@ -14,6 +14,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.DropMode;
 import javax.swing.JScrollPane;
+import java.awt.Font;
 
 public class CourseCreationView extends JPanel {
     
@@ -32,6 +33,7 @@ public class CourseCreationView extends JPanel {
     public CourseCreationView() {
         
         tfName = new JTextField();
+        tfName.setFont(new Font("Arial", Font.PLAIN, 13));
         tfName.setBounds(139, 25, 483, 28);
         tfName.setColumns(10);
         
@@ -48,27 +50,34 @@ public class CourseCreationView extends JPanel {
         panelButtons.setLayout(null);
         
         JLabel lblName = new JLabel("Nome*");
-        lblName.setBounds(10, 31, 110, 16);
+        lblName.setFont(new Font("Arial", Font.BOLD, 12));
+        lblName.setBounds(10, 31, 38, 15);
         
         JLabel lblCode = new JLabel("C\u00F3digo");
-        lblCode.setBounds(10, 70, 110, 16);
+        lblCode.setFont(new Font("Arial", Font.BOLD, 12));
+        lblCode.setBounds(10, 70, 39, 15);
         
         tfCode = new JTextField();
+        tfCode.setFont(new Font("Arial", Font.PLAIN, 13));
         tfCode.setBounds(139, 64, 483, 28);
         tfCode.setColumns(10);
         
         JLabel lblDescription = new JLabel("Descri\u00E7\u00E3o");
-        lblDescription.setBounds(10, 113, 110, 16);
+        lblDescription.setFont(new Font("Arial", Font.BOLD, 12));
+        lblDescription.setBounds(10, 113, 58, 15);
         
         taDescription= new JTextArea();
+        taDescription.setFont(new Font("Arial", Font.PLAIN, 13));
         taDescription.setBounds(139, 109, 483, 168);
         taDescription.setLineWrap(true);
         
         btnSalvar = new JButton("Salvar");
-        btnSalvar.setBounds(389, 420, 112, 29);
+        btnSalvar.setFont(new Font("Arial", Font.BOLD, 12));
+        btnSalvar.setBounds(400, 420, 110, 29);
         
         btnCancelar = new JButton("Voltar");
-        btnCancelar.setBounds(510, 420, 112, 29);
+        btnCancelar.setFont(new Font("Arial", Font.BOLD, 12));
+        btnCancelar.setBounds(520, 420, 110, 29);
         setLayout(null);
         add(tfName);
         add(separator);

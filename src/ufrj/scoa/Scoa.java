@@ -10,7 +10,7 @@ public class Scoa {
 		ScoaBaseFrame baseFrame = new ScoaBaseFrame();
 		ScoaBaseController baseController = new ScoaBaseController(baseFrame);
 		
-		baseFrame.changePanel(new WelcomeView(), "Bem vindo ao SCOA");
+		baseFrame.changePanel(new WelcomeView(), "Bem-vindo ao SCOA");
 		
 		
 		
