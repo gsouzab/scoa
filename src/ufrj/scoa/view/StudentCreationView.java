@@ -13,6 +13,8 @@ import javax.swing.JSeparator;
 import javax.swing.JButton;
 
 import ufrj.scoa.model.VO.Course;
+import javax.swing.UIManager;
+import java.awt.Font;
 
 public class StudentCreationView extends JPanel {
 
@@ -53,19 +55,23 @@ public class StudentCreationView extends JPanel {
 		this.add(separator);
 		
 		JLabel lblName = new JLabel("Nome*");
+		lblName.setFont(new Font("Arial", Font.BOLD, 12));
 		lblName.setBounds(9, 66, 131, 16);
 		add(lblName);
 		
 		tfName = new JTextField();
+		tfName.setFont(new Font("Arial", Font.PLAIN, 13));
 		tfName.setBounds(128, 60, 500, 28);
 		add(tfName);
 		tfName.setColumns(10);
 		
 		JLabel lblCourse = new JLabel("Curso*");
+		lblCourse.setFont(new Font("Arial", Font.BOLD, 12));
 		lblCourse.setBounds(9, 22, 131, 16);
 		add(lblCourse);
 		
 		cbCourse = new JComboBox<Course>();
+		cbCourse.setFont(new Font("Arial", Font.PLAIN, 13));
 		
 		populateComboBox();
 		
@@ -73,37 +79,45 @@ public class StudentCreationView extends JPanel {
 		add(cbCourse);
 		
 		JLabel lblCpf = new JLabel("CPF*");
+		lblCpf.setFont(new Font("Arial", Font.BOLD, 12));
 		lblCpf.setBounds(9, 144, 131, 16);
 		add(lblCpf);
 		
 		tfCpf = new JFormattedTextField(cpfMask);
+		tfCpf.setFont(new Font("Arial", Font.PLAIN, 13));
 		tfCpf.setBounds(128, 138, 116, 28);
 		add(tfCpf);
 		
 		JLabel lblBirthdate = new JLabel("Data de Nascimento*");
+		lblBirthdate.setFont(new Font("Arial", Font.BOLD, 12));
 		lblBirthdate.setBounds(383, 144, 145, 16);
 		add(lblBirthdate);
 		
 //		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		
 		tfDate = new JFormattedTextField(dateMask);
+		tfDate.setFont(new Font("Arial", Font.PLAIN, 13));
 		tfDate.setBounds(538, 138, 90, 28);
 		add(tfDate);
 		
 		btnSalvar = new JButton("Salvar");
+		btnSalvar.setFont(new Font("Arial", Font.BOLD, 12));
 		btnSalvar.setBounds(384, 420, 117, 29);
 		add(btnSalvar);
 		
 		btnCancelar = new JButton("Voltar");
+		btnCancelar.setFont(new Font("Arial", Font.BOLD, 12));
 		btnCancelar.setBounds(511, 420, 117, 29);
 		add(btnCancelar);
 		
 		tfEmail = new JTextField();
+		tfEmail.setFont(new Font("Arial", Font.PLAIN, 13));
 		tfEmail.setBounds(128, 99, 500, 28);
 		add(tfEmail);
 		tfEmail.setColumns(10);
 		
 		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setFont(new Font("Arial", Font.BOLD, 12));
 		lblEmail.setBounds(9, 105, 131, 16);
 		add(lblEmail);
 	}
