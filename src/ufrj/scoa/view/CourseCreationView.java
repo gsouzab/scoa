@@ -1,20 +1,17 @@
 package ufrj.scoa.view;
 
-import javax.swing.JPanel;
+import java.awt.Component;
+import java.awt.Font;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
-import javax.swing.JButton;
+import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
+
 import org.eclipse.wb.swing.FocusTraversalOnArray;
-import java.awt.Component;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.DropMode;
-import javax.swing.JScrollPane;
-import java.awt.Font;
 
 public class CourseCreationView extends JPanel {
     

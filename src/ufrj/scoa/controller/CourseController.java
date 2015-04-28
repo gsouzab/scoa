@@ -14,7 +14,6 @@ import ufrj.scoa.view.WelcomeView;
 
 public class CourseController implements ActionListener {
 	
-	private static final String NEW_LINE = "\n";
 	private CourseCreationView courseCreationView;
 	private ScoaBaseController baseController;
 	private CoursesListView coursesListView;
@@ -31,7 +30,6 @@ public class CourseController implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		
 		if(event.getSource() == this.courseCreationView.getBtnSalvar()) {
-			
 			saveCourse();
 			
 		} else if(event.getSource() == this.courseCreationView.getBtnCancelar()) {
@@ -40,8 +38,36 @@ public class CourseController implements ActionListener {
 		}
 	}
 	
-	private boolean validadeCreateFields(String name, String code, String description) {
+	private void saveCourse() {
+		String name = this.courseCreationView.getTfName().getText();
+		String code = this.courseCreationView.getTfCode().getText();
+		String description = this.courseCreationView.getTaDescription().getText();
 		
+		if(this.validateCreateFields(name, code, description)) {
+			Course newCourse = new Course(this.courseCreationView.getTfName().getText(), this.courseCreationView.getTfCode().getText(), this.courseCreationView.getTaDescription().getText());
+			CourseDAO courseDAO = new CourseDAO();
+			courseDAO.save(newCourse);
+			
+			JOptionPane.showMessageDialog(null, "Curso salvo com sucesso");
+			clearFieldsCreationView();
+			
+		} else {
+			JOptionPane.showMessageDialog(null, "Preencha todos os campos marcados com (*)");
+		}
+	}
+	
+	public void listCourses() {
+		CourseDAO courseDAO = new CourseDAO();
+		ArrayList<Course> courses = courseDAO.list();
+		
+		for(Course course: courses) {
+			this.coursesListView.getModel().addElement(course);
+			
+		}
+
+	}
+	
+	private boolean validateCreateFields(String name, String code, String description) {
 		return name.length() > 0 && code.length() > 0 && description.length() > 0;
 	}
 	
@@ -49,38 +75,6 @@ public class CourseController implements ActionListener {
 		this.courseCreationView.getTfName().setText("");;
 		this.courseCreationView.getTfCode().setText("");
 		this.courseCreationView.getTaDescription().setText("");
-	}
-
-	private void saveCourse() {
-		String name = this.courseCreationView.getTfName().getText();
-		String code = this.courseCreationView.getTfCode().getText();
-		String description = this.courseCreationView.getTaDescription().getText();
-		
-		if(this.validadeCreateFields(name, code, description)) {
-			Course newCourse = new Course(this.courseCreationView.getTfName().getText(), this.courseCreationView.getTfCode().getText(), this.courseCreationView.getTaDescription().getText());
-			CourseDAO courseDAO = new CourseDAO();
-			courseDAO.save(newCourse);
-			
-			JOptionPane.showMessageDialog(null, "Curso salvo com sucesso");
-			clearFieldsCreationView();
-		} else {
-			JOptionPane.showMessageDialog(null, "Preencha todos os campos marcados com *");
-		}
-	}
-	
-	public void listCourses() {
-		CourseDAO courseDAO = new CourseDAO();
-		ArrayList<Course> courses = courseDAO.list();
-		String courseListText = "";
-		
-		for(Course course: courses) {
-			
-			courseListText += course.toString();
-			courseListText += NEW_LINE;
-		}
-		
-		this.coursesListView.getTxtrAwcCurso().setText(courseListText);
-			
 	}
 	
 	public CourseCreationView getCourseCreationView() {

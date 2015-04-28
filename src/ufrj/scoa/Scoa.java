@@ -8,11 +8,11 @@ public class Scoa {
 
 	public static void main(String[] args) {
 		ScoaBaseFrame baseFrame = new ScoaBaseFrame();
+		
+		@SuppressWarnings("unused")
 		ScoaBaseController baseController = new ScoaBaseController(baseFrame);
 		
 		baseFrame.changePanel(new WelcomeView(), "Bem-vindo ao SCOA");
-		
-		
 		
 
 	}

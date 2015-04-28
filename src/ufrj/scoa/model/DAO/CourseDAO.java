@@ -14,11 +14,6 @@ public class CourseDAO {
 	private Connection conn;
 	private PreparedStatement ps;
 	
-	public CourseDAO() {
-		Connection conn = null;
-		PreparedStatement ps = null;
-	}
-	
 	public void save(Course course) {
 		
 		try {

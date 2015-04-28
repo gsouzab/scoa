@@ -1,13 +1,8 @@
 package ufrj.scoa.view;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class WelcomeView extends JPanel {
 	/**

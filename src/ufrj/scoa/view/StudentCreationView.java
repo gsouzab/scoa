@@ -1,20 +1,19 @@
 package ufrj.scoa.view;
 
+import java.awt.Font;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-import javax.swing.JPanel;
-import javax.swing.text.MaskFormatter;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JFormattedTextField;
-import javax.swing.JComboBox;
-import javax.swing.JSeparator;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import ufrj.scoa.model.VO.Course;
-import javax.swing.UIManager;
-import java.awt.Font;
 
 public class StudentCreationView extends JPanel {
 

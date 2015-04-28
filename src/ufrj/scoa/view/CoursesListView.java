@@ -1,55 +1,46 @@
 package ufrj.scoa.view;
 
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-import javax.swing.JScrollPane;
-import javax.swing.DropMode;
-import javax.swing.UIManager;
-import javax.swing.JLabel;
 import java.awt.Font;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+
+import ufrj.scoa.model.VO.Course;
 
 public class CoursesListView extends JPanel {
 
+
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Create the panel.
 	 */
 	
-	private JTextArea txtrAwcCurso;
+	private DefaultListModel<Course> model;
 	
 	public CoursesListView() {
 		setLayout(null);
 		
-		
-		txtrAwcCurso = new JTextArea();
-		txtrAwcCurso.setEditable(false);
-		txtrAwcCurso.setBackground(UIManager.getColor("Button.background"));
-		txtrAwcCurso.setBounds(199, 98, 170, 96);
-		txtrAwcCurso.setLineWrap(true);
-		//add(textPane);
-		
-		JScrollPane scrollPane = new JScrollPane(txtrAwcCurso);
-		scrollPane.setBounds(61, 98, 508, 128);
-		
-		add(scrollPane);
+		model = new DefaultListModel<Course>();
+		JList<Course> list = new JList<Course>(model);
 		
 		JLabel lblCursos = new JLabel("CURSOS CADASTRADOS");
 		lblCursos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCursos.setFont(new Font("Arial", Font.BOLD, 15));
 		lblCursos.setBounds(61, 48, 508, 37);
 		add(lblCursos);
-		
-		
 
+		JScrollPane scrollPane = new JScrollPane(list);
+		scrollPane.setBounds(71, 90, 478, 170);
+		add(scrollPane);
+		
 	}
 
-	public JTextArea getTxtrAwcCurso() {
-		return txtrAwcCurso;
-	}
-
-	public void setTxtrAwcCurso(JTextArea txtrAwcCurso) {
-		this.txtrAwcCurso = txtrAwcCurso;
+	public DefaultListModel<Course> getModel() {
+		return model;
 	}
 	
 	
