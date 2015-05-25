@@ -12,6 +12,7 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Component;
 import javax.swing.Box;
+import javax.swing.JButton;
 
 public class ScoaBaseFrame extends JFrame {
 
@@ -70,11 +71,10 @@ public class ScoaBaseFrame extends JFrame {
         menuBar.add(courseMenu);
         menuBar.add(studentsMenu);
         
-        horizontalStrut = Box.createHorizontalStrut(448);
+        horizontalStrut = Box.createHorizontalStrut(479);
         menuBar.add(horizontalStrut);
         
         mntmLogout = new JMenuItem("Logout");
-        mntmLogout.setBackground(Color.WHITE);
         mntmLogout.setHorizontalAlignment(SwingConstants.RIGHT);
         mntmLogout.setFont(new Font("Arial", Font.PLAIN, 12));
         menuBar.add(mntmLogout);
@@ -143,5 +143,4 @@ public class ScoaBaseFrame extends JFrame {
 		this.setContentPane(newPanel);
 		this.revalidate();
 	}
-    
 }

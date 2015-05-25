@@ -22,7 +22,7 @@ public class PersonDAO {
 			
 			conn = Connect.connectDB();
 			
-			selectPersonStatement = conn.prepareStatement("SELECT COUNT(*) FROM PERSON WHERE entry = ? AND password = md5(?)");
+			selectPersonStatement = conn.prepareStatement("SELECT COUNT(*) FROM person WHERE entry = ? AND password = md5(?)");
 			selectPersonStatement.setInt(1, entry);
 			selectPersonStatement.setString(2, password);
 			
@@ -39,6 +39,7 @@ public class PersonDAO {
 			return canLogin;
 			
 		} catch (SQLException e) {
+			e.printStackTrace();
 			return canLogin;
 		}
 	}
