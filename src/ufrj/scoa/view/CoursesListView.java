@@ -34,7 +34,7 @@ public class CoursesListView extends JPanel {
 		add(lblCursos);
 
 		JScrollPane scrollPane = new JScrollPane(list);
-		scrollPane.setBounds(71, 90, 478, 170);
+		scrollPane.setBounds(20, 90, 600, 350);
 		add(scrollPane);
 		
 	}

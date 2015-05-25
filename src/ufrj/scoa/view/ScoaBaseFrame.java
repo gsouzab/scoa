@@ -8,6 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Font;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+import java.awt.Component;
+import javax.swing.Box;
 
 public class ScoaBaseFrame extends JFrame {
 
@@ -23,10 +27,12 @@ public class ScoaBaseFrame extends JFrame {
 	//	
 	//	Itens do menu de cursos	
 	//	
-	JMenuItem listCoursesMenuItem;
-	JMenuItem newCourseMenuItem;
+	private JMenuItem listCoursesMenuItem;
+	private JMenuItem newCourseMenuItem;
+	private JMenuItem mntmLogout;
 	
 	JPanel contentPane;
+	private Component horizontalStrut;
 	
 	public ScoaBaseFrame(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,6 +69,15 @@ public class ScoaBaseFrame extends JFrame {
         
         menuBar.add(courseMenu);
         menuBar.add(studentsMenu);
+        
+        horizontalStrut = Box.createHorizontalStrut(448);
+        menuBar.add(horizontalStrut);
+        
+        mntmLogout = new JMenuItem("Logout");
+        mntmLogout.setBackground(Color.WHITE);
+        mntmLogout.setHorizontalAlignment(SwingConstants.RIGHT);
+        mntmLogout.setFont(new Font("Arial", Font.PLAIN, 12));
+        menuBar.add(mntmLogout);
         GroupLayout groupLayout = new GroupLayout(getContentPane());
         groupLayout.setHorizontalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
@@ -104,6 +119,9 @@ public class ScoaBaseFrame extends JFrame {
 		return newCourseMenuItem;
 	}
 	
+	public JMenuItem getLogoutMenuItem() {
+		return this.mntmLogout;
+	}
 	
 	public void changePanel(JPanel newPanel, String newTitle) {
 		this.showMenu();
