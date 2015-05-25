@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Student;
 
 public class StudentDAO {
@@ -52,6 +54,36 @@ public class StudentDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+	}
+	
+	public ArrayList<Student> list() {
+		
+		ArrayList<Student> studentList = new ArrayList<Student>();
+		
+		try {
+			
+			conn = Connect.connectDB();
+			
+			PreparedStatement ps = conn.prepareStatement(" SELECT p.*, c.name AS courseName, c.code AS courseCode, c.description AS courseDescription FROM scoa.person p, scoa.student s, scoa.course c "
+														+ " WHERE p.id = s.person_id " 
+														+ " AND s.course_id = c.id" );
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Student student = new Student(rs.getString("name"), rs.getString("cpf"), rs.getString("email"), rs.getDate("birthdate"), new Course(rs.getString("courseName"), rs.getString("courseCode"), rs.getString("courseDescription")));
+				
+				studentList.add(student);
+			}
+			
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return studentList; 
 	}
 
 }

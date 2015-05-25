@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JFormattedTextField;
@@ -14,11 +15,13 @@ import ufrj.scoa.model.DAO.StudentDAO;
 import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Student;
 import ufrj.scoa.view.StudentCreationView;
+import ufrj.scoa.view.StudentListView;
 import ufrj.scoa.view.WelcomeView;
 
 public class StudentController implements ActionListener {
 
 	private StudentCreationView studentCreationView;
+	private StudentListView studentListView;
 	private ScoaBaseController baseController;
 	private CourseDAO courseDAO = new CourseDAO();
 
@@ -28,6 +31,8 @@ public class StudentController implements ActionListener {
 		this.studentCreationView = new StudentCreationView(courseDAO.list());
 		this.studentCreationView.getBtnSalvar().addActionListener(this);
 		this.studentCreationView.getBtnCancelar().addActionListener(this);
+		
+		this.studentListView = new StudentListView();
 
 	}
 
@@ -74,6 +79,20 @@ public class StudentController implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Preencha todos os campos marcados com (*)");
 		}
 	}
+	
+	public void listStudents() {
+		StudentDAO studentDAO = new StudentDAO();
+		ArrayList<Student> students = studentDAO.list();
+		
+		for(Student student: students) {
+			Object[] row = {student.getName(), student.getCpf(), student.getCourse().getName(), student.getEmail() };
+			this.studentListView.getStudentModel().addRow(row);
+			
+		}
+		
+		studentListView.resizeColumnWidth(studentListView.getTable());
+
+	}
 
 	private boolean validadeCreateFields(String name, String email, JFormattedTextField cpf, JFormattedTextField birthdate, Course selectedCourse) {
 		return name.length() > 0 && email.length() > 0 && selectedCourse != null && birthdate.getValue() != null && cpf.getValue() != null;
@@ -90,6 +109,10 @@ public class StudentController implements ActionListener {
 
 	public StudentCreationView getStudentCreationView() {
 		return studentCreationView;
+	}
+	
+	public StudentListView getStudentListView() {
+		return studentListView;
 	}
 
 

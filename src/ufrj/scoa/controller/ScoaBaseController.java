@@ -17,6 +17,7 @@ public class ScoaBaseController implements ActionListener {
 		baseFrame.getListCoursesMenuItem().addActionListener(this);
 		baseFrame.getNewStudentMenuItem().addActionListener(this);
 		baseFrame.getListCoursesMenuItem().addActionListener(this);
+		baseFrame.getListStudentsMenuItem().addActionListener(this);
 	}
 
 	@Override
@@ -37,6 +38,12 @@ public class ScoaBaseController implements ActionListener {
 			CourseController courseController = new CourseController(this);
 			courseController.listCourses();
 			baseFrame.changePanel(courseController.getCoursesListView(), "Listagem de Cursos");
+		
+		} else if(event.getSource() == baseFrame.getListStudentsMenuItem()) {
+			
+			StudentController studentController = new StudentController(this);
+			studentController.listStudents();
+			baseFrame.changePanel(studentController.getStudentListView(), "Listagem de Alunos");
 		}
 		
 		
