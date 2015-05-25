@@ -8,7 +8,7 @@ public class Student extends Person {
 	private float CR;
 
 	public Student(String name,String cpf,String email,Date birthdate, Course course) {
-		super(name,cpf,email,birthdate,1234566);
+		super(name,cpf,email,birthdate,1234566,"");
 		this.course = course;
 		this.setCR(0);
 	}

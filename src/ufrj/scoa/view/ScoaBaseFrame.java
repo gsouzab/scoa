@@ -12,6 +12,9 @@ import java.awt.Font;
 public class ScoaBaseFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	
+	private JMenuBar menuBar;
+	
 	//	
 	//	Itens do menu de alunos	
 	//	
@@ -35,7 +38,7 @@ public class ScoaBaseFrame extends JFrame {
 	
 	private void generateMenu()
     {
-    	JMenuBar menuBar = new JMenuBar();
+    	menuBar = new JMenuBar();
         setJMenuBar(menuBar);
         
         JMenu courseMenu = new JMenu("Cursos");
@@ -74,6 +77,16 @@ public class ScoaBaseFrame extends JFrame {
         setVisible(true);
     	
     }
+	
+	private void hideMenu()
+    {
+    	menuBar.setVisible(false);
+    }
+	
+	private void showMenu()
+    {
+    	menuBar.setVisible(true);
+    }
 
 	public JMenuItem getListStudentsMenuItem() {
 		return listStudentsMenuItem;
@@ -93,10 +106,24 @@ public class ScoaBaseFrame extends JFrame {
 	
 	
 	public void changePanel(JPanel newPanel, String newTitle) {
+		this.showMenu();
+		this._changePanel(newPanel, newTitle);
+	}
+	
+	public void changePanel(JPanel newPanel, String newTitle, boolean showMenu) {
+		if(showMenu) {
+			this.showMenu();
+		} else {
+			this.hideMenu();	
+		}
+		
+		this._changePanel(newPanel, newTitle);
+	}
+	
+	private void _changePanel(JPanel newPanel, String newTitle) {
 		setTitle(newTitle);
 		this.setContentPane(newPanel);
 		this.revalidate();
 	}
-	
     
 }

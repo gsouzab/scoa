@@ -36,7 +36,7 @@ public class StudentController implements ActionListener {
 		if(event.getSource() == this.studentCreationView.getBtnSalvar()) {
 			saveStudent();
 		} else if(event.getSource() == this.studentCreationView.getBtnCancelar()) {
-			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao Scoa");
+			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
 		}
 
 	}

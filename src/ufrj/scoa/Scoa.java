@@ -1,19 +1,16 @@
 package ufrj.scoa;
 
+import ufrj.scoa.controller.AccessController;
 import ufrj.scoa.controller.ScoaBaseController;
-import ufrj.scoa.view.ScoaBaseFrame;
-import ufrj.scoa.view.WelcomeView;
 
 public class Scoa {
 
 	public static void main(String[] args) {
-		ScoaBaseFrame baseFrame = new ScoaBaseFrame();
+		ScoaBaseController baseController = new ScoaBaseController();
 		
-		@SuppressWarnings("unused")
-		ScoaBaseController baseController = new ScoaBaseController(baseFrame);
+		AccessController accessController = new AccessController(baseController);
 		
-		baseFrame.changePanel(new WelcomeView(), "Bem-vindo ao SCOA");
-		
+		baseController.getBaseFrame().changePanel(accessController.getLoginView(), "Login - SCOA", false);
 
 	}
 

@@ -13,17 +13,17 @@ public class Person {
 	private Date birthdate;
 	private int entry;
 	
-	public Person(String name, String cpf, String email, Date birthdate, int entry) {
+	public Person(String name, String cpf, String email, Date birthdate, int entry, String password) {
 
 		this.name = name;
 		this.cpf = cpf;
 		this.email = email;
 		this.birthdate = birthdate;
 		this.entry = entry;
-		this.password = generateMD5Hash();
+		this.password = password;
 	}
 
-	private String generateMD5Hash() {
+	private String generateNewPassword() {
 		
 		MessageDigest md = null;
 		try {

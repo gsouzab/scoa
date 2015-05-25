@@ -9,9 +9,9 @@ public class ScoaBaseController implements ActionListener {
 
 	private ScoaBaseFrame baseFrame;
 	
-	public ScoaBaseController(ScoaBaseFrame baseFrame)
+	public ScoaBaseController()
 	{
-		this.baseFrame = baseFrame;
+		this.baseFrame = new ScoaBaseFrame();
 		
 		baseFrame.getNewCourseMenuItem().addActionListener(this);
 		baseFrame.getListCoursesMenuItem().addActionListener(this);
