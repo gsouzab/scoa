@@ -36,14 +36,25 @@ public class AccessController implements ActionListener {
 		String password = String.valueOf(this.loginView.getPasswordField().getPassword());
 
 		if(this.validadeLoginFields(entry, password)) {
-			//campos validos
-			if(this.personDAO.validateLogin(Integer.parseInt(entry),password)) {
-				//login efetuado com sucesso
-				this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
-			} else {
-				//login inválido
-				JOptionPane.showMessageDialog(null, "Login inválido.");
+			int entryInt = 0;
+			
+			try 
+			{
+				entryInt = Integer.parseInt(entry);
+				
+				if(this.personDAO.validateLogin(entryInt,password)) {
+					//login efetuado com sucesso
+					this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
+				} else {
+					//login inválido
+					JOptionPane.showMessageDialog(null, "Login inválido.");
+				}
+				
+			} catch(Exception e) {
+				JOptionPane.showMessageDialog(null, "Dados incorretos.");
 			}
+			
+			
 		} else {
 			JOptionPane.showMessageDialog(null, "Preencha corretamente os campos.");
 		}
