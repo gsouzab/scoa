@@ -55,16 +55,17 @@ public class LoginView extends JPanel {
 		add(passwordField);
 		
 		//campo de matrícula aceita somente numeros inteiros
-		MaskFormatter entryFormatter = null;
+		//MaskFormatter entryFormatter = null;
 		
-		try {
-			entryFormatter = new MaskFormatter("#########");
-		} catch (ParseException e) {
+		//try {
+		//	entryFormatter = new MaskFormatter("#########");
+		//} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//	e.printStackTrace();
+		//}
 		
-		entryField = new JFormattedTextField(entryFormatter);
+		//entryField = new JFormattedTextField(entryFormatter);]
+		entryField = new JFormattedTextField();
 		entryField.setBounds(195, 249, 326, 28);
 		add(entryField);
 		entryField.setColumns(10);
