@@ -32,6 +32,10 @@ public class ScoaBaseFrame extends JFrame {
 	private JMenuItem newCourseMenuItem;
 	private JMenuItem mntmLogout;
 	
+	// Itens menu Professores
+	private JMenuItem listProfessorsMenuItem;
+	private JMenuItem newProfessorsMenuItem;
+	
 	JPanel contentPane;
 	private Component horizontalStrut;
 	
@@ -68,8 +72,20 @@ public class ScoaBaseFrame extends JFrame {
         studentsMenu.add(newStudentMenuItem);
         studentsMenu.add(listStudentsMenuItem);
         
+        
+        JMenu professorsMenu = new JMenu("Professores");
+        professorsMenu.setFont(new Font("Arial", Font.PLAIN, 12));
+        newProfessorsMenuItem = new JMenuItem("Cadastrar Professor");
+        newProfessorsMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
+        listProfessorsMenuItem = new JMenuItem("Listar Professores");
+        listProfessorsMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
+        
+        professorsMenu.add(newProfessorsMenuItem);
+        professorsMenu.add(listProfessorsMenuItem);
+        
         menuBar.add(courseMenu);
         menuBar.add(studentsMenu);
+        menuBar.add(professorsMenu);
         
         horizontalStrut = Box.createHorizontalStrut(479);
         menuBar.add(horizontalStrut);
@@ -111,6 +127,14 @@ public class ScoaBaseFrame extends JFrame {
 		return newStudentMenuItem;
 	}
 
+	public JMenuItem getListProfessorsMenuItem() {
+		return listProfessorsMenuItem;
+	}
+
+	public JMenuItem getNewProfessorsMenuItem() {
+		return newProfessorsMenuItem;
+	}
+	
 	public JMenuItem getListCoursesMenuItem() {
 		return listCoursesMenuItem;
 	}

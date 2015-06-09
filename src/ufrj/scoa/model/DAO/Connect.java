@@ -21,7 +21,7 @@ public class Connect {
         }
         catch (Exception e)
         {
-            System.err.println ("Não foi possível estabelecer conexão com o BD!");
+            System.err.println ("Nï¿½o foi possï¿½vel estabelecer conexï¿½o com o BD!");
             return conn;
         }
         
@@ -36,7 +36,7 @@ public class Connect {
            {
     		   conn.close ();
            }
-           System.out.println ("Conexão finalizada");
+           System.out.println ("Conexï¿½o finalizada");
        }
        catch (Exception e) { /* ignore close errors */ }
    
