@@ -1,18 +1,17 @@
 package ufrj.scoa.view;
 
+import java.awt.Component;
+import java.awt.Font;
+
+import javax.swing.Box;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.Font;
-import java.awt.Color;
 import javax.swing.SwingConstants;
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.JButton;
 
 public class ScoaBaseFrame extends JFrame {
 
@@ -35,6 +34,10 @@ public class ScoaBaseFrame extends JFrame {
 	// Itens menu Professores
 	private JMenuItem listProfessorsMenuItem;
 	private JMenuItem newProfessorsMenuItem;
+	
+	// Itens menu Disciplinas
+	private JMenuItem listDisciplinesMenuItem;
+	private JMenuItem newDisciplinesMenuItem;
 	
 	JPanel contentPane;
 	private Component horizontalStrut;
@@ -83,9 +86,21 @@ public class ScoaBaseFrame extends JFrame {
         professorsMenu.add(newProfessorsMenuItem);
         professorsMenu.add(listProfessorsMenuItem);
         
+        
+        JMenu disciplinesMenu = new JMenu("Disciplinas");
+        disciplinesMenu.setFont(new Font("Arial", Font.PLAIN, 12));
+        newDisciplinesMenuItem = new JMenuItem("Cadastrar Disciplina");
+        newDisciplinesMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
+        listDisciplinesMenuItem = new JMenuItem("Listar Disciplinas");
+        listDisciplinesMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
+        
+        disciplinesMenu.add(newDisciplinesMenuItem);
+        disciplinesMenu.add(listDisciplinesMenuItem);
+        
         menuBar.add(courseMenu);
         menuBar.add(studentsMenu);
         menuBar.add(professorsMenu);
+        menuBar.add(disciplinesMenu);
         
         horizontalStrut = Box.createHorizontalStrut(479);
         menuBar.add(horizontalStrut);
@@ -141,6 +156,14 @@ public class ScoaBaseFrame extends JFrame {
 
 	public JMenuItem getNewCourseMenuItem() {
 		return newCourseMenuItem;
+	}
+	
+	public JMenuItem getListDisciplinesMenuItem() {
+		return listDisciplinesMenuItem;
+	}
+
+	public JMenuItem getNewDisciplineMenuItem() {
+		return newDisciplinesMenuItem;
 	}
 	
 	public JMenuItem getLogoutMenuItem() {

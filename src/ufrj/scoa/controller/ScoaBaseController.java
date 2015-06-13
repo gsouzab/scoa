@@ -22,7 +22,8 @@ public class ScoaBaseController implements ActionListener {
 		baseFrame.getLogoutMenuItem().addActionListener(this);
 		baseFrame.getListProfessorsMenuItem().addActionListener(this);
 		baseFrame.getNewProfessorsMenuItem().addActionListener(this);
-
+		baseFrame.getListDisciplinesMenuItem().addActionListener(this);
+		baseFrame.getNewDisciplineMenuItem().addActionListener(this);
 
 
 	}
@@ -65,7 +66,18 @@ public class ScoaBaseController implements ActionListener {
 			ProfessorController professorController = new ProfessorController(this);
 			professorController.listProfessors();
 			baseFrame.changePanel(professorController.getProfessorListView(), "Listagem de Professores");
+		} else if(event.getSource() == baseFrame.getNewDisciplineMenuItem()) {
+			
+			DisciplineController disciplineController = new DisciplineController(this);
+			baseFrame.changePanel(disciplineController.getDisciplineCreationView(), "Cadastro de Disciplina");
+			
+		} else if(event.getSource() == baseFrame.getListDisciplinesMenuItem()) {
+			
+			DisciplineController disciplineController = new DisciplineController(this);
+			disciplineController.listDisciplines();
+			baseFrame.changePanel(disciplineController.getDisciplinesListView(), "Listagem de Disciplinas");
 		}
+
 		
 		
 		
