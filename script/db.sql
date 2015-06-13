@@ -53,10 +53,18 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `scoa`.`class`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `scoa`.`class` (
-  `id` INT(11) NOT NULL ,
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `course_id` INT(11) NOT NULL ,
   `code` VARCHAR(45) NULL ,
   `name` VARCHAR(255) NOT NULL ,
-  PRIMARY KEY (`id`) )
+  `is_active` TINYINT NOT NULL DEFAULT 1 ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_class_course1_idx` (`course_id` ASC) ,
+  CONSTRAINT `fk_class_course1`
+    FOREIGN KEY (`course_id` )
+    REFERENCES `scoa`.`course` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -167,7 +175,7 @@ USE `scoa` ;
 -- Table `scoa`.`employee`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `scoa`.`employee` (
-  `id` INT(11) NOT NULL ,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `person_id` INT(11) NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_employee_person1_idx` (`person_id` ASC) ,
