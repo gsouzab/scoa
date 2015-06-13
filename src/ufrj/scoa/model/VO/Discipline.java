@@ -7,12 +7,13 @@ public class Discipline {
 	private String description;
 	private String name;
 	private int credits;
+	private String code;
 	
-	public Discipline(String name, int credits, String description) {
+	public Discipline(String name, String description, String code) {
 		super();
 		this.name = name;
-		this.credits = credits;
 		this.description = description;
+		this.code = code;
 	}
 
 	public int getId() {
@@ -53,6 +54,19 @@ public class Discipline {
 
 	public void setCredits(int credits) {
 		this.credits = credits;
+	}
+	
+	
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String toString() {
+		return this.code + " - " + this.name;
 	}
 	
 }

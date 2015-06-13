@@ -102,7 +102,7 @@ public class ScoaBaseFrame extends JFrame {
         menuBar.add(professorsMenu);
         menuBar.add(disciplinesMenu);
         
-        horizontalStrut = Box.createHorizontalStrut(479);
+        horizontalStrut = Box.createHorizontalStrut(330);
         menuBar.add(horizontalStrut);
         
         mntmLogout = new JMenuItem("Logout");

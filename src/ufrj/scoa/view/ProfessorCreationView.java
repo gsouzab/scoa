@@ -49,36 +49,36 @@ public class ProfessorCreationView extends JPanel {
 		
 		JLabel lblName = new JLabel("Nome*");
 		lblName.setFont(new Font("Arial", Font.BOLD, 12));
-		lblName.setBounds(9, 66, 109, 15);
+		lblName.setBounds(9, 19, 109, 15);
 		add(lblName);
 		
 		tfName = new JTextField();
 		tfName.setFont(new Font("Arial", Font.PLAIN, 13));
-		tfName.setBounds(128, 60, 500, 28);
+		tfName.setBounds(128, 12, 500, 28);
 		add(tfName);
 		tfName.setColumns(10);
 		
 		
 		JLabel lblCpf = new JLabel("CPF*");
 		lblCpf.setFont(new Font("Arial", Font.BOLD, 12));
-		lblCpf.setBounds(9, 144, 109, 15);
+		lblCpf.setBounds(9, 101, 109, 15);
 		add(lblCpf);
 		
 		tfCpf = new JFormattedTextField(cpfMask);
 		tfCpf.setFont(new Font("Arial", Font.PLAIN, 13));
-		tfCpf.setBounds(128, 138, 116, 28);
+		tfCpf.setBounds(128, 94, 116, 28);
 		add(tfCpf);
 		
 		JLabel lblBirthdate = new JLabel("Data de Nascimento*");
 		lblBirthdate.setFont(new Font("Arial", Font.BOLD, 12));
-		lblBirthdate.setBounds(369, 144, 159, 15);
+		lblBirthdate.setBounds(384, 101, 159, 15);
 		add(lblBirthdate);
 		
 //		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		
 		tfDate = new JFormattedTextField(dateMask);
 		tfDate.setFont(new Font("Arial", Font.PLAIN, 13));
-		tfDate.setBounds(538, 138, 90, 28);
+		tfDate.setBounds(538, 94, 90, 28);
 		add(tfDate);
 		
 		btnSalvar = new JButton("Salvar");
@@ -93,13 +93,13 @@ public class ProfessorCreationView extends JPanel {
 		
 		tfEmail = new JTextField();
 		tfEmail.setFont(new Font("Arial", Font.PLAIN, 13));
-		tfEmail.setBounds(128, 99, 500, 28);
+		tfEmail.setBounds(128, 52, 500, 28);
 		add(tfEmail);
 		tfEmail.setColumns(10);
 		
 		JLabel lblEmail = new JLabel("Email*");
 		lblEmail.setFont(new Font("Arial", Font.BOLD, 12));
-		lblEmail.setBounds(9, 105, 109, 15);
+		lblEmail.setBounds(9, 59, 109, 15);
 		add(lblEmail);
 	}
 	

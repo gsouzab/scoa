@@ -43,10 +43,10 @@ public class AccessController implements ActionListener {
 				entryInt = Integer.parseInt(entry);
 				
 				if(this.personDAO.validateLogin(entryInt,password)) {
-					//login efetuado com sucesso
+
 					this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
 				} else {
-					//login inválido
+					
 					JOptionPane.showMessageDialog(null, "Login inválido.");
 				}
 				

@@ -23,9 +23,8 @@ public class DisciplineDAO {
 				
 				ps = conn.prepareStatement("INSERT INTO discipline VALUES(DEFAULT,?,?,?)");
 				ps.setString(1, discipline.getName());
-				ps.setInt(2, discipline.getCredits());
-				ps.setString(3, discipline.getDescription());
-				ps.setInt(4, discipline.getIdProfessor());
+				ps.setString(2, discipline.getDescription());
+				ps.setString(3, discipline.getCode());
 				ps.executeUpdate();
 				
 				conn.close();
@@ -42,15 +41,14 @@ public class DisciplineDAO {
 			try {
 				
 				conn = Connect.connectDB();
-				ps = conn.prepareStatement("SELECT d.idDiscipline, d.name as Nome, d.credits as Creditos from discipline d");
+				ps = conn.prepareStatement("SELECT d.id, d.name, d.description, d.code FROM discipline d");
 				
 				ResultSet rs = ps.executeQuery();
 				
 				while(rs.next()) {
 					
-					Discipline discipline = new Discipline(rs.getString("name"), rs.getInt("credits"), rs.getString("description"));
-					discipline.setId(rs.getInt("idDiscipline"));
-					discipline.setIdProfessor(rs.getInt("professor_id"));
+					Discipline discipline = new Discipline(rs.getString("name"), rs.getString("description"), rs.getString("code"));
+					discipline.setId(rs.getInt("id"));
 					disciplineList.add(discipline);
 				}
 				

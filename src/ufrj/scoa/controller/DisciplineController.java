@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import ufrj.scoa.model.DAO.DisciplineDAO;
-import ufrj.scoa.model.DAO.ProfessorDAO;
 import ufrj.scoa.model.VO.Discipline;
 import ufrj.scoa.view.DisciplineCreationView;
 import ufrj.scoa.view.DisciplineListView;
@@ -18,11 +17,10 @@ public class DisciplineController implements ActionListener {
 	private DisciplineCreationView disciplineCreationView;
 	private ScoaBaseController baseController;
 	private DisciplineListView disciplineListView;
-	private ProfessorDAO professorDAO = new ProfessorDAO();
 
 	public DisciplineController(ScoaBaseController baseController) {
 		this.baseController = baseController;
-		this.disciplineCreationView = new DisciplineCreationView(professorDAO.list());
+		this.disciplineCreationView = new DisciplineCreationView();
 		this.disciplineListView = new DisciplineListView();
 		this.disciplineCreationView.getBtnSalvar().addActionListener(this);
 		this.disciplineCreationView.getBtnCancelar().addActionListener(this);
@@ -42,13 +40,12 @@ public class DisciplineController implements ActionListener {
 	
 	private void saveDiscipline() {
 		String name = this.disciplineCreationView.getTfName().getText();
-		String credits = this.disciplineCreationView.getTfCredits().getText();
 		String description = this.disciplineCreationView.getTaDescription().getText();
+		String code = this.disciplineCreationView.getTfCode().getText();
 		
-		if(this.validateCreateFields(name, credits, description)) {
+		if(this.validateCreateFields(name, code)) {
 			
-			int creditsInt = Integer.parseInt(this.disciplineCreationView.getTfCredits().getText());
-			Discipline newDiscipline = new Discipline(this.disciplineCreationView.getTfName().getText(), creditsInt, this.disciplineCreationView.getTaDescription().getText());
+			Discipline newDiscipline = new Discipline(name, description, code);
 			DisciplineDAO disciplineDAO = new DisciplineDAO();
 			disciplineDAO.save(newDiscipline);
 			
@@ -71,13 +68,13 @@ public class DisciplineController implements ActionListener {
 
 	}
 	
-	private boolean validateCreateFields(String name, String code, String description) {
-		return name.length() > 0 && code.length() > 0 && description.length() > 0;
+	private boolean validateCreateFields(String name, String code) {
+		return name.length() > 0 && code.length() > 0;
 	}
 	
 	private void clearFieldsCreationView() {
 		this.disciplineCreationView.getTfName().setText("");;
-		this.disciplineCreationView.getTfCredits().setText("");
+		this.disciplineCreationView.getTfCode().setText("");
 		this.disciplineCreationView.getTaDescription().setText("");
 	}
 	
