@@ -16,6 +16,7 @@ import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Student;
 import ufrj.scoa.view.StudentCreationView;
 import ufrj.scoa.view.StudentListView;
+import ufrj.scoa.view.StudentSearchView;
 import ufrj.scoa.view.WelcomeView;
 
 public class StudentController implements ActionListener {
@@ -24,15 +25,23 @@ public class StudentController implements ActionListener {
 	private StudentListView studentListView;
 	private ScoaBaseController baseController;
 	private CourseDAO courseDAO = new CourseDAO();
+	private StudentSearchView studentSearchView;
 
 	public StudentController(ScoaBaseController baseController) {
 
+		ArrayList<Course> coursesList = courseDAO.list();
 		this.baseController = baseController;
-		this.studentCreationView = new StudentCreationView(courseDAO.list());
+		this.studentCreationView = new StudentCreationView(coursesList);
+		
+		Course courseNull = new Course("Todos os cursos", "", "");
+		coursesList.add(0, courseNull);
+		this.studentSearchView = new StudentSearchView(coursesList);
+		
 		this.studentCreationView.getBtnSalvar().addActionListener(this);
 		this.studentCreationView.getBtnCancelar().addActionListener(this);
-		
-		this.studentListView = new StudentListView();
+		this.studentSearchView.getBtnBuscar().addActionListener(this);
+		this.studentSearchView.getBtnCancelar().addActionListener(this);
+
 
 	}
 
@@ -41,6 +50,12 @@ public class StudentController implements ActionListener {
 		if(event.getSource() == this.studentCreationView.getBtnSalvar()) {
 			saveStudent();
 		} else if(event.getSource() == this.studentCreationView.getBtnCancelar()) {
+			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
+		} else if(event.getSource() == this.studentSearchView.getBtnBuscar()) {
+			StudentListView studentListView = new StudentListView();
+			searchStudents(studentListView);
+			this.baseController.getBaseFrame().changePanel(studentListView, "Listagem de Alunos");
+		} else if(event.getSource() == this.studentSearchView.getBtnCancelar()) {
 			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
 		}
 
@@ -80,19 +95,6 @@ public class StudentController implements ActionListener {
 		}
 	}
 	
-	public void listStudents() {
-		StudentDAO studentDAO = new StudentDAO();
-		ArrayList<Student> students = studentDAO.list();
-		
-		for(Student student: students) {
-			Object[] row = {student.getName(), student.getCpf(), student.getCourse().getName(), student.getEmail() };
-			this.studentListView.getStudentModel().addRow(row);
-			
-		}
-		
-		studentListView.resizeColumnWidth(studentListView.getTable());
-
-	}
 
 	private boolean validadeCreateFields(String name, String email, JFormattedTextField cpf, JFormattedTextField birthdate, Course selectedCourse) {
 		return name.length() > 0 && email.length() > 0 && selectedCourse != null && birthdate.getValue() != null && cpf.getValue() != null;
@@ -115,5 +117,73 @@ public class StudentController implements ActionListener {
 		return studentListView;
 	}
 
+	public StudentSearchView getStudentSearchView() {
+		return studentSearchView;
+	}
+	
+	public void searchStudents(StudentListView studentListView) {
+		Course course = (Course) this.studentSearchView.getCbCourse().getSelectedItem();
+		String courseCode = course.getCode();
+		String courseName = course.getName();
+		String studentName = this.studentSearchView.getTfName().getText();
+		String email = this.studentSearchView.getTfEmail().getText();
+		String cpf = this.studentSearchView.getTfCpf().getText();
+		String birthdate = this.studentSearchView.getTfDate().getText();
+		
+		if(unmaskDate(birthdate).length() > 0) {
+			birthdate = formatDateSql(birthdate);
+		} else {
+			birthdate = unmaskDate(birthdate);
+		}
+		
+		
+		if(unmaskCPF(cpf).length() == 0) {
+			cpf = "";
+		}
+		
+		if(courseName.equalsIgnoreCase("Todos os cursos")) { 
+			courseName = "";
+			courseCode = "";
+		}
+		
+		StudentDAO studentDAO = new StudentDAO();
+		ArrayList<Student> students = studentDAO.search(courseCode, courseName, studentName, email, cpf, birthdate);
+		
+		for(Student student: students) {
+			studentListView.getModel().addElement(student);
+		}
+	}
+	
+	public String unmaskCPF(String cpf) {
+		cpf = cpf.replaceAll("\\.", "");
+		cpf = cpf.replaceAll("-", "");
+		cpf = cpf.replaceAll(" ", "");
+		
+		return cpf;
+	}
+	
+	public String formatDateSql (String date) {
+		SimpleDateFormat fromUser = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String reformattedStr = "";
+
+		try {
+			reformattedStr = myFormat.format(fromUser.parse(date));
+		} catch (ParseException e) {
+		    e.printStackTrace();
+		}
+		
+		return reformattedStr;
+	}
+	
+	public String unmaskDate(String date) {
+		date = date.replaceAll("\\/", "");
+		date = date.replaceAll(" ", "");
+		
+		System.out.println(date);
+		
+		return date;
+	}
+	
 
 }

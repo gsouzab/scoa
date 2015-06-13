@@ -28,4 +28,8 @@ public class Student extends Person {
 	public void setCR(float cR) {
 		CR = cR;
 	}
+	
+	public String toString() {
+		return this.getName() + " - " +this.getCpf();
+	}
 }

@@ -49,8 +49,7 @@ public class ScoaBaseController implements ActionListener {
 		} else if(event.getSource() == baseFrame.getListStudentsMenuItem()) {
 			
 			StudentController studentController = new StudentController(this);
-			studentController.listStudents();
-			baseFrame.changePanel(studentController.getStudentListView(), "Listagem de Alunos");
+			baseFrame.changePanel(studentController.getStudentSearchView(), "Listagem de Alunos");
 		} else if(event.getSource() == baseFrame.getLogoutMenuItem()) {
 			
 			AccessController acController = new AccessController(this);
