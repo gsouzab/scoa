@@ -41,6 +41,7 @@ public class ScoaBaseFrame extends JFrame {
 	
 	JPanel contentPane;
 	private Component horizontalStrut;
+	private JMenuItem newClassMenuItem;
 	
 	public ScoaBaseFrame(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,6 +64,10 @@ public class ScoaBaseFrame extends JFrame {
         listCoursesMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         
         courseMenu.add(newCourseMenuItem);
+        
+        newClassMenuItem = new JMenuItem("Cadastrar Turma");
+        newClassMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
+        courseMenu.add(newClassMenuItem);
         courseMenu.add(listCoursesMenuItem);
         
         JMenu studentsMenu = new JMenu("Alunos");
@@ -102,7 +107,7 @@ public class ScoaBaseFrame extends JFrame {
         menuBar.add(professorsMenu);
         menuBar.add(disciplinesMenu);
         
-        horizontalStrut = Box.createHorizontalStrut(330);
+        horizontalStrut = Box.createHorizontalStrut(311);
         menuBar.add(horizontalStrut);
         
         mntmLogout = new JMenuItem("Logout");
@@ -168,6 +173,10 @@ public class ScoaBaseFrame extends JFrame {
 	
 	public JMenuItem getLogoutMenuItem() {
 		return this.mntmLogout;
+	}
+	
+	public JMenuItem getNewClassMenuItem() {
+		return this.newClassMenuItem;
 	}
 	
 	public void changePanel(JPanel newPanel, String newTitle) {

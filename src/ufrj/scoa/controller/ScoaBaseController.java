@@ -24,12 +24,13 @@ public class ScoaBaseController implements ActionListener {
 		baseFrame.getNewProfessorsMenuItem().addActionListener(this);
 		baseFrame.getListDisciplinesMenuItem().addActionListener(this);
 		baseFrame.getNewDisciplineMenuItem().addActionListener(this);
-
+		baseFrame.getNewClassMenuItem().addActionListener(this);
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
+		
 		if (event.getSource() == baseFrame.getNewCourseMenuItem()) {
 			
 			CourseController courseController = new CourseController(this);
@@ -76,10 +77,11 @@ public class ScoaBaseController implements ActionListener {
 			DisciplineController disciplineController = new DisciplineController(this);
 			disciplineController.listDisciplines();
 			baseFrame.changePanel(disciplineController.getDisciplinesListView(), "Listagem de Disciplinas");
+		} else if(event.getSource() == baseFrame.getNewClassMenuItem()) {
+			
+			ClassController classController = new ClassController(this);			
+			baseFrame.changePanel(classController.getClassCreationView(), "Cadastro de Turma");
 		}
-
-		
-		
 		
 	}
 

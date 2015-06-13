@@ -26,11 +26,33 @@ public class CourseDAO {
 			ps.setString(3, course.getDescription());
 			ps.executeUpdate();
 			
-			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+	}
+	
+	public Course getCourseById(int courseId) {
+		Course course = null;
+		
+		try {
+			conn = Connect.connectDB();
+			
+			ps = conn.prepareStatement("SELECT * FROM course WHERE id = ?");
+			ps.setInt(1, courseId);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				course = new Course(rs.getString("name"), rs.getString("code"), rs.getString("description"));
+				course.setId(rs.getInt("id"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return course;
 	}
 	
 	public ArrayList<Course> list() {
@@ -53,7 +75,6 @@ public class CourseDAO {
 				courseList.add(course);
 			}
 			
-			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

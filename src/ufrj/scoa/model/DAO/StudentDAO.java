@@ -49,7 +49,6 @@ public class StudentDAO {
             
             insertStudentStatement.executeUpdate();
 			
-			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,7 +76,6 @@ public class StudentDAO {
 				studentList.add(student);
 			}
 			
-			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

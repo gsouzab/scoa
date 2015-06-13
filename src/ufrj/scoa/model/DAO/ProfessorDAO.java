@@ -45,7 +45,6 @@ public class ProfessorDAO {
             
             insertProfessorStatement.executeUpdate();
 			
-			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 

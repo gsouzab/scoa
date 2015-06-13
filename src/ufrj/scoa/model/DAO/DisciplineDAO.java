@@ -27,7 +27,6 @@ public class DisciplineDAO {
 				ps.setString(3, discipline.getCode());
 				ps.executeUpdate();
 				
-				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -52,7 +51,6 @@ public class DisciplineDAO {
 					disciplineList.add(discipline);
 				}
 				
-				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

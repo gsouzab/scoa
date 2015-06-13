@@ -34,8 +34,6 @@ public class PersonDAO {
 		    	canLogin = false;
 		    }
 
-			conn.close();
-
 			return canLogin;
 			
 		} catch (SQLException e) {
