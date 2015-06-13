@@ -55,7 +55,7 @@ public class StudentDAO {
 		} 
 	}
 	
-	public ArrayList<Student> list() {
+	public ArrayList<Student> search(String courseCode,String courseName,String studentName,String email,String cpf, String birthdate) {
 		
 		ArrayList<Student> studentList = new ArrayList<Student>();
 		
@@ -63,9 +63,32 @@ public class StudentDAO {
 			
 			conn = Connect.connectDB();
 			
-			PreparedStatement ps = conn.prepareStatement(" SELECT p.*, c.name AS courseName, c.code AS courseCode, c.description AS courseDescription FROM scoa.person p, scoa.student s, scoa.course c "
-														+ " WHERE p.id = s.person_id " 
-														+ " AND s.course_id = c.id" );
+			String baseQuery = " SELECT p.*, c.name AS courseName, c.code AS courseCode, c.description AS courseDescription FROM scoa.person p, scoa.student s, scoa.course c" +
+							   " WHERE p.id = s.person_id " +
+							   " AND s.course_id = c.id ";
+			
+			if(courseCode.length() > 0 && courseName.length() > 0) {
+				baseQuery += " AND c.code = '" +courseCode+ "' " +
+							 " AND c.name = '" +courseName+ "' ";
+			}
+			
+			if(studentName.length() > 0) {
+				baseQuery += " AND p.name like '%" +studentName+ "%' ";
+			}
+			
+			if(email.length() > 0){ 
+				baseQuery += " AND p.email like '%" +email+ "%' ";
+			}
+			
+			if(cpf.length() > 0) {
+				baseQuery += " AND p.cpf = '" +cpf+ "' ";
+			}
+			
+			if(birthdate.length() > 0) {
+				baseQuery += "AND p.birthdate = '" +birthdate+ "' ";
+			}
+			
+			PreparedStatement ps = conn.prepareStatement(baseQuery);
 			
 			ResultSet rs = ps.executeQuery();
 			

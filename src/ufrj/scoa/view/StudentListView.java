@@ -3,6 +3,7 @@ package ufrj.scoa.view;
 import java.awt.Component;
 import java.awt.Font;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -12,15 +13,18 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
+import ufrj.scoa.model.VO.Course;
+import ufrj.scoa.model.VO.Student;
+import javax.swing.JList;
+
 public class StudentListView extends JPanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTable table;
 	private static final int ESPACAMENTO_CELULA = 30;
 	
-	DefaultTableModel studentModel;
+	private DefaultListModel<Student> model;
 
 	/**
 	 * Create the panel.
@@ -28,47 +32,23 @@ public class StudentListView extends JPanel {
 	public StudentListView() {
 		setLayout(null);
 		
-		studentModel = new DefaultTableModel() {
-			 /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			    public boolean isCellEditable(int row, int column) {
-			       //all cells false
-			       return false;
-			    }
-		};
+		model = new DefaultListModel<Student>();
+		JList<Student> list = new JList<Student>(model);
 		
-		studentModel.addColumn("Nome"); 
-		studentModel.addColumn("CPF"); 
-		studentModel.addColumn("Curso");
-		studentModel.addColumn("Email");
-		
-		table = new JTable(studentModel);
-		table.setFont(new Font("Arial", Font.PLAIN, 12));
-		table.setColumnSelectionAllowed(true);
-		table.setCellSelectionEnabled(true);
-		table.setBounds(67, 164, 494, 249);
-		
-		JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scrollPane.setBounds(20, 90, 600, 350);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		
-
-		add(scrollPane);
-		
-		JLabel lblAlunosCadastrados = new JLabel("ALUNOS CADASTRADOS");
+		JLabel lblAlunosCadastrados = new JLabel("Resultado da busca por alunos");
 		lblAlunosCadastrados.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAlunosCadastrados.setFont(new Font("Arial", Font.BOLD, 15));
 		lblAlunosCadastrados.setBounds(61, 48, 508, 37);
 		add(lblAlunosCadastrados);
+		
+		JScrollPane scrollPane = new JScrollPane(list);
+		scrollPane.setBounds(20, 90, 600, 350);
+		add(scrollPane);
 
 	}
 
-	public DefaultTableModel getStudentModel() {
-		return this.studentModel;
+	public DefaultListModel<Student> getModel() {
+		return model;
 	}
 	
 	public void resizeColumnWidth(JTable table) {
@@ -96,9 +76,5 @@ public class StudentListView extends JPanel {
 		 
 		    tableColumn.setPreferredWidth(preferredWidth + ESPACAMENTO_CELULA);
 		}
-	}
-
-	public JTable getTable() {
-		return table;
 	}
 }
