@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import ufrj.scoa.model.DAO.PersonDAO;
+import ufrj.scoa.model.VO.Person;
 import ufrj.scoa.view.LoginView;
 import ufrj.scoa.view.WelcomeView;
 
@@ -36,15 +37,15 @@ public class AccessController implements ActionListener {
 		String password = String.valueOf(this.loginView.getPasswordField().getPassword());
 
 		if(this.validadeLoginFields(entry, password)) {
-			int entryInt = 0;
 			
 			try 
-			{
-				entryInt = Integer.parseInt(entry);
-				
-				if(this.personDAO.validateLogin(entryInt,password)) {
+			{	
+				if(this.personDAO.validateLogin(entry,password)) {
 
+					Person currentUser = personDAO.getCurrentUser(entry, password);
+					this.baseController.setCurrentUser(currentUser);
 					this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
+					
 				} else {
 					
 					JOptionPane.showMessageDialog(null, "Login inválido.");

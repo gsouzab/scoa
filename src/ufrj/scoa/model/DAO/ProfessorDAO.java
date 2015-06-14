@@ -22,13 +22,14 @@ public class ProfessorDAO {
 			
 			conn = Connect.connectDB();
 			
-			insertPersonStatement = conn.prepareStatement("INSERT INTO person VALUES(DEFAULT,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+			insertPersonStatement = conn.prepareStatement("INSERT INTO person (id, name, cpf, email, birthdate, password, entry, role_id) VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?)",Statement.RETURN_GENERATED_KEYS);
 			insertPersonStatement.setString(1, professor.getName());
 			insertPersonStatement.setString(2, professor.getCpf());
 			insertPersonStatement.setString(3, professor.getEmail());
 			insertPersonStatement.setDate(4, new java.sql.Date(professor.getBirthdate().getTime()));
 			insertPersonStatement.setString(5, professor.getPassword());
-			insertPersonStatement.setInt(6, professor.getEntry());
+			insertPersonStatement.setString(6, professor.getEntry());
+			insertPersonStatement.setInt(7, professor.getRole());
 			insertPersonStatement.executeUpdate();
 			
 			ResultSet rs = insertPersonStatement.getGeneratedKeys();
@@ -65,12 +66,11 @@ public class ProfessorDAO {
 			
 			while(rs.next()) {
 				
-				Professor professor = new Professor(rs.getString("name"), rs.getString("cpf"), rs.getString("email"), rs.getDate("birthdate"));
+				Professor professor = new Professor(rs.getString("name"), rs.getString("cpf"), rs.getString("email"), rs.getDate("birthdate"), rs.getString("entry"), rs.getString("password"));
 				
 				professorList.add(professor);
 			}
-			
-			conn.close();
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

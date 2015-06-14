@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `scoa`.`person` (
   `email` VARCHAR(255) NOT NULL,
   `birthdate` DATE NOT NULL,
   `password` VARCHAR(255) NOT NULL,
-  `entry` INT(11) NOT NULL,
+  `entry` VARCHAR(45) NOT NULL,
   `role_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_person_role1_idx` (`role_id` ASC),

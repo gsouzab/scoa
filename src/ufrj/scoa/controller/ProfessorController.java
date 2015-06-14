@@ -11,11 +11,10 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 
 import ufrj.scoa.model.DAO.ProfessorDAO;
-
 import ufrj.scoa.model.VO.Professor;
+import ufrj.scoa.util.Util;
 import ufrj.scoa.view.ProfessorCreationView;
 import ufrj.scoa.view.ProfessorListView;
-
 import ufrj.scoa.view.WelcomeView;
 
 public class ProfessorController implements ActionListener {
@@ -51,6 +50,8 @@ public class ProfessorController implements ActionListener {
 		String email = this.professorCreationView.getTfEmail().getText();
 		String cpf = this.professorCreationView.getTfCpf().getText();
 		String birthdate = this.professorCreationView.getTfDate().getText();
+		String entry = null;
+		String password = null;
 		
 
 		if(this.validadeCreateFields(name, email, this.professorCreationView.getTfCpf(), this.professorCreationView.getTfDate())) {
@@ -66,8 +67,11 @@ public class ProfessorController implements ActionListener {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
+			
+			password = Util.generateNewPassword(cpf);
+			entry = Util.unmaskCPF(cpf);
 
-			Professor professor = new Professor(name, cpf, email, date);
+			Professor professor = new Professor(name, cpf, email, date, entry, password);
 			ProfessorDAO professorDao = new ProfessorDAO();
 
 			professorDao.save(professor);

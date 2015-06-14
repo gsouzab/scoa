@@ -2,6 +2,8 @@ package ufrj.scoa.model.VO;
 
 import java.util.Date;
 
+import ufrj.scoa.util.Constants;
+
 public class Professor extends Person{
 
 	private int professorID;
@@ -14,8 +16,8 @@ public class Professor extends Person{
 		this.professorID = professorID;
 	}
 
-	public Professor(String name, String cpf, String email, Date birthdate) {
-		super(name, cpf, email, birthdate, 0, "");
+	public Professor(String name, String cpf, String email, Date birthdate, String entry, String password) {
+		super(name, cpf, email, birthdate, entry, password, Constants.ROLE_PROFESSOR);
 		
 	}
 
