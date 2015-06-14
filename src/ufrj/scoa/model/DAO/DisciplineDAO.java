@@ -21,7 +21,7 @@ public class DisciplineDAO {
 				
 				conn = Connect.connectDB();
 				
-				ps = conn.prepareStatement("INSERT INTO discipline VALUES(DEFAULT,?,?,?)");
+				ps = conn.prepareStatement("INSERT INTO discipline (id, name, description, code) VALUES (DEFAULT, ?, ?, ?)");
 				ps.setString(1, discipline.getName());
 				ps.setString(2, discipline.getDescription());
 				ps.setString(3, discipline.getCode());
