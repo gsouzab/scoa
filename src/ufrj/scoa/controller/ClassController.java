@@ -30,12 +30,10 @@ public class ClassController implements ActionListener {
 	public ClassController(ScoaBaseController baseController) {
 
 		this.baseController = baseController;
-		this.classCreationView = new ClassCreationView(courseDAO.list());
+		this.classCreationView = new ClassCreationView(courseDAO.listAll());
 		this.classCreationView.getBtnSalvar().addActionListener(this);
 		this.classCreationView.getBtnCancelar().addActionListener(this);
 		
-		
-//		this.studentListView = new StudentListView();
 
 	}
 

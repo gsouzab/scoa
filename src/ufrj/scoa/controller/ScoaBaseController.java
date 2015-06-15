@@ -36,52 +36,52 @@ public class ScoaBaseController implements ActionListener {
 		if (event.getSource() == baseFrame.getNewCourseMenuItem()) {
 			
 			CourseController courseController = new CourseController(this);
-			baseFrame.changePanel(courseController.getCourseCreationView(), "Cadastro de Curso");
+			baseFrame.changePanel(courseController.getCourseCreationView(), "Cadastrar Curso");
 	        
 		} else if(event.getSource() == baseFrame.getNewStudentMenuItem()) {
 			
 			StudentController studentController = new StudentController(this);
-			baseFrame.changePanel(studentController.getStudentCreationView(), "Cadastro de Aluno");
+			baseFrame.changePanel(studentController.getStudentCreationView(), "Cadastrar Aluno");
 			
 		} else if(event.getSource() == baseFrame.getListCoursesMenuItem()) {
 			
 			CourseController courseController = new CourseController(this);
-			courseController.listCourses();
-			baseFrame.changePanel(courseController.getCoursesListView(), "Listagem de Cursos");
+			baseFrame.changePanel(courseController.getCourseSearchView(), "Buscar Cursos");
 		
 		} else if(event.getSource() == baseFrame.getListStudentsMenuItem()) {
 			
 			StudentController studentController = new StudentController(this);
-			baseFrame.changePanel(studentController.getStudentSearchView(), "Listagem de Alunos");
+			baseFrame.changePanel(studentController.getStudentSearchView(), "Buscar Alunos");
+			
 		} else if(event.getSource() == baseFrame.getLogoutMenuItem()) {
 			
 			AccessController acController = new AccessController(this);
-			
 			baseFrame.changePanel(acController.getLoginView(), "Login - SCOA", false);
+			
 		} else if(event.getSource() == baseFrame.getNewProfessorsMenuItem()) {
 			
 			ProfessorController professorController = new ProfessorController(this);
-			baseFrame.changePanel(professorController.getProfessorCreationView(), "Cadastro de Professor");
+			baseFrame.changePanel(professorController.getProfessorCreationView(), "Cadastrar Professor");
 			
 		} else if(event.getSource() == baseFrame.getListProfessorsMenuItem()) {
 			
 			ProfessorController professorController = new ProfessorController(this);
-			professorController.listProfessors();
-			baseFrame.changePanel(professorController.getProfessorListView(), "Listagem de Professores");
+			baseFrame.changePanel(professorController.getProfessorSearchView(), "Buscar Professores");
+			
 		} else if(event.getSource() == baseFrame.getNewDisciplineMenuItem()) {
 			
 			DisciplineController disciplineController = new DisciplineController(this);
-			baseFrame.changePanel(disciplineController.getDisciplineCreationView(), "Cadastro de Disciplina");
+			baseFrame.changePanel(disciplineController.getDisciplineCreationView(), "Cadastrar Disciplina");
 			
 		} else if(event.getSource() == baseFrame.getListDisciplinesMenuItem()) {
 			
 			DisciplineController disciplineController = new DisciplineController(this);
-			disciplineController.listDisciplines();
-			baseFrame.changePanel(disciplineController.getDisciplinesListView(), "Listagem de Disciplinas");
+			baseFrame.changePanel(disciplineController.getDisciplineSearchView(), "Buscar Disciplinas");
+			
 		} else if(event.getSource() == baseFrame.getNewClassMenuItem()) {
 			
 			ClassController classController = new ClassController(this);			
-			baseFrame.changePanel(classController.getClassCreationView(), "Cadastro de Turma");
+			baseFrame.changePanel(classController.getClassCreationView(), "Cadastrar Turma");
 		}
 		
 	}
@@ -97,7 +97,6 @@ public class ScoaBaseController implements ActionListener {
 	public void setCurrentUser(Person currentUser) {
 		this.currentUser = currentUser;
 	}
-	
 	
 	
 }
