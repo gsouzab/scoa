@@ -29,6 +29,7 @@ public class ScoaBaseController implements ActionListener {
 		baseFrame.getNewClassMenuItem().addActionListener(this);
 		baseFrame.getNewRoomMenuItem().addActionListener(this);
 		baseFrame.getSearchRoomMenuItem().addActionListener(this);
+		baseFrame.getNewSecretaryMenuItem().addActionListener(this);
 
 	}
 
@@ -91,8 +92,12 @@ public class ScoaBaseController implements ActionListener {
 		} else if(event.getSource() == baseFrame.getSearchRoomMenuItem()) {
 			
 			RoomController roomController = new RoomController(this);
-			baseFrame.changePanel(roomController.getRoomSearchView(), roomController.getRoomSearchView().getWindowTitle());
-		} 
+			baseFrame.changePanel(roomController.getRoomSearchView(), roomController.getRoomSearchView().getWindowTitle());			
+		} else if(event.getSource() == baseFrame.getNewSecretaryMenuItem()) {
+			
+			SecretaryController secretaryController = new SecretaryController(this);
+			baseFrame.changePanel(secretaryController.getSecretaryCreationView(), "Cadastrar secretaria");
+		}
 		
 	}
 

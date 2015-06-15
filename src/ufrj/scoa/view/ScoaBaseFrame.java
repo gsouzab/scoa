@@ -38,12 +38,15 @@ public class ScoaBaseFrame extends JFrame {
 	// Itens menu Disciplinas
 	private JMenuItem listDisciplinesMenuItem;
 	private JMenuItem newDisciplinesMenuItem;
-	
 
 	// Itens menu Salas
 	private JMenuItem newRoomMenuItem;
 	private JMenuItem searchRoomMenuItem;
 
+	//Itens menu secretaria
+	private JMenuItem newSecretaryMenuItem;
+	
+	
 	private JMenuItem mntmLogout;
 	JPanel contentPane;
 	private Component horizontalStrut;
@@ -107,10 +110,18 @@ public class ScoaBaseFrame extends JFrame {
         disciplinesMenu.add(newDisciplinesMenuItem);
         disciplinesMenu.add(listDisciplinesMenuItem);
         
+        JMenu secretaryMenu = new JMenu("Secretaria");
+        secretaryMenu.setFont(new Font("Arial", Font.PLAIN, 12));
+        newSecretaryMenuItem = new JMenuItem("Cadastrar Secretaria");
+        newSecretaryMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
+        
+        secretaryMenu.add(newSecretaryMenuItem);
+        
         menuBar.add(courseMenu);
         menuBar.add(studentsMenu);
         menuBar.add(professorsMenu);
         menuBar.add(disciplinesMenu);
+        menuBar.add(secretaryMenu);
         
         JMenu roomsMenu = new JMenu("Salas");
         roomsMenu.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -188,6 +199,9 @@ public class ScoaBaseFrame extends JFrame {
 	public JMenuItem getNewDisciplineMenuItem() {
 		return newDisciplinesMenuItem;
 	}
+	public JMenuItem getNewSecretaryMenuItem() {
+		return newSecretaryMenuItem;
+	}	
 	
 	public JMenuItem getLogoutMenuItem() {
 		return this.mntmLogout;

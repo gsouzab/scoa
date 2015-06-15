@@ -11,10 +11,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 
 import ufrj.scoa.model.DAO.ProfessorDAO;
-import ufrj.scoa.model.DAO.StudentDAO;
-import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Professor;
-import ufrj.scoa.model.VO.Student;
 import ufrj.scoa.util.Util;
 import ufrj.scoa.view.ProfessorCreationView;
 import ufrj.scoa.view.ProfessorListView;
