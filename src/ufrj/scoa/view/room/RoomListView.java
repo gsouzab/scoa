@@ -1,4 +1,4 @@
-package ufrj.scoa.view;
+package ufrj.scoa.view.room;
 
 import java.awt.Font;
 
@@ -9,10 +9,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
-import ufrj.scoa.model.VO.Course;
+import ufrj.scoa.model.VO.Room;
 import javax.swing.JButton;
 
-public class CourseListView extends JPanel {
+public class RoomListView extends JPanel {
 
 
 	private static final long serialVersionUID = 1L;
@@ -20,19 +20,19 @@ public class CourseListView extends JPanel {
 	 * Create the panel.
 	 */
 	
-	private DefaultListModel<Course> model;
+	private DefaultListModel<Room> model;
 	private JButton btnExcluir;
-	private JList<Course> list;
+	private JList<Room> list;
 	
 	
 	
-	public CourseListView() {
+	public RoomListView() {
 		setLayout(null);
 		
-		model = new DefaultListModel<Course>();
-		list = new JList<Course>(model);
+		model = new DefaultListModel<Room>();
+		list = new JList<Room>(model);
 		
-		JLabel lblCursos = new JLabel("Resultado da busca por cursos");
+		JLabel lblCursos = new JLabel("Resultado da busca por salas");
 		lblCursos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCursos.setFont(new Font("Arial", Font.BOLD, 15));
 		lblCursos.setBounds(60, 12, 508, 37);
@@ -48,7 +48,7 @@ public class CourseListView extends JPanel {
 		
 	}
 
-	public DefaultListModel<Course> getModel() {
+	public DefaultListModel<Room> getModel() {
 		return model;
 	}
 
@@ -56,15 +56,15 @@ public class CourseListView extends JPanel {
 		return btnExcluir;
 	}
 
-	public JList<Course> getList() {
+	public JList<Room> getList() {
 		return list;
 	}
 
-	public void setModel(DefaultListModel<Course> model) {
+	public void setModel(DefaultListModel<Room> model) {
 		this.model = model;
 	}
 
-	public void setList(JList<Course> list) {
+	public void setList(JList<Room> list) {
 		this.list = list;
 	}
 	

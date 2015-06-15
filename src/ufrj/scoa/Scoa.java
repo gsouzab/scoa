@@ -15,7 +15,7 @@ public class Scoa {
 		
 		AccessController accessController = new AccessController(baseController);
 		
-		baseController.getBaseFrame().changePanel(accessController.getLoginView(), "Login - SCOA", false);
+		baseController.getBaseFrame().changePanel(new WelcomeView(), "Login - SCOA");
 
 	}
 
