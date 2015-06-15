@@ -78,6 +78,50 @@ public class RoomDAO {
 			return roomList; 
 		}
 		
+		public ArrayList<Room> search(String building, int number, int floor) {
+			
+			ArrayList<Room> roomList = new ArrayList<Room>();
+			
+			try {
+				
+				conn = Connect.connectDB();
+				
+				String query = "SELECT * FROM room ";
+				String connector = "WHERE";
+				
+				if(building.length() > 0) {
+					query += connector + " building LIKE '%" + building + "%'";
+					connector = "AND";
+				}
+				
+				if(number > 0) {
+					query += connector + " number =" + number;
+					connector = "AND";
+				}
+				
+				if(floor > 0) {
+					query += connector + " floor =" + floor;
+				}
+				
+				System.out.println(query);
+				
+				ps = conn.prepareStatement(query);
+				
+				ResultSet rs = ps.executeQuery();
+				
+				while(rs.next()) {
+					Room room = new Room(rs.getInt("id"),rs.getString("building"), rs.getInt("number"), rs.getInt("floor"));
+					roomList.add(room);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return roomList; 
+		}
+		
 		public void delete(int roomId) {
 			
 			PreparedStatement deleteStatement;

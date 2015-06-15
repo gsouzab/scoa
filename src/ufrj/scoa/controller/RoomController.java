@@ -54,7 +54,7 @@ public class RoomController implements ActionListener {
 			
 		} else if(event.getSource() == this.roomSearchView.getBtnBuscar()) {
 			searchRooms();
-			this.baseController.getBaseFrame().changePanel(roomListView, "Resultado da busca por cursos");
+			this.baseController.getBaseFrame().changePanel(roomListView, "Resultado da busca por salas");
 			
 		} else if(event.getSource() == this.roomSearchView.getBtnVoltar()) {
 			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
@@ -89,14 +89,14 @@ public class RoomController implements ActionListener {
 	
 
 	private void searchRooms() {
-		String name = this.roomSearchView.getTfName().getText();
-		String courseCode = this.roomSearchView.getTfCode().getText();
-		String description = this.roomSearchView.getTaDescription().getText();
+		String building = this.roomSearchView.getTfBuilding().getText();
+		int number = this.roomSearchView.getTfNumber().getText().length() > 0 ? Integer.valueOf(this.roomSearchView.getTfNumber().getText()) : 0;
+		int floor = this.roomSearchView.getTfFloor().getText().length() > 0 ? Integer.valueOf(this.roomSearchView.getTfFloor().getText()) : 0;
 		
-		CourseDAO courseDAO = new CourseDAO();
-		ArrayList<Course> roomList = courseDAO.searchCourse(name, courseCode, description);
+		RoomDAO roomDAO = new RoomDAO();
+		ArrayList<Room> roomList = roomDAO.search(building, number, floor);
 		
-		//this.roomListView.setList(roomList)
+		this.roomListView.setList(roomList);
 		
 	}
 	
@@ -120,7 +120,7 @@ public class RoomController implements ActionListener {
 		this.roomCreationView.getTfNumber().setText("");
 	}
 	
-	public RoomCreationView getroomCreationView() {
+	public RoomCreationView getRoomCreationView() {
 		return roomCreationView;
 	}
 
@@ -132,6 +132,5 @@ public class RoomController implements ActionListener {
 	public RoomSearchView getRoomSearchView() {
 		return roomSearchView;
 	}
-
 
 }

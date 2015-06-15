@@ -29,7 +29,7 @@ public class ScoaBaseFrame extends JFrame {
 	//	
 	private JMenuItem listCoursesMenuItem;
 	private JMenuItem newCourseMenuItem;
-	private JMenuItem mntmLogout;
+	private JMenuItem newClassMenuItem;
 	
 	// Itens menu Professores
 	private JMenuItem listProfessorsMenuItem;
@@ -39,13 +39,18 @@ public class ScoaBaseFrame extends JFrame {
 	private JMenuItem listDisciplinesMenuItem;
 	private JMenuItem newDisciplinesMenuItem;
 	
+
+	// Itens menu Salas
+	private JMenuItem newRoomMenuItem;
+	private JMenuItem searchRoomMenuItem;
+
+	private JMenuItem mntmLogout;
 	JPanel contentPane;
 	private Component horizontalStrut;
-	private JMenuItem newClassMenuItem;
 	
 	public ScoaBaseFrame(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 640, 520);
+        setBounds(100, 100, 640, 480);
         setResizable(false);
         
         this.generateMenu();
@@ -107,7 +112,20 @@ public class ScoaBaseFrame extends JFrame {
         menuBar.add(professorsMenu);
         menuBar.add(disciplinesMenu);
         
-        horizontalStrut = Box.createHorizontalStrut(311);
+        JMenu roomsMenu = new JMenu("Salas");
+        roomsMenu.setFont(new Font("Arial", Font.PLAIN, 12));
+
+        menuBar.add(roomsMenu);
+        
+        newRoomMenuItem = new JMenuItem("Cadastrar Sala");
+        newRoomMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
+        roomsMenu.add(newRoomMenuItem);
+        
+        searchRoomMenuItem = new JMenuItem("Buscar Salas");
+        searchRoomMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
+        roomsMenu.add(searchRoomMenuItem);
+        
+        horizontalStrut = Box.createHorizontalStrut(255);
         menuBar.add(horizontalStrut);
         
         mntmLogout = new JMenuItem("Logout");
@@ -177,6 +195,14 @@ public class ScoaBaseFrame extends JFrame {
 	
 	public JMenuItem getNewClassMenuItem() {
 		return this.newClassMenuItem;
+	}
+	
+	public JMenuItem getNewRoomMenuItem() {
+		return newRoomMenuItem;
+	}
+	
+	public JMenuItem getSearchRoomMenuItem() {
+		return searchRoomMenuItem;
 	}
 	
 	public void changePanel(JPanel newPanel, String newTitle) {

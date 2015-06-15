@@ -27,6 +27,8 @@ public class ScoaBaseController implements ActionListener {
 		baseFrame.getListDisciplinesMenuItem().addActionListener(this);
 		baseFrame.getNewDisciplineMenuItem().addActionListener(this);
 		baseFrame.getNewClassMenuItem().addActionListener(this);
+		baseFrame.getNewRoomMenuItem().addActionListener(this);
+		baseFrame.getSearchRoomMenuItem().addActionListener(this);
 
 	}
 
@@ -82,7 +84,15 @@ public class ScoaBaseController implements ActionListener {
 			
 			ClassController classController = new ClassController(this);			
 			baseFrame.changePanel(classController.getClassCreationView(), "Cadastrar Turma");
-		}
+		} else if(event.getSource() == baseFrame.getNewRoomMenuItem()) {
+			
+			RoomController roomController = new RoomController(this);
+			baseFrame.changePanel(roomController.getRoomCreationView(), roomController.getRoomCreationView().getWindowTitle());
+		} else if(event.getSource() == baseFrame.getSearchRoomMenuItem()) {
+			
+			RoomController roomController = new RoomController(this);
+			baseFrame.changePanel(roomController.getRoomSearchView(), roomController.getRoomSearchView().getWindowTitle());
+		} 
 		
 	}
 

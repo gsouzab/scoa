@@ -97,6 +97,11 @@ public class RoomCreationView extends JPanel {
 	public JTextField getTfFloor() {
 		return tfFloor;
 	}
+	
+	public String getWindowTitle() {
+		return "Cadastrar Sala";
+		
+	}
 
 	
 }

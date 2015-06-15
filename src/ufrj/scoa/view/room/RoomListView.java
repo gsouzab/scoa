@@ -1,6 +1,7 @@
 package ufrj.scoa.view.room;
 
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
@@ -10,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import ufrj.scoa.model.VO.Room;
+
 import javax.swing.JButton;
 
 public class RoomListView extends JPanel {
@@ -23,8 +25,6 @@ public class RoomListView extends JPanel {
 	private DefaultListModel<Room> model;
 	private JButton btnExcluir;
 	private JList<Room> list;
-	
-	
 	
 	public RoomListView() {
 		setLayout(null);
@@ -48,10 +48,6 @@ public class RoomListView extends JPanel {
 		
 	}
 
-	public DefaultListModel<Room> getModel() {
-		return model;
-	}
-
 	public JButton getBtnExcluir() {
 		return btnExcluir;
 	}
@@ -60,16 +56,21 @@ public class RoomListView extends JPanel {
 		return list;
 	}
 
-	public void setModel(DefaultListModel<Room> model) {
-		this.model = model;
-	}
-
-	public void setList(JList<Room> list) {
-		this.list = list;
+	public void setList(ArrayList<Room> list) {
+		this.model.removeAllElements();
+		
+		for(Room r : list) {
+			this.model.addElement(r);			
+		}		
 	}
 	
 	public void resetList() {
 		this.model.removeAllElements();
+	}
+	
+	public String getWindowTitle() {
+		return "Listar Salas";
+		
 	}
 	
 	
