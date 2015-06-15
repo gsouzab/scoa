@@ -33,6 +33,29 @@ public class DisciplineDAO {
 			} 
 		}
 		
+		public Discipline getDisciplineById(int disciplineId) {
+			Discipline discipline = null;
+			
+			try {
+				conn = Connect.connectDB();
+				
+				ps = conn.prepareStatement("SELECT * FROM discipline WHERE id = ?");
+				ps.setInt(1, disciplineId);
+				
+				ResultSet rs = ps.executeQuery();
+				
+				while(rs.next()) {
+					discipline = new Discipline(rs.getString("name"), rs.getString("description"), rs.getString("code"));
+					discipline.setId(rs.getInt("id"));
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return discipline;
+		}
+		
 		public ArrayList<Discipline> list() {
 			
 			ArrayList<Discipline> disciplineList = new ArrayList<Discipline>();
