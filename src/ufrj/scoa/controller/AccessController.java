@@ -9,10 +9,14 @@ import ufrj.scoa.model.DAO.PersonDAO;
 import ufrj.scoa.model.VO.Person;
 import ufrj.scoa.view.LoginView;
 import ufrj.scoa.view.WelcomeView;
+import ufrj.scoa.view.NewPasswordView;
+
+import ufrj.scoa.util.Util;
 
 public class AccessController implements ActionListener {
 
 	private LoginView loginView;
+	private NewPasswordView passwordView;
 	private ScoaBaseController baseController;
 	private PersonDAO personDAO = new PersonDAO();
 
@@ -29,13 +33,20 @@ public class AccessController implements ActionListener {
 		if(event.getSource() == this.loginView.getBtnLogin()) {
 			login();
 		}
+		if(event.getSource() == this.passwordView.getBtnAccept()) {
+			personDAO.setPassword(String.valueOf(this.passwordView.getPassword1Field().getPassword()), passwordView.getEntry());
+			this.baseController.getBaseFrame().changePanel(this.loginView, "Login - SCOA", false);
+		}		
+	
 	}
-
+	
 	private void login() {
 
 		String entry = this.loginView.getUsernameField().getText();
 		String password = String.valueOf(this.loginView.getPasswordField().getPassword());
-
+		this.passwordView = new NewPasswordView(entry);
+		this.passwordView.getBtnAccept().addActionListener(this);
+		
 		if(this.validadeLoginFields(entry, password)) {
 			
 			try 
@@ -43,9 +54,15 @@ public class AccessController implements ActionListener {
 				if(this.personDAO.validateLogin(entry,password)) {
 
 					Person currentUser = personDAO.getCurrentUser(entry, password);
-					this.baseController.setCurrentUser(currentUser);
-					this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
-					
+					if(this.checkPassword(entry))
+					{
+						this.baseController.getBaseFrame().changePanel(this.passwordView, "Redefinição de senha",false);						
+					}
+					else
+					{
+						this.baseController.setCurrentUser(currentUser);
+						this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
+					}
 				} else {
 					
 					JOptionPane.showMessageDialog(null, "Login inválido.");
@@ -59,6 +76,18 @@ public class AccessController implements ActionListener {
 		} else {
 			JOptionPane.showMessageDialog(null, "Preencha corretamente os campos.");
 		}
+	}
+	
+	private boolean checkPassword(String entry){
+		String password =  Util.generateNewPassword(entry);
+		
+		String passwordBd = personDAO.getPassword(entry);
+		
+		Boolean passwd = false;
+		
+		passwd = password.equalsIgnoreCase(passwordBd);
+		
+		return passwd;
 	}
 
 	private boolean validadeLoginFields(String entry, String password) {

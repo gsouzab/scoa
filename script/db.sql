@@ -254,6 +254,11 @@ CREATE TABLE IF NOT EXISTS `scoa`.`student_classes` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+INSERT INTO scoa.role VALUES (DEFAULT, 'Administrator'), (DEFAULT, 'Secretary'), (DEFAULT, 'Professor'), (DEFAULT, 'Student');
+
+
+INSERT INTO scoa.person VALUES (DEFAULT,'Administrador geral', '000.000.000-00', 'admin@admin.com', '1900-01-01', md5('0000'), '11111111111', 1);
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
