@@ -60,7 +60,7 @@ public class ScoaBaseFrame extends JFrame {
         courseMenu.setFont(new Font("Arial", Font.PLAIN, 12));
         newCourseMenuItem = new JMenuItem("Cadastrar Curso");
         newCourseMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
-        listCoursesMenuItem = new JMenuItem("Listar Cursos");
+        listCoursesMenuItem = new JMenuItem("Buscar Cursos");
         listCoursesMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         
         courseMenu.add(newCourseMenuItem);
@@ -74,7 +74,7 @@ public class ScoaBaseFrame extends JFrame {
         studentsMenu.setFont(new Font("Arial", Font.PLAIN, 12));
         newStudentMenuItem = new JMenuItem("Cadastrar Aluno");
         newStudentMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
-        listStudentsMenuItem = new JMenuItem("Listar Alunos");
+        listStudentsMenuItem = new JMenuItem("Buscar Alunos");
         listStudentsMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         
         studentsMenu.add(newStudentMenuItem);
@@ -85,7 +85,7 @@ public class ScoaBaseFrame extends JFrame {
         professorsMenu.setFont(new Font("Arial", Font.PLAIN, 12));
         newProfessorsMenuItem = new JMenuItem("Cadastrar Professor");
         newProfessorsMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
-        listProfessorsMenuItem = new JMenuItem("Listar Professores");
+        listProfessorsMenuItem = new JMenuItem("Buscar Professores");
         listProfessorsMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         
         professorsMenu.add(newProfessorsMenuItem);
@@ -96,7 +96,7 @@ public class ScoaBaseFrame extends JFrame {
         disciplinesMenu.setFont(new Font("Arial", Font.PLAIN, 12));
         newDisciplinesMenuItem = new JMenuItem("Cadastrar Disciplina");
         newDisciplinesMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
-        listDisciplinesMenuItem = new JMenuItem("Listar Disciplinas");
+        listDisciplinesMenuItem = new JMenuItem("Buscar Disciplinas");
         listDisciplinesMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         
         disciplinesMenu.add(newDisciplinesMenuItem);

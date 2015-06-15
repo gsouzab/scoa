@@ -6,10 +6,14 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import ufrj.scoa.model.DAO.CourseDAO;
 import ufrj.scoa.model.DAO.DisciplineDAO;
+import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Discipline;
+import ufrj.scoa.view.CourseListView;
 import ufrj.scoa.view.DisciplineCreationView;
 import ufrj.scoa.view.DisciplineListView;
+import ufrj.scoa.view.DisciplineSearchView;
 import ufrj.scoa.view.WelcomeView;
 
 public class DisciplineController implements ActionListener {
@@ -17,13 +21,21 @@ public class DisciplineController implements ActionListener {
 	private DisciplineCreationView disciplineCreationView;
 	private ScoaBaseController baseController;
 	private DisciplineListView disciplineListView;
+	private DisciplineSearchView disciplineSearchView;
 
 	public DisciplineController(ScoaBaseController baseController) {
 		this.baseController = baseController;
+		
 		this.disciplineCreationView = new DisciplineCreationView();
-		this.disciplineListView = new DisciplineListView();
 		this.disciplineCreationView.getBtnSalvar().addActionListener(this);
 		this.disciplineCreationView.getBtnCancelar().addActionListener(this);
+		
+		this.disciplineSearchView = new DisciplineSearchView();
+		this.disciplineSearchView.getBtnBuscar().addActionListener(this);
+		this.disciplineSearchView.getBtnVoltar().addActionListener(this);	
+		
+		this.disciplineListView = new DisciplineListView();
+
 	}
 
 	@Override
@@ -35,6 +47,12 @@ public class DisciplineController implements ActionListener {
 		} else if(event.getSource() == this.disciplineCreationView.getBtnCancelar()) {
 			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem-vindo ao SCOA");
 			
+		} else if(event.getSource() == this.disciplineSearchView.getBtnBuscar()) {
+			searchDisciplines();
+			this.baseController.getBaseFrame().changePanel(disciplineListView, "Buscar Disciplinas");
+			
+		} else if(event.getSource() == this.disciplineSearchView.getBtnVoltar()) {
+			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
 		}
 	}
 	
@@ -57,7 +75,7 @@ public class DisciplineController implements ActionListener {
 		}
 	}
 	
-	public void listDisciplines() {
+	public void listAllDisciplines() {
 		DisciplineDAO disciplineDAO = new DisciplineDAO();
 		ArrayList<Discipline> disciplines = disciplineDAO.list();
 		
@@ -66,6 +84,19 @@ public class DisciplineController implements ActionListener {
 			
 		}
 
+	}
+	
+	public void searchDisciplines() {
+		String name = this.disciplineSearchView.getTfName().getText();
+		String courseCode = this.disciplineSearchView.getTfCode().getText();
+		String description = this.disciplineSearchView.getTaDescription().getText();
+		
+		DisciplineDAO disciplineDAO = new DisciplineDAO();
+		ArrayList<Discipline> disciplineList = disciplineDAO.search(name, courseCode, description);
+		
+		for(Discipline discipline: disciplineList) {
+			disciplineListView.getModel().addElement(discipline);
+		}
 	}
 	
 	private boolean validateCreateFields(String name, String code) {
@@ -85,7 +116,10 @@ public class DisciplineController implements ActionListener {
 	public DisciplineListView getDisciplinesListView() {
 		return disciplineListView;
 	}
-	
+
+	public DisciplineSearchView getDisciplineSearchView() {
+		return disciplineSearchView;
+	}
 	
 
 }

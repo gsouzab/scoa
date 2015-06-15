@@ -27,14 +27,14 @@ public class DisciplineListView extends JPanel {
 		model = new DefaultListModel<Discipline>();
 		JList<Discipline> list = new JList<Discipline>(model);
 		
-		JLabel lblDisciplines = new JLabel("DISCIPLINAS CADASTRADAS");
+		JLabel lblDisciplines = new JLabel("Resultado da busca por disciplinas");
 		lblDisciplines.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDisciplines.setFont(new Font("Arial", Font.BOLD, 15));
-		lblDisciplines.setBounds(61, 48, 508, 37);
+		lblDisciplines.setBounds(60, 12, 508, 37);
 		add(lblDisciplines);
 
 		JScrollPane scrollPane = new JScrollPane(list);
-		scrollPane.setBounds(20, 90, 600, 350);
+		scrollPane.setBounds(12, 90, 616, 235);
 		add(scrollPane);
 		
 	}

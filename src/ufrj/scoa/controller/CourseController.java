@@ -7,23 +7,36 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import ufrj.scoa.model.DAO.CourseDAO;
+import ufrj.scoa.model.DAO.StudentDAO;
 import ufrj.scoa.model.VO.Course;
+import ufrj.scoa.model.VO.Student;
+import ufrj.scoa.util.Util;
 import ufrj.scoa.view.CourseCreationView;
-import ufrj.scoa.view.CoursesListView;
+import ufrj.scoa.view.CourseSearchView;
+import ufrj.scoa.view.CourseListView;
+import ufrj.scoa.view.StudentListView;
+import ufrj.scoa.view.StudentSearchView;
 import ufrj.scoa.view.WelcomeView;
 
 public class CourseController implements ActionListener {
 	
-	private CourseCreationView courseCreationView;
 	private ScoaBaseController baseController;
-	private CoursesListView coursesListView;
+	private CourseCreationView courseCreationView;
+	private CourseListView coursesListView;
+	private CourseSearchView courseSearchView;
 	
 	public CourseController(ScoaBaseController baseController) {
 		this.baseController = baseController;
+		
 		this.courseCreationView = new CourseCreationView();
-		this.coursesListView = new CoursesListView();
 		this.courseCreationView.getBtnSalvar().addActionListener(this);
 		this.courseCreationView.getBtnCancelar().addActionListener(this);
+		
+		this.courseSearchView = new CourseSearchView();
+		this.courseSearchView.getBtnBuscar().addActionListener(this);
+		this.courseSearchView.getBtnVoltar().addActionListener(this);		
+		
+		this.coursesListView = new CourseListView();
 	}
 
 	@Override
@@ -35,6 +48,12 @@ public class CourseController implements ActionListener {
 		} else if(event.getSource() == this.courseCreationView.getBtnCancelar()) {
 			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem-vindo ao SCOA");
 			
+		} else if(event.getSource() == this.courseSearchView.getBtnBuscar()) {
+			searchCourses();
+			this.baseController.getBaseFrame().changePanel(coursesListView, "Resultado da busca por cursos");
+			
+		} else if(event.getSource() == this.courseSearchView.getBtnVoltar()) {
+			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
 		}
 	}
 	
@@ -56,15 +75,18 @@ public class CourseController implements ActionListener {
 		}
 	}
 	
-	public void listCourses() {
-		CourseDAO courseDAO = new CourseDAO();
-		ArrayList<Course> courses = courseDAO.list();
-		
-		for(Course course: courses) {
-			this.coursesListView.getModel().addElement(course);
-			
-		}
 
+	public void searchCourses() {
+		String name = this.courseSearchView.getTfName().getText();
+		String courseCode = this.courseSearchView.getTfCode().getText();
+		String description = this.courseSearchView.getTaDescription().getText();
+		
+		CourseDAO courseDAO = new CourseDAO();
+		ArrayList<Course> courseList = courseDAO.search(name, courseCode, description);
+		
+		for(Course course: courseList) {
+			coursesListView.getModel().addElement(course);
+		}
 	}
 	
 	private boolean validateCreateFields(String name, String code, String description) {
@@ -81,10 +103,14 @@ public class CourseController implements ActionListener {
 		return courseCreationView;
 	}
 
-	public CoursesListView getCoursesListView() {
+	public CourseListView getCoursesListView() {
 		return coursesListView;
 	}
 	
 	
+	public CourseSearchView getCourseSearchView() {
+		return courseSearchView;
+	}
+
 
 }

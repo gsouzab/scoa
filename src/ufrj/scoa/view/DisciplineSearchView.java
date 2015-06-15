@@ -13,25 +13,26 @@ import javax.swing.border.EtchedBorder;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-public class CourseCreationView extends JPanel {
+public class DisciplineSearchView extends JPanel {
     
 
 	private static final long serialVersionUID = 1L;
     private JTextField tfName;
-    private JTextField tfCode;
     private JTextArea taDescription;
-    private JButton btnSalvar;
-    private JButton btnCancelar;
+
+    private JButton btnBuscar;
+    private JButton btnVoltar;
+    private JTextField tfCode;
     
     /**
      * Create the frame.
      */
     
-    public CourseCreationView() {
-        
+    public DisciplineSearchView() {
+
         tfName = new JTextField();
         tfName.setFont(new Font("Arial", Font.PLAIN, 13));
-        tfName.setBounds(139, 25, 483, 28);
+        tfName.setBounds(139, 10, 483, 28);
         tfName.setColumns(10);
         
         JSeparator separator = new JSeparator();
@@ -46,68 +47,71 @@ public class CourseCreationView extends JPanel {
         panelButtons.setBounds(236, 10, 1, 1);
         panelButtons.setLayout(null);
         
-        JLabel lblName = new JLabel("Nome*");
+        JLabel lblName = new JLabel("Nome");
         lblName.setFont(new Font("Arial", Font.BOLD, 12));
-        lblName.setBounds(10, 31, 119, 15);
-        
-        JLabel lblCode = new JLabel("C\u00F3digo*");
-        lblCode.setFont(new Font("Arial", Font.BOLD, 12));
-        lblCode.setBounds(10, 70, 119, 15);
-        
-        tfCode = new JTextField();
-        tfCode.setFont(new Font("Arial", Font.PLAIN, 13));
-        tfCode.setBounds(139, 64, 119, 28);
-        tfCode.setColumns(10);
-        
-        JLabel lblDescription = new JLabel("Descri\u00E7\u00E3o*");
+        lblName.setBounds(10, 17, 119, 15);
+		        
+        JLabel lblDescription = new JLabel("Descrição");
         lblDescription.setFont(new Font("Arial", Font.BOLD, 12));
-        lblDescription.setBounds(10, 113, 119, 15);
+        lblDescription.setBounds(10, 107, 119, 15);
         
         taDescription= new JTextArea();
         taDescription.setFont(new Font("Arial", Font.PLAIN, 13));
-        taDescription.setBounds(139, 109, 483, 168);
+        taDescription.setBounds(139, 106, 483, 137);
         taDescription.setLineWrap(true);
         
-        btnSalvar = new JButton("Salvar");
-        btnSalvar.setFont(new Font("Arial", Font.BOLD, 12));
-        btnSalvar.setBounds(400, 420, 110, 29);
+        btnBuscar = new JButton("Buscar");
+        btnBuscar.setFont(new Font("Arial", Font.BOLD, 12));
+        btnBuscar.setBounds(400, 420, 110, 29);
         
-        btnCancelar = new JButton("Voltar");
-        btnCancelar.setFont(new Font("Arial", Font.BOLD, 12));
-        btnCancelar.setBounds(520, 420, 110, 29);
+        btnVoltar = new JButton("Voltar");
+        btnVoltar.setFont(new Font("Arial", Font.BOLD, 12));
+        btnVoltar.setBounds(520, 420, 110, 29);
+        
+        tfCode = new JTextField();
+        tfCode.setFont(new Font("Arial", Font.PLAIN, 13));
+        tfCode.setColumns(10);
+        tfCode.setBounds(139, 50, 141, 28);
+        
+        JLabel lblCodigo = new JLabel("Código");
+        lblCodigo.setFont(new Font("Arial", Font.BOLD, 12));
+        lblCodigo.setBounds(10, 60, 119, 15);
+        
+        
         setLayout(null);
         add(tfName);
         add(separator);
         add(panelDescription);
         add(panelButtons);
         add(lblName);
-        add(lblCode);
-        add(tfCode);
         add(lblDescription);
         add(taDescription);
-        add(btnSalvar);
-        add(btnCancelar);
-        setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblName, tfName, lblCode, separator, panelDescription, lblDescription, panelButtons, btnCancelar}));
+        add(btnBuscar);
+        add(btnVoltar);
+        add(lblCodigo);
+        add(tfCode);
+        
+        setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblName, tfName, separator, panelDescription, lblDescription, panelButtons, btnVoltar}));
    	}
 
-	public JButton getBtnSalvar() {
-		return btnSalvar;
+	public JButton getBtnBuscar() {
+		return btnBuscar;
 	}
 
-	public JButton getBtnCancelar() {
-		return btnCancelar;
+	public JButton getBtnVoltar() {
+		return btnVoltar;
 	}
 
 	public JTextField getTfName() {
 		return tfName;
 	}
 
-	public JTextField getTfCode() {
-		return tfCode;
-	}
-
-
 	public JTextArea getTaDescription() {
 		return taDescription;
 	}
+
+	public JTextField getTfCode() {
+		return tfCode;
+	}
+	
 }

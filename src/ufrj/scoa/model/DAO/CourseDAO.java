@@ -55,7 +55,7 @@ public class CourseDAO {
 		return course;
 	}
 	
-	public ArrayList<Course> list() {
+	public ArrayList<Course> listAll() {
 		
 		ArrayList<Course> courseList = new ArrayList<Course>();
 		
@@ -64,6 +64,49 @@ public class CourseDAO {
 			conn = Connect.connectDB();
 			
 			ps = conn.prepareStatement("SELECT * FROM course");
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Course course = new Course(rs.getString("name"), rs.getString("code"), rs.getString("description"));
+				course.setId(rs.getInt("id"));
+				
+				courseList.add(course);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return courseList; 
+	}
+	
+	public ArrayList<Course> search(String name, String code, String description) {
+		
+		ArrayList<Course> courseList = new ArrayList<Course>();
+
+		try {
+			
+			conn = Connect.connectDB();
+			
+			String query = " SELECT * FROM course WHERE id = id";
+			
+			if(name.length() > 0) {
+				query += " AND name like '%" +name+ "%' ";
+			}
+			
+			if(code.length() > 0) {
+				query += " AND code like '%" +code+ "%' ";
+			}
+			
+			if(description.length() > 0) {
+				query += " AND description like '%" +description+ "%' ";
+			}
+			
+			
+			ps = conn.prepareStatement(query);
 			
 			ResultSet rs = ps.executeQuery();
 			

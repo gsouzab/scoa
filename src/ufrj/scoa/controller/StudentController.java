@@ -28,37 +28,42 @@ public class StudentController implements ActionListener {
 	private ScoaBaseController baseController;
 	private CourseDAO courseDAO = new CourseDAO();
 	private StudentSearchView studentSearchView;
+	ArrayList<Course> coursesList;
 
 	public StudentController(ScoaBaseController baseController) {
 
-		ArrayList<Course> coursesList = courseDAO.list();
+		coursesList = courseDAO.listAll();
+		
 		this.baseController = baseController;
+		
 		this.studentCreationView = new StudentCreationView(coursesList);
+		this.studentCreationView.getBtnSalvar().addActionListener(this);
+		this.studentCreationView.getBtnCancelar().addActionListener(this);
 		
 		Course courseNull = new Course("Todos os cursos", "", "");
 		coursesList.add(0, courseNull);
 		this.studentSearchView = new StudentSearchView(coursesList);
-		
-		this.studentCreationView.getBtnSalvar().addActionListener(this);
-		this.studentCreationView.getBtnCancelar().addActionListener(this);
 		this.studentSearchView.getBtnBuscar().addActionListener(this);
-		this.studentSearchView.getBtnCancelar().addActionListener(this);
-
-
+		this.studentSearchView.getBtnVoltar().addActionListener(this);
+		
+		this.studentListView = new StudentListView();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == this.studentCreationView.getBtnSalvar()) {
 			saveStudent();
+			
 		} else if(event.getSource() == this.studentCreationView.getBtnCancelar()) {
 			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
+			
 		} else if(event.getSource() == this.studentSearchView.getBtnBuscar()) {
-			StudentListView studentListView = new StudentListView();
-			searchStudents(studentListView);
-			this.baseController.getBaseFrame().changePanel(studentListView, "Listagem de Alunos");
-		} else if(event.getSource() == this.studentSearchView.getBtnCancelar()) {
+			searchStudents();
+			this.baseController.getBaseFrame().changePanel(studentListView, "Resultado da busca por alunos");
+			
+		} else if(event.getSource() == this.studentSearchView.getBtnVoltar()) {
 			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
+			
 		}
 
 	}
@@ -128,7 +133,7 @@ public class StudentController implements ActionListener {
 		return studentSearchView;
 	}
 	
-	public void searchStudents(StudentListView studentListView) {
+	public void searchStudents() {
 		Course course = (Course) this.studentSearchView.getCbCourse().getSelectedItem();
 		String courseCode = course.getCode();
 		String courseName = course.getName();
