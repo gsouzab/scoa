@@ -5,9 +5,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 
 import ufrj.scoa.model.VO.Person;
+import ufrj.scoa.util.Util;
 
 public class PersonDAO {
 	
@@ -24,7 +26,7 @@ public class PersonDAO {
 			PreparedStatement selectPersonStatement;
 			
 			conn = Connect.connectDB();
-			
+						
 			selectPersonStatement = conn.prepareStatement("SELECT COUNT(*) FROM person WHERE entry = ? AND password = md5(?)");
 			selectPersonStatement.setString(1, entry);
 			selectPersonStatement.setString(2, password);
@@ -43,6 +45,50 @@ public class PersonDAO {
 			e.printStackTrace();
 			return canLogin;
 		}
+	}
+	
+	public void setPassword(String password,String entry){
+		try {
+			PreparedStatement updatePasswordStatement;
+			
+			conn = Connect.connectDB();
+			
+			updatePasswordStatement = conn.prepareStatement("UPDATE person SET password = md5(?) WHERE entry = ?");
+			updatePasswordStatement.setString(1,password);
+			updatePasswordStatement.setString(2,entry);
+			updatePasswordStatement.executeUpdate();
+		}catch(SQLException e){
+			System.out.println("Failed to set new password");
+			e.printStackTrace();
+		}
+	}
+	
+	public String getPassword(String entry){
+		String passwordBd = null;
+		try {
+			PreparedStatement selectPersonStatement;
+			
+			conn = Connect.connectDB();
+			selectPersonStatement = conn.prepareStatement("SELECT password FROM person WHERE entry = ?");
+			selectPersonStatement.setString(1, entry);
+			
+			
+			ResultSet rs = selectPersonStatement.executeQuery();
+			if (rs.next()) {
+		        passwordBd = rs.getString(1);		   
+			}
+			else{
+				passwordBd = "Fail";
+			}
+			
+			return passwordBd;
+			
+		}catch(SQLException e){
+			System.out.println("Failed to get current password.");
+			passwordBd = "Fail";
+			return passwordBd;
+		}
+		
 	}
 	
 public Person getCurrentUser(String entry, String password) {

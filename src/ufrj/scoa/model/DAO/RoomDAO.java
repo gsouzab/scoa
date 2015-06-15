@@ -77,5 +77,22 @@ public class RoomDAO {
 			
 			return roomList; 
 		}
+		
+		public void delete(int roomId) {
+			
+			PreparedStatement deleteStatement;
+			
+			try {
+				conn = Connect.connectDB();
+				
+				deleteStatement = conn.prepareStatement(" DELETE FROM scoa.room WHERE id = ? ");
+				deleteStatement.setInt(1, roomId);
+				deleteStatement.executeUpdate();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
 
 }

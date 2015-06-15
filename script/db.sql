@@ -244,17 +244,10 @@ DEFAULT CHARACTER SET = utf8;
 
 USE `scoa` ;
 
-INSERT INTO scoa.role
-VALUES 
-(DEFAULT, 'Administrator'), 
-(DEFAULT, 'Secretary'), 
-(DEFAULT, 'Professor'), 
-(DEFAULT, 'Student')
+INSERT INTO scoa.role VALUES (DEFAULT, 'Administrator'), (DEFAULT, 'Secretary'), (DEFAULT, 'Professor'), (DEFAULT, 'Student');
 
 
-INSERT INTO scoa.person
-VALUES
-(DEFAULT,'Administrador geral', '000.000.000-00', 'admin@admin.com', '1900-01-01', md5('0000'), '11111111111', 1)
+INSERT INTO scoa.person VALUES (DEFAULT,'Administrador geral', '000.000.000-00', 'admin@admin.com', '1900-01-01', md5('0000'), '11111111111', 1);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
