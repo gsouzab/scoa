@@ -87,20 +87,20 @@ public class RoomDAO {
 				conn = Connect.connectDB();
 				
 				String query = "SELECT * FROM room ";
-				String connector = "WHERE";
+				String connector = " WHERE ";
 				
 				if(building.length() > 0) {
 					query += connector + " building LIKE '%" + building + "%'";
-					connector = "AND";
+					connector = " AND ";
 				}
 				
 				if(number > 0) {
-					query += connector + " number =" + number;
-					connector = "AND";
+					query += connector + " number = " + number;
+					connector = " AND ";
 				}
 				
 				if(floor > 0) {
-					query += connector + " floor =" + floor;
+					query += connector + " floor = " + floor;
 				}
 				
 				ps = conn.prepareStatement(query);
