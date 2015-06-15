@@ -14,7 +14,7 @@ public class CourseDAO {
 	private Connection conn;
 	private PreparedStatement ps;
 	
-	public void save(Course course) {
+	public void saveCourse(Course course) {
 		
 		try {
 			
@@ -24,6 +24,21 @@ public class CourseDAO {
 			ps.setString(1, course.getName());
 			ps.setString(2, course.getCode());
 			ps.setString(3, course.getDescription());
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+	
+	public void deleteCourse(int courseId) {
+		
+		try {
+			conn = Connect.connectDB();
+			
+			ps = conn.prepareStatement(" DELETE FROM scoa.course WHERE id = ? ");
+			ps.setInt(1, courseId);
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -55,7 +70,7 @@ public class CourseDAO {
 		return course;
 	}
 	
-	public ArrayList<Course> listAll() {
+	public ArrayList<Course> listAllCourses() {
 		
 		ArrayList<Course> courseList = new ArrayList<Course>();
 		
@@ -83,7 +98,7 @@ public class CourseDAO {
 		return courseList; 
 	}
 	
-	public ArrayList<Course> search(String name, String code, String description) {
+	public ArrayList<Course> searchCourse(String name, String code, String description) {
 		
 		ArrayList<Course> courseList = new ArrayList<Course>();
 

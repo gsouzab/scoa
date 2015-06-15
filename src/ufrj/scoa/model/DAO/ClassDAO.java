@@ -21,11 +21,14 @@ public class ClassDAO {
 			
 			conn = Connect.connectDB();
 			
-			ps = conn.prepareStatement("INSERT INTO class VALUES(DEFAULT,?,?,?,?)");
+			ps = conn.prepareStatement("INSERT INTO class (id, course_id, discipline_id, room_id, name, code, credits, time_of_class) VALUES(DEFAULT,?,?,?,?,?,?,?)");
 			ps.setInt(1, newClass.getCourse().getId());
-			ps.setString(2, newClass.getName());
-			ps.setString(3, newClass.getCode());
-			ps.setBoolean(4, newClass.getIsActive());
+			ps.setInt(2, newClass.getDiscipline().getId());
+			ps.setInt(3, newClass.getRoom().getId());
+			ps.setString(4, newClass.getName());
+			ps.setString(5, newClass.getCode());
+			ps.setInt(6, newClass.getCredits());
+			ps.setString(7, newClass.getTimeOfClass());
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -47,11 +50,12 @@ public class ClassDAO {
 			ResultSet rs = ps.executeQuery();
 			
 			CourseDAO courseDao = new CourseDAO();
+			DisciplineDAO disciplineDao = new DisciplineDAO();
+			RoomDAO roomDao = new RoomDAO();
 			
 			while(rs.next()) {
 				
-				Class c = new Class(rs.getInt("id"),rs.getString("name"), rs.getString("code"),courseDao.getCourseById(rs.getInt("course_id")), rs.getBoolean("is_active"));
-				
+				Class c = new Class(rs.getInt("id"), rs.getInt("credits"),rs.getString("name"), rs.getString("code"), rs.getString("time_of_class"), courseDao.getCourseById(rs.getInt("course_id")), disciplineDao.getDisciplineById(rs.getInt("discipline_id")), roomDao.getRoomById(rs.getInt("room_id")));
 				classList.add(c);
 			}
 			

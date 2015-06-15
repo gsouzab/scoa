@@ -18,7 +18,7 @@ public class StudentDAO {
 	public StudentDAO() {
 	}
 	
-	public void save(Student student) {
+	public void saveStudent(Student student) {
 		
 		try {
 			PreparedStatement insertPersonStatement, insertStudentStatement;
@@ -43,7 +43,7 @@ public class StudentDAO {
                 person_id = rs.getInt(1);
             }
             
-            insertStudentStatement = conn.prepareStatement("INSERT INTO student (person_id, cr, course_id) VALUES(DEFAULT,?,?,?)");
+            insertStudentStatement = conn.prepareStatement("INSERT INTO student (id, person_id, cr, course_id) VALUES(DEFAULT,?,?,?)");
             insertStudentStatement.setInt(1, person_id);
             insertStudentStatement.setFloat(2, student.getCR());
             insertStudentStatement.setInt(3, student.getCourse().getId());
@@ -56,7 +56,7 @@ public class StudentDAO {
 		} 
 	}
 	
-	public ArrayList<Student> search(String courseCode,String courseName,String studentName,String email,String cpf, String birthdate) {
+	public ArrayList<Student> searchStudent(String courseCode,String courseName,String studentName,String email,String cpf, String birthdate) {
 		
 		ArrayList<Student> studentList = new ArrayList<Student>();
 		
@@ -64,7 +64,7 @@ public class StudentDAO {
 			
 			conn = Connect.connectDB();
 			
-			String baseQuery = " SELECT p.*, c.name AS courseName, c.code AS courseCode, c.description AS courseDescription FROM scoa.person p, scoa.student s, scoa.course c" +
+			String baseQuery = " SELECT p.*, c.name AS courseName, c.code AS courseCode, c.description AS courseDescription, s.id AS studentId FROM scoa.person p, scoa.student s, scoa.course c" +
 							   " WHERE p.id = s.person_id " +
 							   " AND s.course_id = c.id ";
 			
@@ -96,6 +96,8 @@ public class StudentDAO {
 			while(rs.next()) {
 				
 				Student student = new Student(rs.getString("name"), rs.getString("cpf"), rs.getString("email"), rs.getDate("birthdate"), new Course(rs.getString("courseName"), rs.getString("courseCode"), rs.getString("courseDescription")), rs.getString("entry"), rs.getString("password"));
+				student.setStudentId(rs.getInt("studentId"));
+				student.setPersonId(rs.getInt("id"));
 				
 				studentList.add(student);
 			}
@@ -106,6 +108,27 @@ public class StudentDAO {
 		}
 		
 		return studentList; 
+	}
+	
+	public void deleteStudent(int personId, int studentId) {
+		
+		PreparedStatement deletePersonStatement, deleteStudentStatement;
+		
+		try {
+			conn = Connect.connectDB();
+			
+			deleteStudentStatement = conn.prepareStatement(" DELETE FROM scoa.student WHERE id = ? ");
+			deleteStudentStatement.setInt(1, studentId);
+			deleteStudentStatement.executeUpdate();
+			
+			deletePersonStatement = conn.prepareStatement(" DELETE FROM scoa.person WHERE id = ? ");
+			deletePersonStatement.setInt(1, personId);
+			deletePersonStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 
 }

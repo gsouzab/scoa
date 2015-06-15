@@ -13,6 +13,7 @@ public class Person {
 	private Date birthdate;
 	private String entry;
 	private int role;
+	private int personId;
 	
 	public Person(String name, String cpf, String email, Date birthdate, String entry, String password, int role) {
 
@@ -79,6 +80,14 @@ public class Person {
 
 	public void setRole(int role) {
 		this.role = role;
+	}
+
+	public int getPersonId() {
+		return personId;
+	}
+
+	public void setPersonId(int personId) {
+		this.personId = personId;
 	}
 	
 

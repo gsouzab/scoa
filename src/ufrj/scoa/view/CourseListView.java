@@ -21,13 +21,16 @@ public class CourseListView extends JPanel {
 	 */
 	
 	private DefaultListModel<Course> model;
+	private JButton btnExcluir;
+	private JList<Course> list;
+	
 	
 	
 	public CourseListView() {
 		setLayout(null);
 		
 		model = new DefaultListModel<Course>();
-		JList<Course> list = new JList<Course>(model);
+		list = new JList<Course>(model);
 		
 		JLabel lblCursos = new JLabel("Resultado da busca por cursos");
 		lblCursos.setHorizontalAlignment(SwingConstants.CENTER);
@@ -35,13 +38,39 @@ public class CourseListView extends JPanel {
 		lblCursos.setBounds(60, 12, 508, 37);
 		add(lblCursos);
 
-		JScrollPane scrollPane = new JScrollPane(list);
+		JScrollPane scrollPane;scrollPane = new JScrollPane(list);
 		scrollPane.setBounds(12, 90, 616, 235);
 		add(scrollPane);
+		
+		btnExcluir = new JButton("Excluir");
+		btnExcluir.setBounds(12, 337, 103, 25);
+		add(btnExcluir);
 		
 	}
 
 	public DefaultListModel<Course> getModel() {
 		return model;
 	}
+
+	public JButton getBtnExcluir() {
+		return btnExcluir;
+	}
+
+	public JList<Course> getList() {
+		return list;
+	}
+
+	public void setModel(DefaultListModel<Course> model) {
+		this.model = model;
+	}
+
+	public void setList(JList<Course> list) {
+		this.list = list;
+	}
+	
+	public void resetList() {
+		this.model.removeAllElements();
+	}
+	
+	
 }
