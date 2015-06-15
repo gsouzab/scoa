@@ -71,7 +71,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `scoa`.`secretary`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `scoa`.`secretary` (
-  `id` INT(11) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `person_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_employee_person1_idx` (`person_id` ASC),
