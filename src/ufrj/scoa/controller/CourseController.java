@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import ufrj.scoa.model.DAO.CourseDAO;
@@ -22,7 +25,7 @@ public class CourseController implements ActionListener {
 	
 	private ScoaBaseController baseController;
 	private CourseCreationView courseCreationView;
-	private CourseListView coursesListView;
+	private CourseListView courseListView;
 	private CourseSearchView courseSearchView;
 	
 	public CourseController(ScoaBaseController baseController) {
@@ -36,7 +39,8 @@ public class CourseController implements ActionListener {
 		this.courseSearchView.getBtnBuscar().addActionListener(this);
 		this.courseSearchView.getBtnVoltar().addActionListener(this);		
 		
-		this.coursesListView = new CourseListView();
+		this.courseListView = new CourseListView();
+		this.courseListView.getBtnExcluir().addActionListener(this);
 	}
 
 	@Override
@@ -50,10 +54,19 @@ public class CourseController implements ActionListener {
 			
 		} else if(event.getSource() == this.courseSearchView.getBtnBuscar()) {
 			searchCourses();
-			this.baseController.getBaseFrame().changePanel(coursesListView, "Resultado da busca por cursos");
+			this.baseController.getBaseFrame().changePanel(courseListView, "Resultado da busca por cursos");
 			
 		} else if(event.getSource() == this.courseSearchView.getBtnVoltar()) {
 			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
+			
+		} else if(event.getSource() == this.courseListView.getBtnExcluir()) {
+			int option = JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir o curso selecionado?", "Excluir curso", JOptionPane.YES_NO_OPTION);
+
+			if(option == 0) {
+				deleteCourse(courseListView.getList().getSelectedValue());
+			}
+			else if (option == 1) {}
+			
 		}
 	}
 	
@@ -65,7 +78,7 @@ public class CourseController implements ActionListener {
 		if(this.validateCreateFields(name, code, description)) {
 			Course newCourse = new Course(this.courseCreationView.getTfName().getText(), this.courseCreationView.getTfCode().getText(), this.courseCreationView.getTaDescription().getText());
 			CourseDAO courseDAO = new CourseDAO();
-			courseDAO.save(newCourse);
+			courseDAO.saveCourse(newCourse);
 			
 			JOptionPane.showMessageDialog(null, "Curso salvo com sucesso");
 			clearFieldsCreationView();
@@ -76,17 +89,28 @@ public class CourseController implements ActionListener {
 	}
 	
 
-	public void searchCourses() {
+	private void searchCourses() {
 		String name = this.courseSearchView.getTfName().getText();
 		String courseCode = this.courseSearchView.getTfCode().getText();
 		String description = this.courseSearchView.getTaDescription().getText();
 		
 		CourseDAO courseDAO = new CourseDAO();
-		ArrayList<Course> courseList = courseDAO.search(name, courseCode, description);
+		ArrayList<Course> courseList = courseDAO.searchCourse(name, courseCode, description);
 		
 		for(Course course: courseList) {
-			coursesListView.getModel().addElement(course);
+			courseListView.getModel().addElement(course);
 		}
+	}
+	
+	private void deleteCourse(Course course) {
+		int courseId = course.getId();
+		
+		CourseDAO courseDAO = new CourseDAO();
+		courseDAO.deleteCourse(courseId);
+		
+		this.courseListView.resetList();
+		searchCourses();
+		
 	}
 	
 	private boolean validateCreateFields(String name, String code, String description) {
@@ -104,7 +128,7 @@ public class CourseController implements ActionListener {
 	}
 
 	public CourseListView getCoursesListView() {
-		return coursesListView;
+		return courseListView;
 	}
 	
 	

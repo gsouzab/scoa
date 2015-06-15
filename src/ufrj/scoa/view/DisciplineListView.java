@@ -42,6 +42,11 @@ public class DisciplineListView extends JPanel {
 	public DefaultListModel<Discipline> getModel() {
 		return model;
 	}
+
+	public void setModel(DefaultListModel<Discipline> model) {
+		this.model = model;
+	}
+	
 	
 	
 }

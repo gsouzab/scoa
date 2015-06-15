@@ -32,7 +32,7 @@ public class StudentController implements ActionListener {
 
 	public StudentController(ScoaBaseController baseController) {
 
-		coursesList = courseDAO.listAll();
+		coursesList = courseDAO.listAllCourses();
 		
 		this.baseController = baseController;
 		
@@ -47,6 +47,7 @@ public class StudentController implements ActionListener {
 		this.studentSearchView.getBtnVoltar().addActionListener(this);
 		
 		this.studentListView = new StudentListView();
+		this.studentListView.getBtnExcluir().addActionListener(this);
 	}
 
 	@Override
@@ -63,6 +64,14 @@ public class StudentController implements ActionListener {
 			
 		} else if(event.getSource() == this.studentSearchView.getBtnVoltar()) {
 			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
+			
+		} else if(event.getSource() == this.studentListView.getBtnExcluir()) {
+			int option = JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir o aluno selecionado?", "Excluir aluno", JOptionPane.YES_NO_OPTION);
+
+			if(option == 0) {
+				deleteStudent(studentListView.getList().getSelectedValue());
+			}
+			else if (option == 1) {}
 			
 		}
 
@@ -98,7 +107,7 @@ public class StudentController implements ActionListener {
 			Student student = new Student(name, cpf, email, date, selectedCourse, entry, password);
 			StudentDAO studentDao = new StudentDAO();
 
-			studentDao.save(student);
+			studentDao.saveStudent(student);
 
 			JOptionPane.showMessageDialog(null, "Aluno salvo com sucesso");
 			clearFieldsCreationView();
@@ -159,11 +168,23 @@ public class StudentController implements ActionListener {
 		}
 		
 		StudentDAO studentDAO = new StudentDAO();
-		ArrayList<Student> students = studentDAO.search(courseCode, courseName, studentName, email, cpf, birthdate);
+		ArrayList<Student> students = studentDAO.searchStudent(courseCode, courseName, studentName, email, cpf, birthdate);
 		
 		for(Student student: students) {
 			studentListView.getModel().addElement(student);
 		}
+	}
+	
+	private void deleteStudent(Student student) {
+		int studentId = student.getStudentId();
+		int personId = student.getPersonId();
+		
+		StudentDAO studentDAO = new StudentDAO();
+		studentDAO.deleteStudent(personId, studentId);
+		
+		this.studentListView.resetList();
+		searchStudents();
+		
 	}
 	
 

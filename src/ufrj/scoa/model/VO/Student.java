@@ -8,6 +8,7 @@ public class Student extends Person {
 	
 	private Course course;
 	private float CR;
+	private int studentId;
 
 	public Student(String name,String cpf,String email,Date birthdate, Course course, String entry, String password) {
 		super(name, cpf, email, birthdate, entry, password, Constants.ROLE_STUDENT);
@@ -34,4 +35,14 @@ public class Student extends Person {
 	public String toString() {
 		return this.getName() + " - " +this.getCpf();
 	}
+
+	public int getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
+	}
+
+	
 }
