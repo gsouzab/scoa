@@ -103,8 +103,6 @@ public class RoomDAO {
 					query += connector + " floor = " + floor;
 				}
 				
-				System.out.println(query);
-				
 				ps = conn.prepareStatement(query);
 				
 				ResultSet rs = ps.executeQuery();
