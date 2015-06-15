@@ -2,13 +2,15 @@ package ufrj.scoa.model.VO;
 
 import java.util.Date;
 
+import ufrj.scoa.util.Constants;
+
 public class Student extends Person {
 	
 	private Course course;
 	private float CR;
 
-	public Student(String name,String cpf,String email,Date birthdate, Course course) {
-		super(name,cpf,email,birthdate,0,"");
+	public Student(String name,String cpf,String email,Date birthdate, Course course, String entry, String password) {
+		super(name, cpf, email, birthdate, entry, password, Constants.ROLE_STUDENT);
 		this.course = course;
 		this.setCR(0);
 	}

@@ -11,9 +11,10 @@ public class Person {
 	private String email;
 	private String password;
 	private Date birthdate;
-	private int entry;
+	private String entry;
+	private int role;
 	
-	public Person(String name, String cpf, String email, Date birthdate, int entry, String password) {
+	public Person(String name, String cpf, String email, Date birthdate, String entry, String password, int role) {
 
 		this.name = name;
 		this.cpf = cpf;
@@ -21,26 +22,7 @@ public class Person {
 		this.birthdate = birthdate;
 		this.entry = entry;
 		this.password = password;
-	}
-
-	private String generateNewPassword() {
-		
-		MessageDigest md = null;
-		try {
-			md = MessageDigest.getInstance("MD5");
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-        md.update(cpf.getBytes());
- 
-        byte byteData[] = md.digest();
- 
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < byteData.length; i++) {
-        	sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
-        }
-        
-        return sb.toString();
+		this.role = role;
 	}
 	
 	public String getName() {
@@ -83,16 +65,21 @@ public class Person {
 		this.password = password;
 	}
 
-	public int getEntry() {
+	public String getEntry() {
 		return entry;
 	}
 
-	public void setEntry(int entry) {
+	public void setEntry(String entry) {
 		this.entry = entry;
 	}
-	
-	
-	
+
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
+	}
 	
 
 }

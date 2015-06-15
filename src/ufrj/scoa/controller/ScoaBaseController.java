@@ -3,11 +3,13 @@ package ufrj.scoa.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import ufrj.scoa.model.VO.Person;
 import ufrj.scoa.view.ScoaBaseFrame;
 
 public class ScoaBaseController implements ActionListener {
 
 	private ScoaBaseFrame baseFrame;
+	private Person currentUser;
 	
 	public ScoaBaseController()
 	{
@@ -87,5 +89,15 @@ public class ScoaBaseController implements ActionListener {
 	public ScoaBaseFrame getBaseFrame() {
 		return baseFrame;
 	}
+
+	public Person getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(Person currentUser) {
+		this.currentUser = currentUser;
+	}
+	
+	
 	
 }

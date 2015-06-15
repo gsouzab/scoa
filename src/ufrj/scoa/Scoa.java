@@ -2,6 +2,7 @@ package ufrj.scoa;
 
 import ufrj.scoa.controller.AccessController;
 import ufrj.scoa.controller.ScoaBaseController;
+import ufrj.scoa.view.WelcomeView;
 
 public class Scoa {
 

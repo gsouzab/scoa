@@ -2,6 +2,7 @@ package ufrj.scoa.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import ufrj.scoa.model.DAO.CourseDAO;
 import ufrj.scoa.model.DAO.StudentDAO;
 import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Student;
+import ufrj.scoa.util.Util;
 import ufrj.scoa.view.StudentCreationView;
 import ufrj.scoa.view.StudentListView;
 import ufrj.scoa.view.StudentSearchView;
@@ -68,6 +70,8 @@ public class StudentController implements ActionListener {
 		String cpf = this.studentCreationView.getTfCpf().getText();
 		String birthdate = this.studentCreationView.getTfDate().getText();
 		Course selectedCourse = (Course) this.studentCreationView.getCbCourse().getSelectedItem();
+		String password = null;
+		String entry;
 
 		if(this.validadeCreateFields(name, email, this.studentCreationView.getTfCpf(), this.studentCreationView.getTfDate(), selectedCourse)) {
 
@@ -82,8 +86,11 @@ public class StudentController implements ActionListener {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
+			
+			password = Util.generateNewPassword(cpf);
+			entry = Util.unmaskCPF(cpf);
 
-			Student student = new Student(name, cpf, email, date, selectedCourse);
+			Student student = new Student(name, cpf, email, date, selectedCourse, entry, password);
 			StudentDAO studentDao = new StudentDAO();
 
 			studentDao.save(student);
@@ -130,14 +137,14 @@ public class StudentController implements ActionListener {
 		String cpf = this.studentSearchView.getTfCpf().getText();
 		String birthdate = this.studentSearchView.getTfDate().getText();
 		
-		if(unmaskDate(birthdate).length() > 0) {
-			birthdate = formatDateSql(birthdate);
+		if(Util.unmaskDate(birthdate).length() > 0) {
+			birthdate = Util.formatDateToSql(birthdate);
 		} else {
-			birthdate = unmaskDate(birthdate);
+			birthdate = Util.unmaskDate(birthdate);
 		}
 		
 		
-		if(unmaskCPF(cpf).length() == 0) {
+		if(Util.unmaskCPF(cpf).length() == 0) {
 			cpf = "";
 		}
 		
@@ -152,37 +159,6 @@ public class StudentController implements ActionListener {
 		for(Student student: students) {
 			studentListView.getModel().addElement(student);
 		}
-	}
-	
-	public String unmaskCPF(String cpf) {
-		cpf = cpf.replaceAll("\\.", "");
-		cpf = cpf.replaceAll("-", "");
-		cpf = cpf.replaceAll(" ", "");
-		
-		return cpf;
-	}
-	
-	public String formatDateSql (String date) {
-		SimpleDateFormat fromUser = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String reformattedStr = "";
-
-		try {
-			reformattedStr = myFormat.format(fromUser.parse(date));
-		} catch (ParseException e) {
-		    e.printStackTrace();
-		}
-		
-		return reformattedStr;
-	}
-	
-	public String unmaskDate(String date) {
-		date = date.replaceAll("\\/", "");
-		date = date.replaceAll(" ", "");
-		
-		System.out.println(date);
-		
-		return date;
 	}
 	
 
