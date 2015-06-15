@@ -12,9 +12,9 @@ import javax.swing.JOptionPane;
 import ufrj.scoa.model.DAO.SecretaryDAO;
 import ufrj.scoa.model.VO.Secretary;
 import ufrj.scoa.util.Util;
-import ufrj.scoa.view.SecretaryCreationView;
-import ufrj.scoa.view.StudentCreationView;
 import ufrj.scoa.view.WelcomeView;
+import ufrj.scoa.view.secretary.SecretaryCreationView;
+import ufrj.scoa.view.student.StudentCreationView;
 
 
 

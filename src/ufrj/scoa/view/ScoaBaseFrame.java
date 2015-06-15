@@ -43,17 +43,22 @@ public class ScoaBaseFrame extends JFrame {
 	private JMenuItem newRoomMenuItem;
 	private JMenuItem searchRoomMenuItem;
 
-	//Itens menu secretaria
+	//Itens menu Secretaria
 	private JMenuItem newSecretaryMenuItem;
 	
-	
+	//Itens menu Minha Conta
+	private JMenuItem mntmDetalharMenuItem;
 	private JMenuItem mntmLogout;
+	
+	
 	JPanel contentPane;
 	private Component horizontalStrut;
+	private JMenu mnMinhaConta;
+
 	
 	public ScoaBaseFrame(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 640, 480);
+        setBounds(100, 100, 640, 520);
         setResizable(false);
         
         this.generateMenu();
@@ -136,13 +141,19 @@ public class ScoaBaseFrame extends JFrame {
         searchRoomMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         roomsMenu.add(searchRoomMenuItem);
         
-        horizontalStrut = Box.createHorizontalStrut(255);
+        horizontalStrut = Box.createHorizontalStrut(166);
         menuBar.add(horizontalStrut);
         
+        mnMinhaConta = new JMenu("Minha Conta");
+        menuBar.add(mnMinhaConta);
+        
+        mntmDetalharMenuItem = new JMenuItem("Detalhar");
+        mntmDetalharMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
+        mnMinhaConta.add(mntmDetalharMenuItem);
+        
         mntmLogout = new JMenuItem("Logout");
-        mntmLogout.setHorizontalAlignment(SwingConstants.RIGHT);
+        mnMinhaConta.add(mntmLogout);
         mntmLogout.setFont(new Font("Arial", Font.PLAIN, 12));
-        menuBar.add(mntmLogout);
         GroupLayout groupLayout = new GroupLayout(getContentPane());
         groupLayout.setHorizontalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
@@ -219,6 +230,11 @@ public class ScoaBaseFrame extends JFrame {
 		return searchRoomMenuItem;
 	}
 	
+	
+	public JMenuItem getDetalharMenuItem() {
+		return mntmDetalharMenuItem;
+	}
+
 	public void changePanel(JPanel newPanel, String newTitle) {
 		this.showMenu();
 		this._changePanel(newPanel, newTitle);

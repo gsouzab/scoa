@@ -14,12 +14,12 @@ import ufrj.scoa.model.DAO.StudentDAO;
 import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Student;
 import ufrj.scoa.util.Util;
-import ufrj.scoa.view.CourseCreationView;
-import ufrj.scoa.view.CourseSearchView;
-import ufrj.scoa.view.CourseListView;
-import ufrj.scoa.view.StudentListView;
-import ufrj.scoa.view.StudentSearchView;
 import ufrj.scoa.view.WelcomeView;
+import ufrj.scoa.view.course.CourseCreationView;
+import ufrj.scoa.view.course.CourseListView;
+import ufrj.scoa.view.course.CourseSearchView;
+import ufrj.scoa.view.student.StudentListView;
+import ufrj.scoa.view.student.StudentSearchView;
 
 public class CourseController implements ActionListener {
 	

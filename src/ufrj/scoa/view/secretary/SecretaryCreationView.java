@@ -1,4 +1,4 @@
-package ufrj.scoa.view;
+package ufrj.scoa.view.secretary;
 
 import java.awt.Font;
 import java.text.ParseException;
@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 
-public class ProfessorCreationView extends JPanel {
+public class SecretaryCreationView extends JPanel {
 
 	/**
 	 * 
@@ -28,7 +28,7 @@ public class ProfessorCreationView extends JPanel {
 	/**
 	 * Create the frame.
 	 */
-	public ProfessorCreationView() {
+	public SecretaryCreationView() {
 		
 		setLayout(null);
 		

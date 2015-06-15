@@ -21,8 +21,8 @@ import ufrj.scoa.model.VO.Room;
 import ufrj.scoa.model.VO.Student;
 import ufrj.scoa.model.VO.Class;
 import ufrj.scoa.view.classes.ClassCreationView;
-import ufrj.scoa.view.StudentCreationView;
-import ufrj.scoa.view.StudentListView;
+import ufrj.scoa.view.student.StudentCreationView;
+import ufrj.scoa.view.student.StudentListView;
 import ufrj.scoa.view.WelcomeView;
 
 public class ClassController implements ActionListener {
