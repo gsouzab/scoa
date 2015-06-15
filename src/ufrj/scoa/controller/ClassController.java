@@ -12,8 +12,12 @@ import javax.swing.JOptionPane;
 
 import ufrj.scoa.model.DAO.ClassDAO;
 import ufrj.scoa.model.DAO.CourseDAO;
+import ufrj.scoa.model.DAO.DisciplineDAO;
+import ufrj.scoa.model.DAO.RoomDAO;
 import ufrj.scoa.model.DAO.StudentDAO;
 import ufrj.scoa.model.VO.Course;
+import ufrj.scoa.model.VO.Discipline;
+import ufrj.scoa.model.VO.Room;
 import ufrj.scoa.model.VO.Student;
 import ufrj.scoa.model.VO.Class;
 import ufrj.scoa.view.classes.ClassCreationView;
@@ -26,11 +30,13 @@ public class ClassController implements ActionListener {
 	private ClassCreationView classCreationView;
 	private ScoaBaseController baseController;
 	private CourseDAO courseDAO = new CourseDAO();
+	private RoomDAO roomDAO = new RoomDAO();
+	private DisciplineDAO disciplineDAO = new DisciplineDAO();
 
 	public ClassController(ScoaBaseController baseController) {
 
 		this.baseController = baseController;
-		this.classCreationView = new ClassCreationView(courseDAO.listAll());
+		this.classCreationView = new ClassCreationView(courseDAO.listAll(), disciplineDAO.list(),roomDAO.list());
 		this.classCreationView.getBtnSalvar().addActionListener(this);
 		this.classCreationView.getBtnCancelar().addActionListener(this);
 		
@@ -56,11 +62,13 @@ public class ClassController implements ActionListener {
 	private void saveClass() {
 		String name = this.classCreationView.getTfName().getText();
 		String code = this.classCreationView.getTfCode().getText();
+		int credits = Integer.valueOf(this.classCreationView.getTfCredits().getText());
 		Course selectedCourse = (Course) this.classCreationView.getSelectedCourseComboBox().getSelectedItem();
-		boolean isActive = this.classCreationView.getActiveClass().isSelected();
+		Discipline selectedDiscipline = (Discipline) this.classCreationView.getSelectedDisciplineComboBox().getSelectedItem();
+		Room selectedRoom = (Room) this.classCreationView.getSelectedRoomComboBox().getSelectedItem();
 		
 		if(validateCreateFields(name, code, selectedCourse)) {
-			Class newClass = new Class(name,code, selectedCourse,isActive);
+			Class newClass = new Class(credits,name,code,"ter-qui 10:00 às 12:00", selectedCourse,selectedDiscipline,selectedRoom);
 			ClassDAO classDAO = new ClassDAO();
 			classDAO.save(newClass);
 			
@@ -80,7 +88,7 @@ public class ClassController implements ActionListener {
 	private void clearFieldsCreationView() {
 		this.classCreationView.getTfName().setText("");
 		this.classCreationView.getTfCode().setText("");
-		this.classCreationView.getActiveClass().setSelected(true);
+		this.classCreationView.getTfCredits().setText("");
 	}
 
 }
