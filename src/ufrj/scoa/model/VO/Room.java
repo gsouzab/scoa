@@ -57,7 +57,18 @@ public class Room {
 	}
 
 	public String toString() {
-		return this.building + " - " + this.floor + "/" + this.number;
+		
+		String retorno = this.building;
+		
+		if(this.floor > 0) {
+			retorno += " " + this.floor + "º andar";
+		}
+		
+		if(this.number > 0) {
+			retorno += " " + this.number;
+		}
+		
+		return retorno;
 	}
 	
 }

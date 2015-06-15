@@ -21,6 +21,8 @@ import ufrj.scoa.model.VO.Room;
 import ufrj.scoa.model.VO.Student;
 import ufrj.scoa.model.VO.Class;
 import ufrj.scoa.view.classes.ClassCreationView;
+import ufrj.scoa.view.classes.ClassListView;
+import ufrj.scoa.view.classes.ClassSearchView;
 import ufrj.scoa.view.StudentCreationView;
 import ufrj.scoa.view.StudentListView;
 import ufrj.scoa.view.WelcomeView;
@@ -28,6 +30,8 @@ import ufrj.scoa.view.WelcomeView;
 public class ClassController implements ActionListener {
 
 	private ClassCreationView classCreationView;
+	private ClassSearchView classSearchView;
+	private ClassListView classListView;
 	private ScoaBaseController baseController;
 	private CourseDAO courseDAO = new CourseDAO();
 	private RoomDAO roomDAO = new RoomDAO();
@@ -40,11 +44,20 @@ public class ClassController implements ActionListener {
 		this.classCreationView.getBtnSalvar().addActionListener(this);
 		this.classCreationView.getBtnCancelar().addActionListener(this);
 		
-
+		this.classSearchView = new ClassSearchView(courseDAO.listAllCourses(), disciplineDAO.list(),roomDAO.list());
+		this.classSearchView.getBtnBuscar().addActionListener(this);
+		this.classSearchView.getBtnVoltar().addActionListener(this);
+		
+		this.classListView = new ClassListView();
+		this.classListView.getBtnExcluir().addActionListener(this);
 	}
 
 	public ClassCreationView getClassCreationView() {
 		return classCreationView;
+	}
+	
+	public ClassSearchView getClassSearchView() {
+		return classSearchView;
 	}
 	
 	@Override
@@ -55,7 +68,50 @@ public class ClassController implements ActionListener {
 		} else if(event.getSource() == this.classCreationView.getBtnCancelar()) {
 			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem-vindo ao SCOA");
 			
+		} else if(event.getSource() == this.classSearchView.getBtnBuscar()) {
+			searchClasses();
+			this.baseController.getBaseFrame().changePanel(classListView, "Resultado da busca por salas");
+			
+		} else if(event.getSource() == this.classSearchView.getBtnVoltar()) {
+			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
+			
+		} else if(event.getSource() == this.classListView.getBtnExcluir()) {
+			int option = JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir a turma selecionado?", "Excluir turma", JOptionPane.YES_NO_OPTION);
+
+			if(option == 0) {
+				deleteClass(classListView.getList().getSelectedValue());
+			}
+			
 		}
+		
+	}
+	
+	private void searchClasses() {
+		String code = this.classSearchView.getTfCode().getText();
+		String name = this.classSearchView.getTfName().getText();
+		int credits = this.classSearchView.getTfCredits().getText().length() > 0 ? Integer.valueOf(this.classSearchView.getTfCredits().getText()) : 0 ;
+		Course selectedCourse = (Course) this.classSearchView.getSelectedCourseComboBox().getSelectedItem();
+		Discipline selectedDiscipline = (Discipline) this.classSearchView.getSelectedDisciplineComboBox().getSelectedItem();
+		Room selectedRoom = (Room) this.classSearchView.getSelectedRoomComboBox().getSelectedItem();
+		
+		int course_id = selectedCourse.getId();
+		int discipline_id = selectedDiscipline.getId();
+		int room_id = selectedRoom.getId();
+		
+		ClassDAO classDAO = new ClassDAO();
+		ArrayList<Class> classList = classDAO.search(code, name, course_id, discipline_id, room_id, credits);
+		
+		this.classListView.setList(classList);
+		
+	}
+	
+	private void deleteClass(Class c) {
+		int classId = c.getId();
+		
+		ClassDAO classDAO = new ClassDAO();
+		classDAO.delete(classId);
+		
+		searchClasses();
 		
 	}
 

@@ -26,11 +26,11 @@ public class ScoaBaseController implements ActionListener {
 		baseFrame.getNewProfessorsMenuItem().addActionListener(this);
 		baseFrame.getListDisciplinesMenuItem().addActionListener(this);
 		baseFrame.getNewDisciplineMenuItem().addActionListener(this);
-		baseFrame.getNewClassMenuItem().addActionListener(this);
 		baseFrame.getNewRoomMenuItem().addActionListener(this);
 		baseFrame.getSearchRoomMenuItem().addActionListener(this);
 		baseFrame.getNewSecretaryMenuItem().addActionListener(this);
-
+		baseFrame.getNewClassMenuItem().addActionListener(this);
+		baseFrame.getSearchClassMenuItem().addActionListener(this);
 	}
 
 	@Override
@@ -85,6 +85,10 @@ public class ScoaBaseController implements ActionListener {
 			
 			ClassController classController = new ClassController(this);			
 			baseFrame.changePanel(classController.getClassCreationView(), "Cadastrar Turma");
+		} else if(event.getSource() == baseFrame.getSearchClassMenuItem()) {
+			
+			ClassController classController = new ClassController(this);			
+			baseFrame.changePanel(classController.getClassSearchView(), "Buscar Turma");
 		} else if(event.getSource() == baseFrame.getNewRoomMenuItem()) {
 			
 			RoomController roomController = new RoomController(this);

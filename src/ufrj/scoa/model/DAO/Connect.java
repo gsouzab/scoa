@@ -11,7 +11,7 @@ public class Connect {
 		try
 		{
 			String userName = "root";
-			String password = "root";
+			String password = "";
 			String url = "jdbc:mysql://localhost/scoa";
 			Class.forName ("com.mysql.jdbc.Driver").newInstance();
 			conn = DriverManager.getConnection (url, userName, password);

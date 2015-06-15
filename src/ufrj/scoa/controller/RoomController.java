@@ -60,7 +60,7 @@ public class RoomController implements ActionListener {
 			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
 			
 		} else if(event.getSource() == this.roomListView.getBtnExcluir()) {
-			int option = JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir o curso selecionado?", "Excluir curso", JOptionPane.YES_NO_OPTION);
+			int option = JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir a sala selecionada?", "Excluir sala", JOptionPane.YES_NO_OPTION);
 
 			if(option == 0) {
 				deleteRoom(roomListView.getList().getSelectedValue());

@@ -29,7 +29,6 @@ public class ScoaBaseFrame extends JFrame {
 	//	
 	private JMenuItem listCoursesMenuItem;
 	private JMenuItem newCourseMenuItem;
-	private JMenuItem newClassMenuItem;
 	
 	// Itens menu Professores
 	private JMenuItem listProfessorsMenuItem;
@@ -43,6 +42,10 @@ public class ScoaBaseFrame extends JFrame {
 	private JMenuItem newRoomMenuItem;
 	private JMenuItem searchRoomMenuItem;
 
+	// Itens menu turma	
+	private JMenuItem newClassMenuItem;
+	private JMenuItem searchClassMenuItem;
+	
 	//Itens menu secretaria
 	private JMenuItem newSecretaryMenuItem;
 	
@@ -53,7 +56,7 @@ public class ScoaBaseFrame extends JFrame {
 	
 	public ScoaBaseFrame(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 640, 480);
+        setBounds(100, 100, 640, 520);
         setResizable(false);
         
         this.generateMenu();
@@ -72,10 +75,6 @@ public class ScoaBaseFrame extends JFrame {
         listCoursesMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         
         courseMenu.add(newCourseMenuItem);
-        
-        newClassMenuItem = new JMenuItem("Cadastrar Turma");
-        newClassMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
-        courseMenu.add(newClassMenuItem);
         courseMenu.add(listCoursesMenuItem);
         
         JMenu studentsMenu = new JMenu("Alunos");
@@ -136,7 +135,19 @@ public class ScoaBaseFrame extends JFrame {
         searchRoomMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         roomsMenu.add(searchRoomMenuItem);
         
-        horizontalStrut = Box.createHorizontalStrut(255);
+        JMenu classesMenu = new JMenu("Turmas");
+        classesMenu.setFont(new Font("Arial", Font.PLAIN, 12));
+        menuBar.add(classesMenu);
+        
+        newClassMenuItem = new JMenuItem("Cadastrar Turma");
+        newClassMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
+        classesMenu.add(newClassMenuItem);
+        
+        searchClassMenuItem = new JMenuItem("Buscar Turma");
+        searchClassMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
+        classesMenu.add(searchClassMenuItem);
+        
+        horizontalStrut = Box.createHorizontalStrut(134);
         menuBar.add(horizontalStrut);
         
         mntmLogout = new JMenuItem("Logout");
@@ -217,6 +228,10 @@ public class ScoaBaseFrame extends JFrame {
 	
 	public JMenuItem getSearchRoomMenuItem() {
 		return searchRoomMenuItem;
+	}
+	
+	public JMenuItem getSearchClassMenuItem() {
+		return searchClassMenuItem;
 	}
 	
 	public void changePanel(JPanel newPanel, String newTitle) {
