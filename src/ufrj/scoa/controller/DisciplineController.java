@@ -6,15 +6,12 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import ufrj.scoa.model.DAO.CourseDAO;
 import ufrj.scoa.model.DAO.DisciplineDAO;
-import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Discipline;
-import ufrj.scoa.view.CourseListView;
-import ufrj.scoa.view.DisciplineCreationView;
-import ufrj.scoa.view.DisciplineListView;
-import ufrj.scoa.view.DisciplineSearchView;
 import ufrj.scoa.view.WelcomeView;
+import ufrj.scoa.view.discipline.DisciplineCreationView;
+import ufrj.scoa.view.discipline.DisciplineListView;
+import ufrj.scoa.view.discipline.DisciplineSearchView;
 
 public class DisciplineController implements ActionListener {
 	

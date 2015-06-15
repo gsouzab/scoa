@@ -4,22 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
-import ufrj.scoa.model.DAO.CourseDAO;
 import ufrj.scoa.model.DAO.RoomDAO;
-import ufrj.scoa.model.DAO.StudentDAO;
-import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Room;
-import ufrj.scoa.model.VO.Student;
-import ufrj.scoa.util.Util;
+import ufrj.scoa.view.WelcomeView;
 import ufrj.scoa.view.room.RoomCreationView;
 import ufrj.scoa.view.room.RoomListView;
 import ufrj.scoa.view.room.RoomSearchView;
-import ufrj.scoa.view.WelcomeView;
 
 public class RoomController implements ActionListener {
 	

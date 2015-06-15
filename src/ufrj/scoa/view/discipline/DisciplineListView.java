@@ -1,4 +1,4 @@
-package ufrj.scoa.view;
+package ufrj.scoa.view.discipline;
 
 import java.awt.Font;
 

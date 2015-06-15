@@ -46,24 +46,24 @@ public class StudentDisciplineCreationView extends JPanel {
         btnCancelar.setBounds(520, 420, 110, 29);
         setLayout(null);
         
-        JLabel label = new JLabel("Turma");
-        label.setFont(new Font("Arial", Font.BOLD, 12));
-        label.setBounds(6, 87, 119, 15);
-        add(label);
+        JLabel lblTurma = new JLabel("Turma*");
+        lblTurma.setFont(new Font("Arial", Font.BOLD, 12));
+        lblTurma.setBounds(6, 87, 119, 15);
+        add(lblTurma);
         
         JLabel lblClass = new JLabel("Aluno*");
         lblClass.setFont(new Font("Arial", Font.BOLD, 12));
-        lblClass.setBounds(6, 114, 119, 15);
+        lblClass.setBounds(6, 133, 119, 15);
         add(lblClass);
                         
         cbStudent = new JComboBox<Student>();
         cbStudent.setFont(new Font("Arial", Font.PLAIN, 13));
-        cbStudent.setBounds(137, 134, 483, 28);
+        cbStudent.setBounds(143, 126, 483, 28);
         add(cbStudent);
         
         cbClass = new JComboBox<Class>();
         cbClass.setFont(new Font("Arial", Font.PLAIN, 13));
-        cbClass.setBounds(137, 108, 483, 28);
+        cbClass.setBounds(143, 80, 483, 28);
         add(cbClass);
         
         JSeparator separator = new JSeparator();

@@ -11,7 +11,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 public class ScoaBaseFrame extends JFrame {
 
@@ -46,15 +45,19 @@ public class ScoaBaseFrame extends JFrame {
 	private JMenuItem newClassMenuItem;
 	private JMenuItem searchClassMenuItem;
 	
-	//Itens menu secretaria
+	//Itens menu Secretaria
 	private JMenuItem newSecretaryMenuItem;
 
-	private JMenuItem newStudentDisciplineMenuItem;
-
-	
+	//Itens menu Minha Conta
+	private JMenuItem mntmDetalharMenuItem;
 	private JMenuItem mntmLogout;
+	
+	private JMenuItem newStudentDisciplineMenuItem;
+	
 	JPanel contentPane;
 	private Component horizontalStrut;
+	private JMenu mnMinhaConta;
+
 	
 	public ScoaBaseFrame(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -156,13 +159,19 @@ public class ScoaBaseFrame extends JFrame {
         searchClassMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         classesMenu.add(searchClassMenuItem);
         
-        horizontalStrut = Box.createHorizontalStrut(134);
+        horizontalStrut = Box.createHorizontalStrut(127);
         menuBar.add(horizontalStrut);
         
+        mnMinhaConta = new JMenu("Minha Conta");
+        menuBar.add(mnMinhaConta);
+        
+        mntmDetalharMenuItem = new JMenuItem("Detalhar");
+        mntmDetalharMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
+        mnMinhaConta.add(mntmDetalharMenuItem);
+        
         mntmLogout = new JMenuItem("Logout");
-        mntmLogout.setHorizontalAlignment(SwingConstants.RIGHT);
+        mnMinhaConta.add(mntmLogout);
         mntmLogout.setFont(new Font("Arial", Font.PLAIN, 12));
-        menuBar.add(mntmLogout);
         GroupLayout groupLayout = new GroupLayout(getContentPane());
         groupLayout.setHorizontalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
@@ -245,6 +254,10 @@ public class ScoaBaseFrame extends JFrame {
 		return searchClassMenuItem;
 	}
 	
+	public JMenuItem getDetalharMenuItem() {
+		return mntmDetalharMenuItem;
+	}
+
 	public void changePanel(JPanel newPanel, String newTitle) {
 		this.showMenu();
 		this._changePanel(newPanel, newTitle);

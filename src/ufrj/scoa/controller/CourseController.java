@@ -4,22 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import ufrj.scoa.model.DAO.CourseDAO;
-import ufrj.scoa.model.DAO.StudentDAO;
 import ufrj.scoa.model.VO.Course;
-import ufrj.scoa.model.VO.Student;
-import ufrj.scoa.util.Util;
-import ufrj.scoa.view.CourseCreationView;
-import ufrj.scoa.view.CourseSearchView;
-import ufrj.scoa.view.CourseListView;
-import ufrj.scoa.view.StudentListView;
-import ufrj.scoa.view.StudentSearchView;
 import ufrj.scoa.view.WelcomeView;
+import ufrj.scoa.view.course.CourseCreationView;
+import ufrj.scoa.view.course.CourseListView;
+import ufrj.scoa.view.course.CourseSearchView;
 
 public class CourseController implements ActionListener {
 	

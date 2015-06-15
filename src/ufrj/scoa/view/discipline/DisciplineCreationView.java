@@ -1,4 +1,4 @@
-package ufrj.scoa.view;
+package ufrj.scoa.view.discipline;
 
 import java.awt.Component;
 import java.awt.Font;
@@ -13,22 +13,22 @@ import javax.swing.border.EtchedBorder;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-public class DisciplineSearchView extends JPanel {
+public class DisciplineCreationView extends JPanel {
     
 
 	private static final long serialVersionUID = 1L;
     private JTextField tfName;
     private JTextArea taDescription;
 
-    private JButton btnBuscar;
-    private JButton btnVoltar;
+    private JButton btnSalvar;
+    private JButton btnCancelar;
     private JTextField tfCode;
     
     /**
      * Create the frame.
      */
     
-    public DisciplineSearchView() {
+    public DisciplineCreationView() {
 
         tfName = new JTextField();
         tfName.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -47,7 +47,7 @@ public class DisciplineSearchView extends JPanel {
         panelButtons.setBounds(236, 10, 1, 1);
         panelButtons.setLayout(null);
         
-        JLabel lblName = new JLabel("Nome");
+        JLabel lblName = new JLabel("Nome*");
         lblName.setFont(new Font("Arial", Font.BOLD, 12));
         lblName.setBounds(10, 17, 119, 15);
 		        
@@ -60,20 +60,20 @@ public class DisciplineSearchView extends JPanel {
         taDescription.setBounds(139, 106, 483, 137);
         taDescription.setLineWrap(true);
         
-        btnBuscar = new JButton("Buscar");
-        btnBuscar.setFont(new Font("Arial", Font.BOLD, 12));
-        btnBuscar.setBounds(400, 420, 110, 29);
+        btnSalvar = new JButton("Salvar");
+        btnSalvar.setFont(new Font("Arial", Font.BOLD, 12));
+        btnSalvar.setBounds(400, 420, 110, 29);
         
-        btnVoltar = new JButton("Voltar");
-        btnVoltar.setFont(new Font("Arial", Font.BOLD, 12));
-        btnVoltar.setBounds(520, 420, 110, 29);
+        btnCancelar = new JButton("Voltar");
+        btnCancelar.setFont(new Font("Arial", Font.BOLD, 12));
+        btnCancelar.setBounds(520, 420, 110, 29);
         
         tfCode = new JTextField();
         tfCode.setFont(new Font("Arial", Font.PLAIN, 13));
         tfCode.setColumns(10);
         tfCode.setBounds(139, 50, 141, 28);
         
-        JLabel lblCodigo = new JLabel("Código");
+        JLabel lblCodigo = new JLabel("Código*");
         lblCodigo.setFont(new Font("Arial", Font.BOLD, 12));
         lblCodigo.setBounds(10, 60, 119, 15);
         
@@ -86,20 +86,20 @@ public class DisciplineSearchView extends JPanel {
         add(lblName);
         add(lblDescription);
         add(taDescription);
-        add(btnBuscar);
-        add(btnVoltar);
+        add(btnSalvar);
+        add(btnCancelar);
         add(lblCodigo);
         add(tfCode);
         
-        setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblName, tfName, separator, panelDescription, lblDescription, panelButtons, btnVoltar}));
+        setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblName, tfName, separator, panelDescription, lblDescription, panelButtons, btnCancelar}));
    	}
 
-	public JButton getBtnBuscar() {
-		return btnBuscar;
+	public JButton getBtnSalvar() {
+		return btnSalvar;
 	}
 
-	public JButton getBtnVoltar() {
-		return btnVoltar;
+	public JButton getBtnCancelar() {
+		return btnCancelar;
 	}
 
 	public JTextField getTfName() {

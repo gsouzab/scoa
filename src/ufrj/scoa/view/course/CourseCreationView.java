@@ -1,4 +1,4 @@
-package ufrj.scoa.view;
+package ufrj.scoa.view.course;
 
 import java.awt.Component;
 import java.awt.Font;
@@ -13,21 +13,21 @@ import javax.swing.border.EtchedBorder;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-public class CourseSearchView extends JPanel {
+public class CourseCreationView extends JPanel {
     
 
 	private static final long serialVersionUID = 1L;
     private JTextField tfName;
     private JTextField tfCode;
     private JTextArea taDescription;
-    private JButton btnBuscar;
-    private JButton btnVoltar;
+    private JButton btnSalvar;
+    private JButton btnCancelar;
     
     /**
      * Create the frame.
      */
     
-    public CourseSearchView() {
+    public CourseCreationView() {
         
         tfName = new JTextField();
         tfName.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -46,11 +46,11 @@ public class CourseSearchView extends JPanel {
         panelButtons.setBounds(236, 10, 1, 1);
         panelButtons.setLayout(null);
         
-        JLabel lblName = new JLabel("Nome");
+        JLabel lblName = new JLabel("Nome*");
         lblName.setFont(new Font("Arial", Font.BOLD, 12));
         lblName.setBounds(10, 31, 119, 15);
         
-        JLabel lblCode = new JLabel("Código");
+        JLabel lblCode = new JLabel("C\u00F3digo*");
         lblCode.setFont(new Font("Arial", Font.BOLD, 12));
         lblCode.setBounds(10, 70, 119, 15);
         
@@ -59,23 +59,22 @@ public class CourseSearchView extends JPanel {
         tfCode.setBounds(139, 64, 119, 28);
         tfCode.setColumns(10);
         
-        JLabel lblDescription = new JLabel("Descrição");
+        JLabel lblDescription = new JLabel("Descri\u00E7\u00E3o*");
         lblDescription.setFont(new Font("Arial", Font.BOLD, 12));
         lblDescription.setBounds(10, 113, 119, 15);
         
         taDescription= new JTextArea();
         taDescription.setFont(new Font("Arial", Font.PLAIN, 13));
-        taDescription.setBounds(139, 109, 483, 132);
+        taDescription.setBounds(139, 109, 483, 168);
         taDescription.setLineWrap(true);
         
-        btnBuscar = new JButton("Buscar");
-        btnBuscar.setFont(new Font("Arial", Font.BOLD, 12));
-        btnBuscar.setBounds(400, 420, 110, 29);
+        btnSalvar = new JButton("Salvar");
+        btnSalvar.setFont(new Font("Arial", Font.BOLD, 12));
+        btnSalvar.setBounds(400, 420, 110, 29);
         
-        btnVoltar = new JButton("Voltar");
-        btnVoltar.setFont(new Font("Arial", Font.BOLD, 12));
-        btnVoltar.setBounds(520, 420, 110, 29);
-        
+        btnCancelar = new JButton("Voltar");
+        btnCancelar.setFont(new Font("Arial", Font.BOLD, 12));
+        btnCancelar.setBounds(520, 420, 110, 29);
         setLayout(null);
         add(tfName);
         add(separator);
@@ -86,23 +85,18 @@ public class CourseSearchView extends JPanel {
         add(tfCode);
         add(lblDescription);
         add(taDescription);
-        add(btnBuscar);
-        add(btnVoltar);	
-        setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblName, tfName, lblCode, separator, panelDescription, lblDescription, panelButtons, btnVoltar}));
+        add(btnSalvar);
+        add(btnCancelar);
+        setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblName, tfName, lblCode, separator, panelDescription, lblDescription, panelButtons, btnCancelar}));
    	}
 
-
-
-	public JButton getBtnBuscar() {
-		return btnBuscar;
+	public JButton getBtnSalvar() {
+		return btnSalvar;
 	}
 
-
-
-	public JButton getBtnVoltar() {
-		return btnVoltar;
+	public JButton getBtnCancelar() {
+		return btnCancelar;
 	}
-
 
 	public JTextField getTfName() {
 		return tfName;

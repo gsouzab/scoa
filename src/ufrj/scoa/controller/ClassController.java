@@ -2,29 +2,24 @@ package ufrj.scoa.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 
 import ufrj.scoa.model.DAO.ClassDAO;
 import ufrj.scoa.model.DAO.CourseDAO;
 import ufrj.scoa.model.DAO.DisciplineDAO;
 import ufrj.scoa.model.DAO.RoomDAO;
-import ufrj.scoa.model.DAO.StudentDAO;
+import ufrj.scoa.model.VO.Class;
 import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Discipline;
 import ufrj.scoa.model.VO.Room;
 import ufrj.scoa.model.VO.Student;
-import ufrj.scoa.model.VO.Class;
 import ufrj.scoa.view.classes.ClassCreationView;
 import ufrj.scoa.view.classes.ClassListView;
 import ufrj.scoa.view.classes.ClassSearchView;
-import ufrj.scoa.view.StudentCreationView;
-import ufrj.scoa.view.StudentListView;
+import ufrj.scoa.view.student.StudentCreationView;
+import ufrj.scoa.view.student.StudentListView;
 import ufrj.scoa.view.WelcomeView;
 
 public class ClassController implements ActionListener {

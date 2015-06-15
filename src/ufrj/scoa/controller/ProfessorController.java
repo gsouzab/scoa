@@ -13,10 +13,10 @@ import javax.swing.JOptionPane;
 import ufrj.scoa.model.DAO.ProfessorDAO;
 import ufrj.scoa.model.VO.Professor;
 import ufrj.scoa.util.Util;
-import ufrj.scoa.view.ProfessorCreationView;
-import ufrj.scoa.view.ProfessorListView;
-import ufrj.scoa.view.ProfessorSearchView;
 import ufrj.scoa.view.WelcomeView;
+import ufrj.scoa.view.professor.ProfessorCreationView;
+import ufrj.scoa.view.professor.ProfessorListView;
+import ufrj.scoa.view.professor.ProfessorSearchView;
 
 public class ProfessorController implements ActionListener {
 

@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import ufrj.scoa.model.VO.Class;
-import ufrj.scoa.model.VO.Course;
 
 public class ClassDAO {
 	

@@ -19,6 +19,7 @@ public class Connect {
 		}
 		catch (Exception e)
 		{
+			System.out.println(e.toString());
 			System.err.println ("N�o foi poss�vel estabelecer conex�o com o BD!");
 		}
 
