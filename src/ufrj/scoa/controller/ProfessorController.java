@@ -11,24 +11,34 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 
 import ufrj.scoa.model.DAO.ProfessorDAO;
+import ufrj.scoa.model.DAO.StudentDAO;
+import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Professor;
+import ufrj.scoa.model.VO.Student;
 import ufrj.scoa.util.Util;
 import ufrj.scoa.view.ProfessorCreationView;
 import ufrj.scoa.view.ProfessorListView;
+import ufrj.scoa.view.ProfessorSearchView;
 import ufrj.scoa.view.WelcomeView;
 
 public class ProfessorController implements ActionListener {
 
-	private ProfessorCreationView professorCreationView;
-	private ProfessorListView professorListView;
 	private ScoaBaseController baseController;
+	private ProfessorCreationView professorCreationView;
+	private ProfessorSearchView professorSearchView;
+	private ProfessorListView professorListView;
 	
 	public ProfessorController(ScoaBaseController baseController) {
 
 		this.baseController = baseController;
+		
 		this.professorCreationView = new ProfessorCreationView();
 		this.professorCreationView.getBtnSalvar().addActionListener(this);
 		this.professorCreationView.getBtnCancelar().addActionListener(this);
+		
+		this.professorSearchView = new ProfessorSearchView();
+		this.professorSearchView.getBtnBuscar().addActionListener(this);
+		this.professorSearchView.getBtnVoltar().addActionListener(this);
 		
 		this.professorListView = new ProfessorListView();
 
@@ -40,6 +50,14 @@ public class ProfessorController implements ActionListener {
 			saveProfessor();
 		} else if(event.getSource() == this.professorCreationView.getBtnCancelar()) {
 			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
+			
+		} else if(event.getSource() == this.professorSearchView.getBtnBuscar()) {
+			searchProfessor();
+			this.baseController.getBaseFrame().changePanel(professorListView, "Resultado da busca por professores");
+			
+		} else if(event.getSource() == this.professorSearchView.getBtnVoltar()) {
+			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
+			
 		}
 
 	}
@@ -83,18 +101,30 @@ public class ProfessorController implements ActionListener {
 		}
 	}
 	
-	public void listProfessors() {
-		ProfessorDAO professorDAO = new ProfessorDAO();
-		ArrayList<Professor> professors = professorDAO.list();
+	public void searchProfessor() {
 		
-		for(Professor professor: professors) {
-			Object[] row = {professor.getName(), professor.getCpf(), professor.getEmail() };
-			this.professorListView.getProfessorModel().addRow(row);
-			
+		String name = this.professorSearchView.getTfName().getText();
+		String email = this.professorSearchView.getTfEmail().getText();
+		String cpf = this.professorSearchView.getTfCpf().getText();
+		String birthdate = this.professorSearchView.getTfDate().getText();
+		
+		if(Util.unmaskDate(birthdate).length() > 0) {
+			birthdate = Util.formatDateToSql(birthdate);
+		} else {
+			birthdate = Util.unmaskDate(birthdate);
 		}
 		
-		professorListView.resizeColumnWidth(professorListView.getTable());
-
+		
+		if(Util.unmaskCPF(cpf).length() == 0) {
+			cpf = "";
+		}
+		
+		ProfessorDAO professorDAO = new ProfessorDAO();
+		ArrayList<Professor> professorList = professorDAO.search(name, email, cpf, birthdate);
+		
+		for(Professor professor: professorList) {
+			professorListView.getModel().addElement(professor);
+		}
 	}
 
 	private boolean validadeCreateFields(String name, String email, JFormattedTextField cpf, JFormattedTextField birthdate) {
@@ -117,5 +147,9 @@ public class ProfessorController implements ActionListener {
 		return professorListView;
 	}
 
-
+	public ProfessorSearchView getProfessorSearchView() {
+		return professorSearchView;
+	}
+	
+	
 }

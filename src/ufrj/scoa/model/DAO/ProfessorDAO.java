@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Professor;
+import ufrj.scoa.model.VO.Student;
 
 public class ProfessorDAO {
 	
@@ -71,6 +73,53 @@ public class ProfessorDAO {
 				professorList.add(professor);
 			}
 		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return professorList; 
+	}
+
+	public ArrayList<Professor> search(String name, String email, String cpf, String birthdate) {
+		
+		ArrayList<Professor> professorList = new ArrayList<Professor>();
+		
+		try {
+			
+			conn = Connect.connectDB();
+			
+			String baseQuery = " SELECT pe.* FROM scoa.person pe, scoa.professor pr " +
+							   " WHERE pe.id = pr.person_id ";
+			
+			
+			if(name.length() > 0) {
+				baseQuery += " AND pe.name like '%" +name+ "%' ";
+			}
+			
+			if(email.length() > 0){ 
+				baseQuery += " AND pe.email like '%" +email+ "%' ";
+			}
+			
+			if(cpf.length() > 0) {
+				baseQuery += " AND pe.cpf = '" +cpf+ "' ";
+			}
+			
+			if(birthdate.length() > 0) {
+				baseQuery += "AND pe.birthdate = '" +birthdate+ "' ";
+			}
+			
+			PreparedStatement ps = conn.prepareStatement(baseQuery);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Professor professor = new Professor(rs.getString("name"), rs.getString("cpf"), rs.getString("email"), rs.getDate("birthdate"), rs.getString("entry"), rs.getString("password"));
+				
+				professorList.add(professor);
+			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
