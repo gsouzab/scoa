@@ -1,13 +1,12 @@
 package ufrj.scoa.model.DAO;
 
-import ufrj.scoa.util.Util;
-import ufrj.scoa.model.VO.Secretary;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import ufrj.scoa.model.VO.Secretary;
 
 public class SecretaryDAO {
 	

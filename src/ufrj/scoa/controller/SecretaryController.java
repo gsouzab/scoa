@@ -14,7 +14,6 @@ import ufrj.scoa.model.VO.Secretary;
 import ufrj.scoa.util.Util;
 import ufrj.scoa.view.WelcomeView;
 import ufrj.scoa.view.secretary.SecretaryCreationView;
-import ufrj.scoa.view.student.StudentCreationView;
 
 
 

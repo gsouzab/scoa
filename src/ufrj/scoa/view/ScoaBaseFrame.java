@@ -11,7 +11,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 public class ScoaBaseFrame extends JFrame {
 
@@ -151,7 +150,7 @@ public class ScoaBaseFrame extends JFrame {
         searchRoomMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         roomsMenu.add(searchRoomMenuItem);
         
-        horizontalStrut = Box.createHorizontalStrut(166);
+        horizontalStrut = Box.createHorizontalStrut(127);
         menuBar.add(horizontalStrut);
         
         mnMinhaConta = new JMenu("Minha Conta");

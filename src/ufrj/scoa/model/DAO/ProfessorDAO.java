@@ -6,9 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Professor;
-import ufrj.scoa.model.VO.Student;
 
 public class ProfessorDAO {
 	

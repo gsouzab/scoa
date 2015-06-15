@@ -1,21 +1,15 @@
 package ufrj.scoa.view;
 
+import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-
-import java.awt.Color;
-import java.text.NumberFormat;
-import java.text.ParseException;
-
-import javax.swing.SwingConstants;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.text.MaskFormatter;
-import javax.swing.text.NumberFormatter;
+import javax.swing.SwingConstants;
 
 public class LoginView extends JPanel {
 	/**

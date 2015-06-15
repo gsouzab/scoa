@@ -6,12 +6,9 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import ufrj.scoa.model.DAO.CourseDAO;
 import ufrj.scoa.model.DAO.DisciplineDAO;
-import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Discipline;
 import ufrj.scoa.view.WelcomeView;
-import ufrj.scoa.view.course.CourseListView;
 import ufrj.scoa.view.discipline.DisciplineCreationView;
 import ufrj.scoa.view.discipline.DisciplineListView;
 import ufrj.scoa.view.discipline.DisciplineSearchView;

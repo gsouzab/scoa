@@ -3,23 +3,18 @@ package ufrj.scoa.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import ufrj.scoa.model.DAO.PersonDAO;
 import ufrj.scoa.model.VO.Person;
-import ufrj.scoa.view.AccountInfoView;
-import ufrj.scoa.view.LoginView;
-import ufrj.scoa.view.WelcomeView;
-import ufrj.scoa.view.NewPasswordView;
 import ufrj.scoa.util.Constants;
 import ufrj.scoa.util.Util;
+import ufrj.scoa.view.AccountInfoView;
+import ufrj.scoa.view.WelcomeView;
 
 public class AccountInfoController implements ActionListener {
 
 	private AccountInfoView accountInfoView;
 	private ScoaBaseController baseController;
-	private PersonDAO personDAO = new PersonDAO();
 
 	public AccountInfoController(ScoaBaseController baseController) {
 

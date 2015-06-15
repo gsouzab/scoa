@@ -1,10 +1,10 @@
 package ufrj.scoa.view;
 
 import java.awt.Font;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.JButton;
 
 public class AccountInfoView extends JPanel {
 	/**

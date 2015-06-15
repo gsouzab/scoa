@@ -56,7 +56,6 @@ public class StudentDisciplineController implements ActionListener {
 		
 		if(validateCreateFields(selectedClass, selectedStudent)) {
 			StudentDiscipline newStudentDiscipline = new StudentDiscipline(selectedStudent ,selectedClass);
-			ClassDAO classDAO = new ClassDAO();
 			
 			
 			StudentDisciplineDAO.save(newStudentDiscipline);

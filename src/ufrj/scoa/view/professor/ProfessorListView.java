@@ -10,7 +10,6 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import ufrj.scoa.model.VO.Professor;
-import ufrj.scoa.model.VO.Student;
 
 public class ProfessorListView extends JPanel {
 	/**
