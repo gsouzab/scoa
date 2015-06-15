@@ -31,6 +31,7 @@ public class ScoaBaseController implements ActionListener {
 		baseFrame.getNewSecretaryMenuItem().addActionListener(this);
 		baseFrame.getNewClassMenuItem().addActionListener(this);
 		baseFrame.getSearchClassMenuItem().addActionListener(this);
+		baseFrame.getNewStudentDisciplineMenuItem().addActionListener(this);
 	}
 
 	@Override
@@ -101,7 +102,12 @@ public class ScoaBaseController implements ActionListener {
 			
 			SecretaryController secretaryController = new SecretaryController(this);
 			baseFrame.changePanel(secretaryController.getSecretaryCreationView(), "Cadastrar secretaria");
+		} else if(event.getSource() == baseFrame.getNewStudentDisciplineMenuItem()) {
+			
+			StudentDisciplineController studentDisciplineController = new StudentDisciplineController(this);
+			baseFrame.changePanel(studentDisciplineController.getStudentDisciplineCreationView(), "Realizar Inscricao");
 		}
+		
 		
 	}
 
