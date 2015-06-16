@@ -17,11 +17,13 @@ public class StudentDisciplineDAO {
 			
 			conn = Connect.connectDB();
 			
-			ps = conn.prepareStatement("INSERT INTO student_classes (student_id, class_id, grade, attendance) VALUES (?, ?, ?, ?)");
+			ps = conn.prepareStatement("INSERT INTO student_class (student_id, class_id, grade, frequency, period, state) VALUES (?, ?, ?, ?,?,?)");
 			ps.setInt(1, studentDiscipline.getStudentId());
 			ps.setInt(2, studentDiscipline.getClassId());
 			ps.setFloat(3, 0);
 			ps.setInt(4, 0);
+			ps.setInt(5, 1);
+			ps.setInt(6,0);
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {
