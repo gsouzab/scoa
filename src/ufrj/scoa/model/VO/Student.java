@@ -33,7 +33,7 @@ public class Student extends Person {
 	}
 	
 	public String toString() {
-		return this.getName() + " - " +this.getCpf();
+		return this.getEntry() + " - " + this.getName();
 	}
 
 	public int getStudentId() {

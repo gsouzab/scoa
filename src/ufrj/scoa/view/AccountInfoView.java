@@ -43,7 +43,7 @@ public class AccountInfoView extends JPanel {
 		lblCpf.setBounds(363, 165, 64, 15);
 		add(lblCpf);
 		
-		JLabel lblEmail = new JLabel("E-mail: ");
+		JLabel lblEmail = new JLabel("Email: ");
 		lblEmail.setFont(new Font("Arial", Font.BOLD, 15));
 		lblEmail.setBounds(12, 115, 70, 15);
 		add(lblEmail);
@@ -73,14 +73,14 @@ public class AccountInfoView extends JPanel {
 		fieldCPF.setBounds(414, 165, 152, 15);
 		add(fieldCPF);
 		
-		fieldEmail = new JLabel("Insira e-mail aqui");
+		fieldEmail = new JLabel("Insira email aqui");
 		fieldEmail.setFont(new Font("Arial", Font.PLAIN, 15));
 		fieldEmail.setBounds(73, 115, 537, 15);
 		add(fieldEmail);
 		
 		fieldBirthdate = new JLabel("Insira data aqui");
 		fieldBirthdate.setFont(new Font("Arial", Font.PLAIN, 15));
-		fieldBirthdate.setBounds(172, 165, 152, 15);
+		fieldBirthdate.setBounds(169, 165, 152, 15);
 		add(fieldBirthdate);
 		
 		fieldEntry = new JLabel("Insira matrícula aqui");

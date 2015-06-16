@@ -70,7 +70,7 @@ public class CourseDAO {
 		return course;
 	}
 	
-	public ArrayList<Course> listAllCourses() {
+	public ArrayList<Course> list() {
 		
 		ArrayList<Course> courseList = new ArrayList<Course>();
 		

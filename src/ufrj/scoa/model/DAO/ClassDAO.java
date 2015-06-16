@@ -20,12 +20,12 @@ public class ClassDAO {
 			
 			conn = Connect.connectDB();
 			
-			ps = conn.prepareStatement("INSERT INTO class (id, course_id, discipline_id, room_id, name, code, credits, time_of_class) VALUES(DEFAULT,?,?,?,?,?,?,?)");
+			ps = conn.prepareStatement("INSERT INTO class (id, course_id, discipline_id, professor_id, room_id, name, credits, time_of_class) VALUES(DEFAULT,?,?,?,?,?,?,?)");
 			ps.setInt(1, newClass.getCourse().getId());
 			ps.setInt(2, newClass.getDiscipline().getId());
-			ps.setInt(3, newClass.getRoom().getId());
-			ps.setString(4, newClass.getName());
-			ps.setString(5, newClass.getCode());
+			ps.setInt(3, newClass.getProfessor().getProfessorID());
+			ps.setInt(4, newClass.getRoom().getId());
+			ps.setString(5, newClass.getName());
 			ps.setInt(6, newClass.getCredits());
 			ps.setString(7, newClass.getTimeOfClass());
 			ps.executeUpdate();
@@ -36,7 +36,7 @@ public class ClassDAO {
 		} 
 	}
 	
-	public ArrayList<Class> search(String code, String name, int course_id, int discipline_id, int room_id, int credits) {
+	public ArrayList<Class> search(String name, int course_id, int discipline_id, int room_id, int professor_id, int credits, String timeOfClass) {
 		ArrayList<Class> classList = new ArrayList<Class>();
 		
 		try {
@@ -44,35 +44,40 @@ public class ClassDAO {
 			conn = Connect.connectDB();
 			
 			String query = "SELECT * FROM class ";
-			String connector = "WHERE";
-			
-			if(code.length() > 0) {
-				query += connector + " code LIKE '%" + code + "%'";
-				connector = "AND";
-			}
+			String connector = " WHERE ";
 			
 			if(name.length() > 0) {
 				query += connector + " name LIKE '%" + name + "%'";
-				connector = "AND";
+				connector = " AND ";
 			}
 			
 			if(course_id > 0) {
-				query += connector + " course_id =" + course_id;
-				connector = "AND";
+				query += connector + " course_id = " + course_id;
+				connector = " AND ";
 			}
 			
 			if(discipline_id > 0) {
-				query += connector + " discipline_id =" + discipline_id;
-				connector = "AND";
+				query += connector + " discipline_id = " + discipline_id;
+				connector = " AND ";
 			}
 			
 			if(room_id > 0) {
-				query += connector + " room_id =" + room_id;
-				connector = "AND";
+				query += connector + " room_id = " + room_id;
+				connector = " AND ";
+			}
+			
+			if(professor_id > 0) {
+				query += connector + " professor_id = " + professor_id;
+				connector = " AND ";
 			}
 			
 			if(credits > 0) {
-				query += connector + " credits =" + credits;
+				query += connector + " credits = " + credits;
+				connector = " AND ";
+			}
+			
+			if(timeOfClass.length() > 0) {
+				query += connector + " time_of_class LIKE '%" + timeOfClass + "%'";
 			}
 			
 			ps = conn.prepareStatement(query);
@@ -82,10 +87,11 @@ public class ClassDAO {
 			CourseDAO courseDao = new CourseDAO();
 			DisciplineDAO disciplineDao = new DisciplineDAO();
 			RoomDAO roomDao = new RoomDAO();
+			ProfessorDAO professorDAO = new ProfessorDAO();
 			
 			while(rs.next()) {
 				
-				Class c = new Class(rs.getInt("id"), rs.getInt("credits"),rs.getString("name"), rs.getString("code"), rs.getString("time_of_class"), courseDao.getCourseById(rs.getInt("course_id")), disciplineDao.getDisciplineById(rs.getInt("discipline_id")), roomDao.getRoomById(rs.getInt("room_id")));
+				Class c = new Class(rs.getInt("id"), rs.getInt("credits"),rs.getString("name"), rs.getString("time_of_class"), courseDao.getCourseById(rs.getInt("course_id")), disciplineDao.getDisciplineById(rs.getInt("discipline_id")), roomDao.getRoomById(rs.getInt("room_id")), professorDAO.getProfessorById(rs.getInt("professor_id")));
 				classList.add(c);
 			}
 			
@@ -112,10 +118,11 @@ public class ClassDAO {
 			CourseDAO courseDao = new CourseDAO();
 			DisciplineDAO disciplineDao = new DisciplineDAO();
 			RoomDAO roomDao = new RoomDAO();
+			ProfessorDAO professorDAO = new ProfessorDAO();
 			
 			while(rs.next()) {
 				
-				Class c = new Class(rs.getInt("id"), rs.getInt("credits"),rs.getString("name"), rs.getString("code"), rs.getString("time_of_class"), courseDao.getCourseById(rs.getInt("course_id")), disciplineDao.getDisciplineById(rs.getInt("discipline_id")), roomDao.getRoomById(rs.getInt("room_id")));
+				Class c = new Class(rs.getInt("id"), rs.getInt("credits"),rs.getString("name"), rs.getString("time_of_class"), courseDao.getCourseById(rs.getInt("course_id")), disciplineDao.getDisciplineById(rs.getInt("discipline_id")), roomDao.getRoomById(rs.getInt("room_id")), professorDAO.getProfessorById(rs.getInt("professor_id")));
 				classList.add(c);
 			}
 			

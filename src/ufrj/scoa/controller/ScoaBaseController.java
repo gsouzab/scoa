@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ufrj.scoa.model.VO.Person;
+import ufrj.scoa.util.Constants;
 import ufrj.scoa.view.ScoaBaseFrame;
 
 public class ScoaBaseController implements ActionListener {
@@ -34,8 +35,9 @@ public class ScoaBaseController implements ActionListener {
 		baseFrame.getDetalharMenuItem().addActionListener(this);
 		baseFrame.getNewStudentDisciplineMenuItem().addActionListener(this);
 		baseFrame.getBuscarSecretariaMenuItem().addActionListener(this);
+	
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		
@@ -62,6 +64,7 @@ public class ScoaBaseController implements ActionListener {
 		} else if(event.getSource() == baseFrame.getLogoutMenuItem()) {
 			
 			AccessController acController = new AccessController(this);
+			baseFrame.setAllMenusVisible();
 			baseFrame.changePanel(acController.getLoginView(), "Login - SCOA", false);
 			
 		} else if(event.getSource() == baseFrame.getNewProfessorsMenuItem()) {
@@ -116,7 +119,7 @@ public class ScoaBaseController implements ActionListener {
 		} else if(event.getSource() == baseFrame.getNewStudentDisciplineMenuItem()) {
 			
 			StudentDisciplineController studentDisciplineController = new StudentDisciplineController(this);
-			baseFrame.changePanel(studentDisciplineController.getStudentDisciplineCreationView(), "Realizar Inscricao");
+			baseFrame.changePanel(studentDisciplineController.getStudentDisciplineCreationView(), "Inscrever Aluno");
 			
 		} else if(event.getSource() == baseFrame.getBuscarSecretariaMenuItem()) {
 			
@@ -139,5 +142,42 @@ public class ScoaBaseController implements ActionListener {
 		this.currentUser = currentUser;
 	}
 	
+	public void generateMenus() {
+		
+		switch (currentUser.getRole()) {
+			case Constants.ROLE_ADMINISTRATOR:
+				break;
+		
+			case Constants.ROLE_SECRETARY:
+				generateSecretaryMenu();
+				break;
+			
+			case Constants.ROLE_PROFESSOR:
+				generateProfessorMenu();
+				break;
+			
+			case Constants.ROLE_STUDENT:
+				generateStudentMenu();
+				break;
+
+			default:
+				break;
+		}
+	}
+
+	private void generateSecretaryMenu() {
+		baseFrame.getSecretaryMenu().setVisible(false);
+	}
+	
+	private void generateProfessorMenu() {
+		baseFrame.setAllMenusInvisible();
+		baseFrame.getClassesMenu().setVisible(true);
+		baseFrame.getNewClassMenuItem().setVisible(false);
+	}
+	
+	private void generateStudentMenu() {
+		baseFrame.getSecretaryMenu().setVisible(false);
+	}
+
 	
 }

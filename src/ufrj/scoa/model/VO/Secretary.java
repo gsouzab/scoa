@@ -23,7 +23,7 @@ public class Secretary extends Person{
 
 	@Override
 	public String toString() {
-		return this.getName() + " - " + this.getCpf();
+		return this.getEntry() + " - " + this.getName() ;
 	}
 
 }

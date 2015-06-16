@@ -1,6 +1,7 @@
 package ufrj.scoa.view.classes;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -10,6 +11,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 import ufrj.scoa.model.VO.Course;
+import ufrj.scoa.model.VO.Professor;
 import ufrj.scoa.model.VO.Room;
 import ufrj.scoa.model.VO.Discipline;
 
@@ -17,41 +19,35 @@ public class ClassSearchView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
     private JTextField tfName;
-    private JTextField tfCode;
     private JTextField tfCredits;
     private JButton btnBuscar;
     private JButton btnVoltar;
 	private JComboBox<Course> cbCourse;
 	private JComboBox<Room> cbRoom;
 	private JComboBox<Discipline> cbDiscipline;
+	private JComboBox<Professor> cbProfessor;
 	
-	//listas dos comboboxes	
     private ArrayList<Course> coursesList;
     private ArrayList<Discipline> disciplinesList;
     private ArrayList<Room> roomsList;
+    private ArrayList<Professor> professorsList;
+    private JLabel lblHorrio;
+    private JTextField tfTime;
     
     
     /**
      * Create the frame.
      */
     
-    public ClassSearchView(ArrayList<Course> coursesList,ArrayList<Discipline> disciplinesList,ArrayList<Room> roomsList) {
+    public ClassSearchView(ArrayList<Course> coursesList,ArrayList<Discipline> disciplinesList,ArrayList<Room> roomsList, ArrayList<Professor> professorsList) {
 		this.coursesList = coursesList;
 		this.disciplinesList = disciplinesList;
 		this.roomsList = roomsList;
+		this.professorsList = professorsList;
         
-        JLabel lblName = new JLabel("Nome");
+        JLabel lblName = new JLabel("Nome*");
         lblName.setFont(new Font("Arial", Font.BOLD, 12));
-        lblName.setBounds(6, 56, 119, 15);
-        
-        JLabel lblCode = new JLabel("Código");
-        lblCode.setFont(new Font("Arial", Font.BOLD, 12));
-        lblCode.setBounds(6, 25, 119, 15);
-        
-        tfCode = new JTextField();
-        tfCode.setFont(new Font("Arial", Font.PLAIN, 13));
-        tfCode.setBounds(137, 16, 119, 28);
-        tfCode.setColumns(10);
+        lblName.setBounds(6, 12, 119, 15);
 		        
         btnBuscar = new JButton("Buscar");
         btnBuscar.setFont(new Font("Arial", Font.BOLD, 12));
@@ -62,48 +58,46 @@ public class ClassSearchView extends JPanel {
         btnVoltar.setBounds(520, 420, 110, 29);
         setLayout(null);
         add(lblName);
-        add(lblCode);
         
-        JLabel label = new JLabel("Curso");
+        JLabel label = new JLabel("Curso*");
         label.setFont(new Font("Arial", Font.BOLD, 12));
-        label.setBounds(6, 87, 119, 15);
+        label.setBounds(6, 45, 119, 15);
         add(label);
         
-        JLabel lblDiscipline = new JLabel("Disciplina");
+        JLabel lblDiscipline = new JLabel("Disciplina*");
         lblDiscipline.setFont(new Font("Arial", Font.BOLD, 12));
-        lblDiscipline.setBounds(6, 114, 119, 15);
+        lblDiscipline.setBounds(6, 79, 119, 15);
         add(lblDiscipline);
         
-        JLabel lblRoom = new JLabel("Sala");
+        JLabel lblRoom = new JLabel("Sala*");
         lblRoom.setFont(new Font("Arial", Font.BOLD, 12));
-        lblRoom.setBounds(6, 140, 119, 15);
+        lblRoom.setBounds(6, 146, 119, 15);
         add(lblRoom);
         
-        JLabel lblCredits = new JLabel("Créditos");
+        JLabel lblCredits = new JLabel("Créditos*");
         lblCredits.setFont(new Font("Arial", Font.BOLD, 12));
-        lblCredits.setBounds(375, 23, 99, 15);
+        lblCredits.setBounds(484, 12, 99, 15);
         add(lblCredits);
         
         tfName = new JTextField();
         tfName.setFont(new Font("Arial", Font.PLAIN, 13));
-        tfName.setBounds(137, 49, 483, 28);
+        tfName.setBounds(105, 5, 361, 28);
         tfName.setColumns(10);
         add(tfName);
-        add(tfCode);
         
         cbCourse = new JComboBox<Course>();
         cbCourse.setFont(new Font("Arial", Font.PLAIN, 13));
-        cbCourse.setBounds(137, 81, 483, 28);
+        cbCourse.setBounds(105, 39, 515, 28);
         add(cbCourse);
         
         cbRoom = new JComboBox<Room>();
         cbRoom.setFont(new Font("Arial", Font.PLAIN, 13));
-        cbRoom.setBounds(137, 134, 483, 28);
+        cbRoom.setBounds(105, 139, 515, 28);
         add(cbRoom);
         
         cbDiscipline = new JComboBox<Discipline>();
         cbDiscipline.setFont(new Font("Arial", Font.PLAIN, 13));
-        cbDiscipline.setBounds(137, 108, 483, 28);
+        cbDiscipline.setBounds(105, 72, 515, 28);
         add(cbDiscipline);
         
         JSeparator separator = new JSeparator();
@@ -113,9 +107,33 @@ public class ClassSearchView extends JPanel {
         add(btnVoltar);
         
         tfCredits = new JTextField();
-        tfCredits.setBounds(486, 17, 134, 28);
+        tfCredits.setBounds(556, 5, 59, 28);
         add(tfCredits);
         tfCredits.setColumns(10);
+        
+        JLabel lblProfessor = new JLabel("Professor*");
+        lblProfessor.setFont(new Font("Arial", Font.BOLD, 12));
+        lblProfessor.setBounds(6, 113, 91, 15);
+        add(lblProfessor);
+        
+        cbProfessor = new JComboBox<Professor>();
+        cbProfessor.setFont(new Font("Arial", Font.PLAIN, 13));
+        cbProfessor.setBounds(105, 106, 515, 28);
+        add(cbProfessor);
+        
+        lblHorrio = new JLabel("Horário*");
+        lblHorrio.setFont(new Font("Arial", Font.BOLD, 12));
+        lblHorrio.setBounds(6, 180, 70, 15);
+        add(lblHorrio);
+        
+        tfTime = new JTextField();
+        tfTime.setBounds(105, 173, 361, 28);
+        add(tfTime);
+        tfTime.setColumns(10);
+        
+        JLabel lblSegqua = new JLabel("Ex: SEG-QUA, 10-12");
+        lblSegqua.setBounds(474, 179, 146, 15);
+        add(lblSegqua);
         
 		populateComboBoxes();
    	}
@@ -136,6 +154,11 @@ public class ClassSearchView extends JPanel {
 		for(Discipline d : disciplinesList) {
 			cbDiscipline.addItem(d);
 		}
+		
+		cbProfessor.addItem(new Professor("Selecione um professor", "", "", new Date() , "", ""));
+		for(Professor p: professorsList) {
+			cbProfessor.addItem(p);
+		}
 	}
     
 	public JButton getBtnBuscar() {
@@ -149,13 +172,14 @@ public class ClassSearchView extends JPanel {
 	public JTextField getTfName() {
 		return tfName;
 	}
-
-	public JTextField getTfCode() {
-		return tfCode;
-	}
 		
 	public JTextField getTfCredits() {
 		return tfCredits;
+	}
+	
+	
+	public JTextField getTfTime() {
+		return tfTime;
 	}
 
 	public JComboBox<Room> getSelectedRoomComboBox() {
@@ -168,5 +192,9 @@ public class ClassSearchView extends JPanel {
 
 	public JComboBox<Course> getSelectedCourseComboBox() {
 		return cbCourse;
+	}
+	
+	public JComboBox<Professor> getSelectedProfessorComboBox() {
+		return cbProfessor;
 	}
 }

@@ -9,10 +9,12 @@ import javax.swing.JOptionPane;
 import ufrj.scoa.model.DAO.ClassDAO;
 import ufrj.scoa.model.DAO.CourseDAO;
 import ufrj.scoa.model.DAO.DisciplineDAO;
+import ufrj.scoa.model.DAO.ProfessorDAO;
 import ufrj.scoa.model.DAO.RoomDAO;
 import ufrj.scoa.model.VO.Class;
 import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Discipline;
+import ufrj.scoa.model.VO.Professor;
 import ufrj.scoa.model.VO.Room;
 import ufrj.scoa.model.VO.Student;
 import ufrj.scoa.view.classes.ClassCreationView;
@@ -31,15 +33,16 @@ public class ClassController implements ActionListener {
 	private CourseDAO courseDAO = new CourseDAO();
 	private RoomDAO roomDAO = new RoomDAO();
 	private DisciplineDAO disciplineDAO = new DisciplineDAO();
+	private ProfessorDAO professorDAO = new ProfessorDAO();
 
 	public ClassController(ScoaBaseController baseController) {
 
 		this.baseController = baseController;
-		this.classCreationView = new ClassCreationView(courseDAO.listAllCourses(), disciplineDAO.list(),roomDAO.list());
+		this.classCreationView = new ClassCreationView(courseDAO.list(), disciplineDAO.list(),roomDAO.list(), professorDAO.list());
 		this.classCreationView.getBtnSalvar().addActionListener(this);
 		this.classCreationView.getBtnCancelar().addActionListener(this);
 		
-		this.classSearchView = new ClassSearchView(courseDAO.listAllCourses(), disciplineDAO.list(),roomDAO.list());
+		this.classSearchView = new ClassSearchView(courseDAO.list(), disciplineDAO.list(),roomDAO.list(), professorDAO.list());
 		this.classSearchView.getBtnBuscar().addActionListener(this);
 		this.classSearchView.getBtnVoltar().addActionListener(this);
 		
@@ -71,7 +74,7 @@ public class ClassController implements ActionListener {
 			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
 			
 		} else if(event.getSource() == this.classListView.getBtnExcluir()) {
-			int option = JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir a turma selecionado?", "Excluir turma", JOptionPane.YES_NO_OPTION);
+			int option = JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir a turma selecionada?", "Excluir turma", JOptionPane.YES_NO_OPTION);
 
 			if(option == 0) {
 				deleteClass(classListView.getList().getSelectedValue());
@@ -82,19 +85,21 @@ public class ClassController implements ActionListener {
 	}
 	
 	private void searchClasses() {
-		String code = this.classSearchView.getTfCode().getText();
 		String name = this.classSearchView.getTfName().getText();
 		int credits = this.classSearchView.getTfCredits().getText().length() > 0 ? Integer.valueOf(this.classSearchView.getTfCredits().getText()) : 0 ;
 		Course selectedCourse = (Course) this.classSearchView.getSelectedCourseComboBox().getSelectedItem();
 		Discipline selectedDiscipline = (Discipline) this.classSearchView.getSelectedDisciplineComboBox().getSelectedItem();
 		Room selectedRoom = (Room) this.classSearchView.getSelectedRoomComboBox().getSelectedItem();
+		Professor selectedProfessor = (Professor) this.classSearchView.getSelectedProfessorComboBox().getSelectedItem();
+		String timeOfClass = this.classSearchView.getTfTime().getText();
 		
 		int course_id = selectedCourse.getId();
 		int discipline_id = selectedDiscipline.getId();
 		int room_id = selectedRoom.getId();
+		int professor_id = selectedProfessor.getProfessorID();
 		
 		ClassDAO classDAO = new ClassDAO();
-		ArrayList<Class> classList = classDAO.search(code, name, course_id, discipline_id, room_id, credits);
+		ArrayList<Class> classList = classDAO.search(name, course_id, discipline_id, room_id, professor_id, credits, timeOfClass);
 		
 		this.classListView.setList(classList);
 		
@@ -112,14 +117,15 @@ public class ClassController implements ActionListener {
 
 	private void saveClass() {
 		String name = this.classCreationView.getTfName().getText();
-		String code = this.classCreationView.getTfCode().getText();
 		int credits = Integer.valueOf(this.classCreationView.getTfCredits().getText());
 		Course selectedCourse = (Course) this.classCreationView.getSelectedCourseComboBox().getSelectedItem();
 		Discipline selectedDiscipline = (Discipline) this.classCreationView.getSelectedDisciplineComboBox().getSelectedItem();
 		Room selectedRoom = (Room) this.classCreationView.getSelectedRoomComboBox().getSelectedItem();
+		Professor selectedProfessor = (Professor) this.classCreationView.getSelectedProfessorComboBox().getSelectedItem();
+		String timeOfClass = this.classCreationView.getTfTime().getText();
 		
-		if(validateCreateFields(name, code, selectedCourse)) {
-			Class newClass = new Class(credits,name,code,"ter-qui 10:00 às 12:00", selectedCourse,selectedDiscipline,selectedRoom);
+		if(validateCreateFields(name, selectedCourse, timeOfClass)) {
+			Class newClass = new Class(credits, name, timeOfClass, selectedCourse, selectedDiscipline, selectedRoom, selectedProfessor);
 			ClassDAO classDAO = new ClassDAO();
 			classDAO.save(newClass);
 			
@@ -131,15 +137,15 @@ public class ClassController implements ActionListener {
 		}
 	}
 	
-	private boolean validateCreateFields(String name, String code, Course selectedCourse) {
+	private boolean validateCreateFields(String name, Course selectedCourse, String timeOfClass) {
 		
-		return name.length() > 0 && code.length() > 0 && selectedCourse != null;
+		return name.length() > 0 && selectedCourse != null && timeOfClass.length() > 0;
 	}
 	
 	private void clearFieldsCreationView() {
 		this.classCreationView.getTfName().setText("");
-		this.classCreationView.getTfCode().setText("");
 		this.classCreationView.getTfCredits().setText("");
+		this.classCreationView.getTfTime().setText("");
 	}
 
 }
