@@ -47,6 +47,7 @@ public class ScoaBaseFrame extends JFrame {
 	
 	//Itens menu Secretaria
 	private JMenuItem newSecretaryMenuItem;
+	private JMenuItem mntmBuscarSecretaria;
 
 	//Itens menu Minha Conta
 	private JMenuItem mntmDetalharMenuItem;
@@ -57,6 +58,7 @@ public class ScoaBaseFrame extends JFrame {
 	JPanel contentPane;
 	private Component horizontalStrut;
 	private JMenu mnMinhaConta;
+
 
 	
 	public ScoaBaseFrame(){
@@ -132,6 +134,10 @@ public class ScoaBaseFrame extends JFrame {
         menuBar.add(professorsMenu);
         menuBar.add(disciplinesMenu);
         menuBar.add(secretaryMenu);
+        
+        mntmBuscarSecretaria = new JMenuItem("Buscar Secretaria");
+        mntmBuscarSecretaria.setFont(new Font("Arial", Font.PLAIN, 12));
+        secretaryMenu.add(mntmBuscarSecretaria);
         menuBar.add(studentDisciplineMenu);
 
         JMenu roomsMenu = new JMenu("Salas");
@@ -159,7 +165,7 @@ public class ScoaBaseFrame extends JFrame {
         searchClassMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         classesMenu.add(searchClassMenuItem);
         
-        horizontalStrut = Box.createHorizontalStrut(127);
+        horizontalStrut = Box.createHorizontalStrut(73);
         menuBar.add(horizontalStrut);
         
         mnMinhaConta = new JMenu("Minha Conta");
@@ -263,6 +269,11 @@ public class ScoaBaseFrame extends JFrame {
 		this._changePanel(newPanel, newTitle);
 	}
 	
+	
+	public JMenuItem getBuscarSecretariaMenuItem() {
+		return mntmBuscarSecretaria;
+	}
+
 	public void changePanel(JPanel newPanel, String newTitle, boolean showMenu) {
 		if(showMenu) {
 			this.showMenu();

@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import ufrj.scoa.model.VO.Professor;
 import ufrj.scoa.model.VO.Secretary;
 
 public class SecretaryDAO {
@@ -45,6 +47,53 @@ public class SecretaryDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+	}
+	
+	public ArrayList<Secretary> search(String name, String email, String cpf, String birthdate) {
+		
+		ArrayList<Secretary> secretaryList = new ArrayList<Secretary>();
+		
+		try {
+			
+			conn = Connect.connectDB();
+			
+			String baseQuery = " SELECT p.* FROM scoa.person p, scoa.secretary s " +
+							   " WHERE p.id = s.person_id ";
+			
+			
+			if(name.length() > 0) {
+				baseQuery += " AND p.name like '%" +name+ "%' ";
+			}
+			
+			if(email.length() > 0){ 
+				baseQuery += " AND p.email like '%" +email+ "%' ";
+			}
+			
+			if(cpf.length() > 0) {
+				baseQuery += " AND p.cpf = '" +cpf+ "' ";
+			}
+			
+			if(birthdate.length() > 0) {
+				baseQuery += "AND p.birthdate = '" +birthdate+ "' ";
+			}
+			
+			PreparedStatement ps = conn.prepareStatement(baseQuery);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Secretary secretary = new Secretary(rs.getString("name"), rs.getString("cpf"), rs.getString("email"), rs.getDate("birthdate"), rs.getString("entry"), rs.getString("password"));
+				
+				secretaryList.add(secretary);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return secretaryList; 
 	}
 
 }

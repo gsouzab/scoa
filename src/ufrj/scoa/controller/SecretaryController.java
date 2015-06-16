@@ -4,16 +4,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 
+import ufrj.scoa.model.DAO.CourseDAO;
+import ufrj.scoa.model.DAO.ProfessorDAO;
 import ufrj.scoa.model.DAO.SecretaryDAO;
+import ufrj.scoa.model.VO.Course;
+import ufrj.scoa.model.VO.Professor;
 import ufrj.scoa.model.VO.Secretary;
 import ufrj.scoa.util.Util;
 import ufrj.scoa.view.WelcomeView;
+import ufrj.scoa.view.course.CourseListView;
+import ufrj.scoa.view.course.CourseSearchView;
 import ufrj.scoa.view.secretary.SecretaryCreationView;
+import ufrj.scoa.view.secretary.SecretaryListView;
+import ufrj.scoa.view.secretary.SecretarySearchView;
 
 
 
@@ -21,6 +30,8 @@ public class SecretaryController implements ActionListener{
 	
 	private ScoaBaseController baseController;
 	private SecretaryCreationView secretaryCreationView;
+	private SecretarySearchView secretarySearchView;
+	private SecretaryListView secretaryListView;
 	
 	public SecretaryController(ScoaBaseController baseController) {
 
@@ -29,17 +40,45 @@ public class SecretaryController implements ActionListener{
 		this.secretaryCreationView = new SecretaryCreationView();
 		this.secretaryCreationView.getBtnSalvar().addActionListener(this);
 		this.secretaryCreationView.getBtnCancelar().addActionListener(this);
+		
+		this.secretarySearchView = new SecretarySearchView();
+		this.secretarySearchView.getBtnBuscar().addActionListener(this);
+		this.secretarySearchView.getBtnVoltar().addActionListener(this);		
+		
+		this.secretaryListView = new SecretaryListView();
+		this.secretaryListView.getBtnExcluir().addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
+		
 		if(event.getSource() == this.secretaryCreationView.getBtnSalvar()) 
 		{
 			saveSecretary();
+			
 		} else if(event.getSource() == this.secretaryCreationView.getBtnCancelar()) {
+			
 			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
 			
-		} 
+		} else if(event.getSource() == this.secretarySearchView.getBtnBuscar()) {
+			
+			searchSecretary();
+			this.baseController.getBaseFrame().changePanel(secretaryListView, "Resultado da busca por secretários(as)");
+			
+		} else if(event.getSource() == this.secretarySearchView.getBtnVoltar()) {
+			
+			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
+			
+		} else if(event.getSource() == this.secretaryListView.getBtnExcluir()) {
+			
+			int option = JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir o(a) secretário(a) selecionado(a)?", "Excluir secretário(a)", JOptionPane.YES_NO_OPTION);
+
+			if(option == 0) {
+				
+			}
+			else if (option == 1) {}
+			
+		}
 
 	}
 	
@@ -95,6 +134,46 @@ public class SecretaryController implements ActionListener{
 
 	public SecretaryCreationView getSecretaryCreationView() {
 		return secretaryCreationView;
+	}
+	
+	
+	
+	public SecretarySearchView getSecretarySearchView() {
+		return secretarySearchView;
+	}
+
+	public SecretaryListView getSecretaryListView() {
+		return secretaryListView;
+	}
+
+	private void searchSecretary() {
+		String name = this.secretarySearchView.getTfName().getText();
+		String email = this.secretarySearchView.getTfEmail().getText();
+		String cpf = this.secretarySearchView.getTfCpf().getText();
+		String birthdate = this.secretarySearchView.getTfDate().getText();
+		
+		if(Util.unmaskDate(birthdate).length() > 0) {
+			birthdate = Util.formatDateToSql(birthdate);
+		} else {
+			birthdate = Util.unmaskDate(birthdate);
+		}
+		
+		
+		if(Util.unmaskCPF(cpf).length() == 0) {
+			cpf = "";
+		}
+		
+		SecretaryDAO secretaryDAO = new SecretaryDAO();
+		ArrayList<Secretary> secretaryList = secretaryDAO.search(name, email, cpf, birthdate);
+		
+		for(Secretary secretary: secretaryList) {
+			secretaryListView.getModel().addElement(secretary);
+		}
+	}
+	
+	private void deleteSecretary(Course course) {
+
+		
 	}
 	
 }
