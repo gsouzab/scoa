@@ -56,7 +56,7 @@ public class StudentDAO {
 		} 
 	}
 	
-public ArrayList<Student> listAllStudent() {
+	public ArrayList<Student> listAllStudent() {
 		
 		ArrayList<Student> studentList = new ArrayList<Student>();
 		
@@ -65,6 +65,37 @@ public ArrayList<Student> listAllStudent() {
 			conn = Connect.connectDB();
 			
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM student s INNER JOIN person p ON p.id = s.person_id");
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				CourseDAO courseDAO = new CourseDAO();
+				Student student = new Student(rs.getString("name"), rs.getString("cpf"), rs.getString("email"), rs.getDate("birthdate"), courseDAO.getCourseById(rs.getInt("course_id")), rs.getString("entry"), rs.getString("password"));
+				student.setStudentId(rs.getInt("id"));
+				student.setPersonId(rs.getInt("person_id"));
+				
+				studentList.add(student);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return studentList; 
+	}
+	
+	public ArrayList<Student> getStudentsByClassId(int class_id) {
+		
+		ArrayList<Student> studentList = new ArrayList<Student>();
+		
+		try {
+			
+			conn = Connect.connectDB();
+			
+			PreparedStatement ps = conn.prepareStatement("SELECT s.*, p.name, p.email, p.birthdate, p.cpf, p.entry, p.password, sc.grade FROM student s INNER JOIN person p ON p.id = s.person_id INNER JOIN student_classes sc ON sc.student_id = s.id WHERE sc.class_id = ?");
+			ps.setInt(1, class_id);
 			
 			ResultSet rs = ps.executeQuery();
 			

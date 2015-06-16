@@ -26,6 +26,7 @@ public class ClassListView extends JPanel {
 	private JButton btnExcluir;
 	private JButton btnInsertGrades;
 	private JList<Class> list;
+	private JButton btnInsertFrequencies;
 	
 	public ClassListView() {
 		setLayout(null);
@@ -48,8 +49,12 @@ public class ClassListView extends JPanel {
 		add(btnExcluir);
 		
 		btnInsertGrades = new JButton("Lançar notas");
-		btnInsertGrades.setBounds(127, 337, 133, 25);
+		btnInsertGrades.setBounds(12, 61, 133, 25);
 		add(btnInsertGrades);
+		
+		btnInsertFrequencies = new JButton("Lançar frequências");
+		btnInsertFrequencies.setBounds(157, 61, 154, 25);
+		add(btnInsertFrequencies);
 		
 	}
 

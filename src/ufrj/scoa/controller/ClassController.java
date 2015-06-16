@@ -10,6 +10,7 @@ import ufrj.scoa.model.DAO.ClassDAO;
 import ufrj.scoa.model.DAO.CourseDAO;
 import ufrj.scoa.model.DAO.DisciplineDAO;
 import ufrj.scoa.model.DAO.RoomDAO;
+import ufrj.scoa.model.DAO.StudentDisciplineDAO;
 import ufrj.scoa.model.VO.Class;
 import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Discipline;
@@ -20,6 +21,7 @@ import ufrj.scoa.view.classes.ClassListView;
 import ufrj.scoa.view.classes.ClassSearchView;
 import ufrj.scoa.view.student.StudentCreationView;
 import ufrj.scoa.view.student.StudentListView;
+import ufrj.scoa.view.InsertGradesDialog;
 import ufrj.scoa.view.WelcomeView;
 
 public class ClassController implements ActionListener {
@@ -31,6 +33,8 @@ public class ClassController implements ActionListener {
 	private CourseDAO courseDAO = new CourseDAO();
 	private RoomDAO roomDAO = new RoomDAO();
 	private DisciplineDAO disciplineDAO = new DisciplineDAO();
+	
+	private InsertGradesDialog dialog;
 
 	public ClassController(ScoaBaseController baseController) {
 
@@ -45,6 +49,12 @@ public class ClassController implements ActionListener {
 		
 		this.classListView = new ClassListView();
 		this.classListView.getBtnExcluir().addActionListener(this);
+		this.classListView.getBtnInsertGrades().addActionListener(this);
+		
+		dialog = new InsertGradesDialog(baseController.getBaseFrame(),this.classListView);			
+		dialog.getBtnInsert().addActionListener(this);
+		dialog.getBtnCancel().addActionListener(this);
+		
 	}
 
 	public ClassCreationView getClassCreationView() {
@@ -77,8 +87,38 @@ public class ClassController implements ActionListener {
 				deleteClass(classListView.getList().getSelectedValue());
 			}
 			
+		} else if(event.getSource() == this.classListView.getBtnInsertGrades()) {
+			if(classListView.getList().getSelectedValue() != null) {
+				dialog.openDialog(classListView.getList().getSelectedValue().getId());
+			} else {
+				JOptionPane.showMessageDialog(null, "Selecione uma turma");
+			}
+			
+			
+		} else if(event.getSource() == dialog.getBtnInsert()) {
+			
+			JOptionPane.showMessageDialog(null, "Notas lançadas");
+			updateStudentsGrade();
+		} else if(event.getSource() == dialog.getBtnCancel()) {
+			dialog.setVisible(false);
 		}
 		
+		
+	}
+	
+	private void updateStudentsGrade() {
+		dialog.setVisible(false);
+		
+		int rowcount = dialog.getTable().getModel().getRowCount();
+		float[] grades = new float[rowcount];
+		int[] student_ids = new int[rowcount];
+		
+		for(int i = 0 ; i < rowcount ; i++) {
+			student_ids[i] = (int) dialog.getTable().getModel().getValueAt(i, 0);
+			grades[i] = (float) dialog.getTable().getModel().getValueAt(i, 3);
+		}
+		
+		StudentDisciplineDAO.updateGrades(student_ids, grades);
 	}
 	
 	private void searchClasses() {
