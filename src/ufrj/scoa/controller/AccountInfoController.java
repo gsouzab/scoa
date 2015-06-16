@@ -4,17 +4,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
+import javax.swing.text.PasswordView;
 
 import ufrj.scoa.model.VO.Person;
+import ufrj.scoa.model.DAO.PersonDAO;
 import ufrj.scoa.util.Constants;
 import ufrj.scoa.util.Util;
 import ufrj.scoa.view.AccountInfoView;
+import ufrj.scoa.view.NewPasswordView;
 import ufrj.scoa.view.WelcomeView;
 
 public class AccountInfoController implements ActionListener {
 
 	private AccountInfoView accountInfoView;
 	private ScoaBaseController baseController;
+	private NewPasswordView passwordView;
+	private PersonDAO personDAO = new PersonDAO();	
 
 	public AccountInfoController(ScoaBaseController baseController) {
 
@@ -31,8 +36,11 @@ public class AccountInfoController implements ActionListener {
 			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem-vindo ao SCOA");
 			
 		} else if(event.getSource() == this.accountInfoView.getBtnTrocarSenha()) {
+			this.baseController.getBaseFrame().changePanel(this.passwordView, "Redefinição de senha",false);
 			
-			
+		} else if(event.getSource() == this.passwordView.getBtnAccept()){
+			personDAO.setPassword(String.valueOf(this.passwordView.getPassword1Field().getPassword()), passwordView.getEntry());
+			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem-vindo ao SCOA");
 		}
 		
 	}
@@ -43,6 +51,8 @@ public class AccountInfoController implements ActionListener {
 	
 	public void setCurrentUserInfo() {
 		Person currentUser = baseController.getCurrentUser();
+		this.passwordView = new NewPasswordView(currentUser.getEntry());
+		this.passwordView.getBtnAccept().addActionListener(this);
 		
 		accountInfoView.getFieldName().setText(currentUser.getName());
 		accountInfoView.getFieldBirthdate().setText(Util.formatDateFromSql(currentUser.getBirthdate().toString()));
