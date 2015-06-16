@@ -97,8 +97,8 @@ public class ClassController implements ActionListener {
 			}
 			
 		} else if(event.getSource() == gradesDialog.getBtnInsert()) {
-			JOptionPane.showMessageDialog(null, "Notas lançadas");
 			updateStudentsGrade();
+			JOptionPane.showMessageDialog(null, "Notas lançadas");
 
 		} else if(event.getSource() == gradesDialog.getBtnCancel()) {
 			gradesDialog.setVisible(false);
@@ -111,8 +111,8 @@ public class ClassController implements ActionListener {
 			}
 			
 		} else if(event.getSource() == frequenciesDialog.getBtnInsert()) {
-			JOptionPane.showMessageDialog(null, "Frequências lançadas");
 			updateStudentsFrequency();
+			JOptionPane.showMessageDialog(null, "Frequências lançadas");
 			
 		} else if(event.getSource() == frequenciesDialog.getBtnCancel()) {
 			frequenciesDialog.setVisible(false);
@@ -134,7 +134,8 @@ public class ClassController implements ActionListener {
 			grades[i] = (float) gradesDialog.getTable().getModel().getValueAt(i, 3);
 		}
 		
-		StudentDisciplineDAO.updateGrades(student_ids, grades);
+		int selected_class_id = classListView.getList().getSelectedValue().getId();
+		StudentDisciplineDAO.updateGrades(student_ids, grades, selected_class_id);
 	}
 	
 	private void updateStudentsFrequency() {
@@ -149,7 +150,8 @@ public class ClassController implements ActionListener {
 			frequencies[i] = (int) frequenciesDialog.getTable().getModel().getValueAt(i, 3);
 		}
 		
-		StudentDisciplineDAO.updateFrequencies(student_ids, frequencies);
+		int selected_class_id = classListView.getList().getSelectedValue().getId();
+		StudentDisciplineDAO.updateFrequencies(student_ids, frequencies, selected_class_id);
 	}
 	
 	private void searchClasses() {
