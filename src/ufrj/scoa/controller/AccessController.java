@@ -61,6 +61,7 @@ public class AccessController implements ActionListener {
 					else
 					{
 						this.baseController.setCurrentUser(currentUser);
+						this.baseController.generateMenus();
 						this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
 					}
 				} else {

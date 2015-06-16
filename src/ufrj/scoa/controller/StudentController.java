@@ -31,7 +31,7 @@ public class StudentController implements ActionListener {
 
 	public StudentController(ScoaBaseController baseController) {
 
-		coursesList = courseDAO.listAllCourses();
+		coursesList = courseDAO.list();
 		
 		this.baseController = baseController;
 		

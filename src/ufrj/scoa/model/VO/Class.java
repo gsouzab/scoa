@@ -11,37 +11,37 @@ public class Class {
 	private int id;
 	private int credits;
 	private String name;
-	private String code;
 	private Course course;
 	private Discipline discipline;
 	private String timeOfClass;
 	private Room room;
+	private Professor professor;
 	
 	public Class() {
 		super();
 	}
 	
-	public Class(int credits, String name, String code, String timeIfClass, Course course, Discipline discipline, Room room) {
+	public Class(int credits, String name, String timeOfClass, Course course, Discipline discipline, Room room, Professor professor) {
 		super();
 		this.credits = credits;
 		this.name = name;
-		this.code = code;
-		this.timeOfClass = timeIfClass;
+		this.timeOfClass = timeOfClass;
 		this.course = course;
 		this.discipline = discipline;
 		this.room = room;
+		this.professor = professor;
 	}
 	
-	public Class(int id, int credits, String name, String code,String timeIfClass, Course course, Discipline discipline, Room room) {
+	public Class(int id, int credits, String name, String timeIfClass, Course course, Discipline discipline, Room room, Professor professor) {
 		super();
 		this.id = id;
 		this.credits = credits;
 		this.name = name;
-		this.code = code;
 		this.timeOfClass = timeIfClass;
 		this.course = course;
 		this.discipline = discipline;
 		this.room = room;
+		this.professor = professor;
 	}
 	
 	public int getId() {
@@ -58,14 +58,6 @@ public class Class {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
 	}
 	
 	public Course getCourse() {
@@ -108,9 +100,18 @@ public class Class {
 	public void setTimeOfClass(String timeOfClass) {
 		this.timeOfClass = timeOfClass;
 	}
+	
+
+	public Professor getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
+	}
 
 	@Override
     public String toString() {
-        return code + " - " + name;
+        return name;
     }
 }

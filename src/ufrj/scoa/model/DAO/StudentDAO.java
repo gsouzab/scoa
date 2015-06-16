@@ -94,7 +94,7 @@ public class StudentDAO {
 			
 			conn = Connect.connectDB();
 			
-			PreparedStatement ps = conn.prepareStatement("SELECT s.*, p.name, p.email, p.birthdate, p.cpf, p.entry, p.password, sc.grade FROM student s INNER JOIN person p ON p.id = s.person_id INNER JOIN student_classes sc ON sc.student_id = s.id WHERE sc.class_id = ?");
+			PreparedStatement ps = conn.prepareStatement("SELECT s.*, p.name, p.email, p.birthdate, p.cpf, p.entry, p.password, sc.grade FROM student s INNER JOIN person p ON p.id = s.person_id INNER JOIN student_class sc ON sc.student_id = s.id WHERE sc.class_id = ?");
 			ps.setInt(1, class_id);
 			
 			ResultSet rs = ps.executeQuery();

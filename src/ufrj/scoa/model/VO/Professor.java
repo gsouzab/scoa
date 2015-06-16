@@ -18,12 +18,20 @@ public class Professor extends Person{
 
 	public Professor(String name, String cpf, String email, Date birthdate, String entry, String password) {
 		super(name, cpf, email, birthdate, entry, password, Constants.ROLE_PROFESSOR);
+
 		
+	}
+	
+	public Professor(int professorId, String name, String cpf, String email, Date birthdate, String entry, String password) {
+		super(name, cpf, email, birthdate, entry, password, Constants.ROLE_PROFESSOR);
+		this.professorID = professorId;
 	}
 
 	@Override
 	public String toString() {
-		return this.getName() + " - " + this.getCpf();
+		if(this.getEntry().length() > 0) return this.getEntry() + " - " + this.getName();
+		
+		return this.getName();
 	}
 	
 	

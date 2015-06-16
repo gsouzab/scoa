@@ -32,7 +32,7 @@ public class LoginView extends JPanel {
 		lblScoa.setBounds(6, 142, 628, 39);
 		add(lblScoa);
 		
-		JLabel lblSistemaDeControle = new JLabel("Sistema de controle acadêmico");
+		JLabel lblSistemaDeControle = new JLabel("Sistema de Controle Acadêmico");
 		lblSistemaDeControle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSistemaDeControle.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblSistemaDeControle.setForeground(Color.DARK_GRAY);

@@ -1,9 +1,7 @@
 package ufrj.scoa.view;
 
-import java.awt.Component;
 import java.awt.Font;
 
-import javax.swing.Box;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
@@ -11,6 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class ScoaBaseFrame extends JFrame {
 
@@ -19,46 +18,50 @@ public class ScoaBaseFrame extends JFrame {
 	private JMenuBar menuBar;
 	
 	//	
-	//	Itens do menu de alunos	
+	//	Itens do menu de Alunos	
 	//	
+	private JMenu studentsMenu;
 	private JMenuItem listStudentsMenuItem;
 	private JMenuItem newStudentMenuItem;
 	//	
-	//	Itens do menu de cursos	
+	//	Itens do menu de Cursos	
 	//	
+	private JMenu courseMenu;
 	private JMenuItem listCoursesMenuItem;
 	private JMenuItem newCourseMenuItem;
 	
 	// Itens menu Professores
+	private JMenu professorsMenu;
 	private JMenuItem listProfessorsMenuItem;
 	private JMenuItem newProfessorsMenuItem;
 	
 	// Itens menu Disciplinas
+	private JMenu disciplinesMenu;
 	private JMenuItem listDisciplinesMenuItem;
 	private JMenuItem newDisciplinesMenuItem;
 
 	// Itens menu Salas
+	private JMenu roomsMenu;
 	private JMenuItem newRoomMenuItem;
 	private JMenuItem searchRoomMenuItem;
 
-	// Itens menu turma	
+	// Itens menu Turma
+	private JMenu classesMenu;
 	private JMenuItem newClassMenuItem;
 	private JMenuItem searchClassMenuItem;
 	
 	//Itens menu Secretaria
+	private JMenu secretaryMenu;
 	private JMenuItem newSecretaryMenuItem;
 	private JMenuItem mntmBuscarSecretaria;
-
+	private JMenuItem newStudentDisciplineMenuItem;
+	
 	//Itens menu Minha Conta
+	private JMenu mnMinhaConta;
 	private JMenuItem mntmDetalharMenuItem;
 	private JMenuItem mntmLogout;
 	
-	private JMenuItem newStudentDisciplineMenuItem;
-	
 	JPanel contentPane;
-	private Component horizontalStrut;
-	private JMenu mnMinhaConta;
-
 
 	
 	public ScoaBaseFrame(){
@@ -72,9 +75,11 @@ public class ScoaBaseFrame extends JFrame {
 	private void generateMenu()
     {
     	menuBar = new JMenuBar();
+    	menuBar.setFont(new Font("Arial", Font.BOLD, 12));
         setJMenuBar(menuBar);
         
-        JMenu courseMenu = new JMenu("Cursos");
+        courseMenu = new JMenu("Cursos");
+        courseMenu.setHorizontalAlignment(SwingConstants.LEFT);
         courseMenu.setFont(new Font("Arial", Font.PLAIN, 12));
         newCourseMenuItem = new JMenuItem("Cadastrar Curso");
         newCourseMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -84,7 +89,8 @@ public class ScoaBaseFrame extends JFrame {
         courseMenu.add(newCourseMenuItem);
         courseMenu.add(listCoursesMenuItem);
         
-        JMenu studentsMenu = new JMenu("Alunos");
+        studentsMenu = new JMenu("Alunos");
+        studentsMenu.setHorizontalAlignment(SwingConstants.LEFT);
         studentsMenu.setFont(new Font("Arial", Font.PLAIN, 12));
         newStudentMenuItem = new JMenuItem("Cadastrar Aluno");
         newStudentMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -94,8 +100,8 @@ public class ScoaBaseFrame extends JFrame {
         studentsMenu.add(newStudentMenuItem);
         studentsMenu.add(listStudentsMenuItem);
         
-        
-        JMenu professorsMenu = new JMenu("Professores");
+        professorsMenu = new JMenu("Professores");
+        professorsMenu.setHorizontalAlignment(SwingConstants.LEFT);
         professorsMenu.setFont(new Font("Arial", Font.PLAIN, 12));
         newProfessorsMenuItem = new JMenuItem("Cadastrar Professor");
         newProfessorsMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -105,8 +111,8 @@ public class ScoaBaseFrame extends JFrame {
         professorsMenu.add(newProfessorsMenuItem);
         professorsMenu.add(listProfessorsMenuItem);
         
-        
-        JMenu disciplinesMenu = new JMenu("Disciplinas");
+        disciplinesMenu = new JMenu("Disciplinas");
+        disciplinesMenu.setHorizontalAlignment(SwingConstants.LEFT);
         disciplinesMenu.setFont(new Font("Arial", Font.PLAIN, 12));
         newDisciplinesMenuItem = new JMenuItem("Cadastrar Disciplina");
         newDisciplinesMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -116,21 +122,18 @@ public class ScoaBaseFrame extends JFrame {
         disciplinesMenu.add(newDisciplinesMenuItem);
         disciplinesMenu.add(listDisciplinesMenuItem);
         
-        JMenu secretaryMenu = new JMenu("Secretaria");
+        secretaryMenu = new JMenu("Secretaria");
+        secretaryMenu.setHorizontalAlignment(SwingConstants.LEFT);
         secretaryMenu.setFont(new Font("Arial", Font.PLAIN, 12));
         newSecretaryMenuItem = new JMenuItem("Cadastrar Secretaria");
         newSecretaryMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         
         secretaryMenu.add(newSecretaryMenuItem);
-        
-        JMenu studentDisciplineMenu = new JMenu("Inscricao");
-        studentDisciplineMenu.setFont(new Font("Arial", Font.PLAIN, 12));
-        newStudentDisciplineMenuItem = new JMenuItem("Associar Aluno/Disciplina");
-        newStudentDisciplineMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
-        
-        studentDisciplineMenu.add(newStudentDisciplineMenuItem);
         menuBar.add(courseMenu);
         menuBar.add(studentsMenu);
+        newStudentDisciplineMenuItem = new JMenuItem("Inscrever Aluno");
+        studentsMenu.add(newStudentDisciplineMenuItem);
+        newStudentDisciplineMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         menuBar.add(professorsMenu);
         menuBar.add(disciplinesMenu);
         menuBar.add(secretaryMenu);
@@ -138,9 +141,9 @@ public class ScoaBaseFrame extends JFrame {
         mntmBuscarSecretaria = new JMenuItem("Buscar Secretaria");
         mntmBuscarSecretaria.setFont(new Font("Arial", Font.PLAIN, 12));
         secretaryMenu.add(mntmBuscarSecretaria);
-        menuBar.add(studentDisciplineMenu);
 
-        JMenu roomsMenu = new JMenu("Salas");
+        roomsMenu = new JMenu("Salas");
+        roomsMenu.setHorizontalAlignment(SwingConstants.LEFT);
         roomsMenu.setFont(new Font("Arial", Font.PLAIN, 12));
 
         menuBar.add(roomsMenu);
@@ -153,7 +156,8 @@ public class ScoaBaseFrame extends JFrame {
         searchRoomMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         roomsMenu.add(searchRoomMenuItem);
         
-        JMenu classesMenu = new JMenu("Turmas");
+        classesMenu = new JMenu("Turmas");
+        classesMenu.setHorizontalAlignment(SwingConstants.LEFT);
         classesMenu.setFont(new Font("Arial", Font.PLAIN, 12));
         menuBar.add(classesMenu);
         
@@ -165,10 +169,9 @@ public class ScoaBaseFrame extends JFrame {
         searchClassMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         classesMenu.add(searchClassMenuItem);
         
-        horizontalStrut = Box.createHorizontalStrut(73);
-        menuBar.add(horizontalStrut);
-        
         mnMinhaConta = new JMenu("Minha Conta");
+        mnMinhaConta.setHorizontalTextPosition(SwingConstants.LEFT);
+        mnMinhaConta.setHorizontalAlignment(SwingConstants.RIGHT);
         menuBar.add(mnMinhaConta);
         
         mntmDetalharMenuItem = new JMenuItem("Detalhar");
@@ -273,6 +276,36 @@ public class ScoaBaseFrame extends JFrame {
 	public JMenuItem getBuscarSecretariaMenuItem() {
 		return mntmBuscarSecretaria;
 	}
+	
+
+	public JMenu getSecretaryMenu() {
+		return secretaryMenu;
+	}
+	
+
+	public JMenu getStudentsMenu() {
+		return studentsMenu;
+	}
+
+	public JMenu getCourseMenu() {
+		return courseMenu;
+	}
+
+	public JMenu getProfessorsMenu() {
+		return professorsMenu;
+	}
+
+	public JMenu getDisciplinesMenu() {
+		return disciplinesMenu;
+	}
+
+	public JMenu getRoomsMenu() {
+		return roomsMenu;
+	}
+
+	public JMenu getClassesMenu() {
+		return classesMenu;
+	}
 
 	public void changePanel(JPanel newPanel, String newTitle, boolean showMenu) {
 		if(showMenu) {
@@ -288,5 +321,25 @@ public class ScoaBaseFrame extends JFrame {
 		setTitle(newTitle);
 		this.setContentPane(newPanel);
 		this.revalidate();
+	}
+	
+	public void setAllMenusVisible() {
+		getStudentsMenu().setVisible(true);
+		getCourseMenu().setVisible(true);
+		getDisciplinesMenu().setVisible(true);
+		getProfessorsMenu().setVisible(true);
+		getRoomsMenu().setVisible(true);
+		getClassesMenu().setVisible(true);
+		getSecretaryMenu().setVisible(true);
+	}
+	
+	public void setAllMenusInvisible() {
+		getStudentsMenu().setVisible(false);
+		getCourseMenu().setVisible(false);
+		getDisciplinesMenu().setVisible(false);
+		getProfessorsMenu().setVisible(false);
+		getRoomsMenu().setVisible(false);
+		getClassesMenu().setVisible(false);
+		getSecretaryMenu().setVisible(false);
 	}
 }

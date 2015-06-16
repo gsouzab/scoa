@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import ufrj.scoa.model.VO.Professor;
+import ufrj.scoa.model.VO.Room;
 
 public class ProfessorDAO {
 	
@@ -66,7 +67,7 @@ public class ProfessorDAO {
 			
 			while(rs.next()) {
 				
-				Professor professor = new Professor(rs.getString("name"), rs.getString("cpf"), rs.getString("email"), rs.getDate("birthdate"), rs.getString("entry"), rs.getString("password"));
+				Professor professor = new Professor(rs.getInt("professorID") ,rs.getString("name"), rs.getString("cpf"), rs.getString("email"), rs.getDate("birthdate"), rs.getString("entry"), rs.getString("password"));
 				
 				professorList.add(professor);
 			}
@@ -124,6 +125,29 @@ public class ProfessorDAO {
 		}
 		
 		return professorList; 
+	}
+
+	public Professor getProfessorById(int professorId) {
+		Professor professor = null;
+		
+		try {
+			conn = Connect.connectDB();
+			
+			PreparedStatement ps = conn.prepareStatement("SELECT pe.*, pr.id AS professor_id FROM scoa.person pe, scoa.professor pr WHERE pr.person_id = pe.id AND pr.id = ? ");
+			ps.setInt(1, professorId);
+			
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				professor = new Professor(rs.getInt("professor_id"), rs.getString("name"), rs.getString("cpf"), rs.getString("email"), rs.getDate("birthdate"), rs.getString("entry"), rs.getString("password"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return professor;
 	}
 
 }

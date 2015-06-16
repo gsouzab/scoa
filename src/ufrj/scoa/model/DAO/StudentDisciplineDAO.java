@@ -19,11 +19,13 @@ public class StudentDisciplineDAO {
 			
 			conn = Connect.connectDB();
 			
-			ps = conn.prepareStatement("INSERT INTO student_classes (student_id, class_id, grade, attendance) VALUES (?, ?, ?, ?)");
+			ps = conn.prepareStatement("INSERT INTO student_class (student_id, class_id, grade, frequency, period, state) VALUES (?, ?, ?, ?,?,?)");
 			ps.setInt(1, studentDiscipline.getStudentId());
 			ps.setInt(2, studentDiscipline.getClassId());
 			ps.setFloat(3, 0);
 			ps.setInt(4, 0);
+			ps.setInt(5, 1);
+			ps.setInt(6,0);
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -39,7 +41,7 @@ public class StudentDisciplineDAO {
 		
 		for(int i = 0  ; i < student_ids.length ; i++) {
 			try {
-				ps = conn.prepareStatement("UPDATE student_classes SET grade = ? WHERE student_id = ?");
+				ps = conn.prepareStatement("UPDATE student_class SET grade = ? WHERE student_id = ?");
 				ps.setFloat(1, grades[i]);
 				ps.setInt(2, student_ids[i]);
 	
@@ -57,7 +59,7 @@ public class StudentDisciplineDAO {
 		try {
 			conn = Connect.connectDB();
 			
-			ps = conn.prepareStatement("SELECT grade FROM student_classes WHERE class_id = ? AND student_id = ?");
+			ps = conn.prepareStatement("SELECT grade FROM student_class WHERE class_id = ? AND student_id = ?");
 			ps.setInt(1, class_id);
 			ps.setInt(2, student_id);
 			
