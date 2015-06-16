@@ -1,9 +1,8 @@
 package ufrj.scoa;
 
-import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
-
 import ufrj.scoa.controller.AccessController;
 import ufrj.scoa.controller.ScoaBaseController;
+import ufrj.scoa.view.LoginView;
 import ufrj.scoa.view.WelcomeView;
 
 public class Scoa {

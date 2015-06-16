@@ -66,6 +66,9 @@ public class Discipline {
 	}
 
 	public String toString() {
+		
+		if(this.code.length() == 0) return this.name;
+		
 		return this.code + " - " + this.name;
 	}
 	

@@ -58,17 +58,17 @@ public class Room {
 
 	public String toString() {
 		
-		String retorno = this.building;
+		String result = this.building;
 		
 		if(this.floor > 0) {
-			retorno += " " + this.floor + "º andar";
+			result += " - " + this.floor + "º andar";
 		}
 		
 		if(this.number > 0) {
-			retorno += " " + this.number;
+			result += ", sala " + this.number;
 		}
 		
-		return retorno;
+		return result;
 	}
 	
 }
