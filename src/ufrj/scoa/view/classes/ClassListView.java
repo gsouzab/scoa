@@ -22,8 +22,9 @@ public class ClassListView extends JPanel {
 	 * Create the panel.
 	 */
 	
+	JLabel lblCursos;
+	
 	private DefaultListModel<Class> model;
-	private JButton btnExcluir;
 	private JButton btnInsertGrades;
 	private JList<Class> list;
 	private JButton btnInsertFrequencies;
@@ -34,7 +35,7 @@ public class ClassListView extends JPanel {
 		model = new DefaultListModel<Class>();
 		list = new JList<Class>(model);
 		
-		JLabel lblCursos = new JLabel("Resultado da busca por turmas");
+		lblCursos = new JLabel("Resultado da busca por turmas");
 		lblCursos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCursos.setFont(new Font("Arial", Font.BOLD, 15));
 		lblCursos.setBounds(60, 12, 508, 37);
@@ -44,22 +45,14 @@ public class ClassListView extends JPanel {
 		scrollPane.setBounds(12, 90, 616, 235);
 		add(scrollPane);
 		
-		btnExcluir = new JButton("Excluir");
-		btnExcluir.setBounds(12, 337, 103, 25);
-		add(btnExcluir);
-		
 		btnInsertGrades = new JButton("Lançar notas");
-		btnInsertGrades.setBounds(12, 61, 133, 25);
+		btnInsertGrades.setBounds(12, 337, 133, 25);
 		add(btnInsertGrades);
 		
 		btnInsertFrequencies = new JButton("Lançar frequências");
-		btnInsertFrequencies.setBounds(157, 61, 154, 25);
+		btnInsertFrequencies.setBounds(157, 337, 187, 25);
 		add(btnInsertFrequencies);
 		
-	}
-
-	public JButton getBtnExcluir() {
-		return btnExcluir;
 	}
 	
 	public JButton getBtnInsertGrades() {
@@ -90,4 +83,11 @@ public class ClassListView extends JPanel {
 		return "Listar turmas";
 		
 	}
+
+	public JLabel getLblCursos() {
+		return lblCursos;
+	}
+	
+	
+	
 }

@@ -25,7 +25,7 @@ public class StudentDisciplineCreationView extends JPanel {
     private JButton btnCancelar;
 	private JComboBox<Student> cbStudent;
 	private JComboBox<Class> cbClass;
-	//listas dos comboboxes	
+
     private ArrayList<Student> studentsList;
     private ArrayList<Class> classesList;
 

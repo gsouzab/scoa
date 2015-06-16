@@ -149,5 +149,28 @@ public class ProfessorDAO {
 		
 		return professor;
 	}
+	
+	public Professor getProfessorByPersonId(int personId) {
+		Professor professor = null;
+		
+		try {
+			conn = Connect.connectDB();
+			
+			PreparedStatement ps = conn.prepareStatement("SELECT pe.*, pr.id AS professor_id FROM scoa.person pe, scoa.professor pr WHERE pr.person_id = pe.id AND pe.id = ? ");
+			ps.setInt(1, personId);
+			
+			
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			
+			professor = new Professor(rs.getInt("professor_id"), rs.getString("name"), rs.getString("cpf"), rs.getString("email"), rs.getDate("birthdate"), rs.getString("entry"), rs.getString("password"));
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return professor;
+	}
 
 }

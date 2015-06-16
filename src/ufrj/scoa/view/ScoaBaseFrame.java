@@ -142,10 +142,6 @@ public class ScoaBaseFrame extends JFrame {
         mntmBuscarSecretaria = new JMenuItem("Buscar Secretaria");
         mntmBuscarSecretaria.setFont(new Font("Arial", Font.PLAIN, 12));
         secretaryMenu.add(mntmBuscarSecretaria);
-        
-        manageStudentDisciplineMenuItem = new JMenuItem("Gerenciar inscrições");
-        secretaryMenu.add(manageStudentDisciplineMenuItem);
-        manageStudentDisciplineMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
 
         roomsMenu = new JMenu("Salas");
         roomsMenu.setHorizontalAlignment(SwingConstants.LEFT);
@@ -174,12 +170,16 @@ public class ScoaBaseFrame extends JFrame {
         searchClassMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         classesMenu.add(searchClassMenuItem);
         
-        studentRequestsMenu = new JMenu("Pedidos");
+        studentRequestsMenu = new JMenu("Inscrições");
         studentRequestsMenu.setFont(new Font("Arial", Font.PLAIN, 12));
         menuBar.add(studentRequestsMenu);
-        newStudentDisciplineMenuItem = new JMenuItem("Inscrição em disciplina");
+        newStudentDisciplineMenuItem = new JMenuItem("Inscrição em Disciplina");
         studentRequestsMenu.add(newStudentDisciplineMenuItem);
         newStudentDisciplineMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
+        
+        manageStudentDisciplineMenuItem = new JMenuItem("Gerenciar Inscrições");
+        studentRequestsMenu.add(manageStudentDisciplineMenuItem);
+        manageStudentDisciplineMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         
         mnMinhaConta = new JMenu("Minha Conta");
         mnMinhaConta.setHorizontalAlignment(SwingConstants.RIGHT);

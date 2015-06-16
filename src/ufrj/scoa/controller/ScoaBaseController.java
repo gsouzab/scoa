@@ -2,8 +2,16 @@ package ufrj.scoa.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.JLabel;
+
+import ufrj.scoa.model.DAO.StudentDAO;
+import ufrj.scoa.model.DAO.StudentDisciplineDAO;
+import ufrj.scoa.model.VO.Discipline;
 import ufrj.scoa.model.VO.Person;
+import ufrj.scoa.model.VO.Student;
+import ufrj.scoa.model.VO.StudentDiscipline;
 import ufrj.scoa.util.Constants;
 import ufrj.scoa.view.ScoaBaseFrame;
 
@@ -92,10 +100,21 @@ public class ScoaBaseController implements ActionListener {
 			
 			ClassController classController = new ClassController(this);			
 			baseFrame.changePanel(classController.getClassCreationView(), "Cadastrar Turma");
+			
 		} else if(event.getSource() == baseFrame.getSearchClassMenuItem()) {
 			
-			ClassController classController = new ClassController(this);			
-			baseFrame.changePanel(classController.getClassSearchView(), "Buscar Turma");
+			ClassController classController = new ClassController(this);
+			
+			if(currentUser.getRole() == Constants.ROLE_PROFESSOR) {
+				classController.searchClassesProfessor(currentUser.getPersonId());
+				classController.getClassListView().getLblCursos().setText("Suas Turmas");
+				baseFrame.changePanel(classController.getClassListView(), "Suas Turmas");
+			}
+			else {
+				
+				baseFrame.changePanel(classController.getClassSearchView(), "Buscar Turma");
+			}
+			
 		} else if(event.getSource() == baseFrame.getNewRoomMenuItem()) {
 			
 			RoomController roomController = new RoomController(this);
@@ -129,7 +148,24 @@ public class ScoaBaseController implements ActionListener {
 		} else if(event.getSource() ==  baseFrame.getManageStudentDisciplineMenuItem()) {
 			
 			SecretaryController secretaryController = new SecretaryController(this);
-			baseFrame.changePanel(secretaryController.getSecretaryStudentDisciplineManagmentView(), "Gerenciamento de inscrição em disciplinas");
+			
+			if(currentUser.getRole() == Constants.ROLE_SECRETARY) {
+
+				baseFrame.changePanel(secretaryController.getSecretaryStudentDisciplineManagmentView(), "Gerenciamento de inscrição em disciplinas");
+			}
+			else if(currentUser.getRole() == Constants.ROLE_STUDENT) {
+				
+				StudentDAO studentDAO = new StudentDAO();
+				
+				Student currentStudent = studentDAO.getStudentByPersonId(currentUser.getPersonId());
+				ArrayList<StudentDiscipline> disciplinesList = StudentDisciplineDAO.getNewDisciplinesRequestsStudent(currentStudent.getStudentId());
+				secretaryController.getSecretaryStudentDisciplineManagmentView().populateTableStudent(disciplinesList);
+				
+				secretaryController.getSecretaryStudentDisciplineManagmentView().getBtnApprove().setVisible(false);
+				secretaryController.getSecretaryStudentDisciplineManagmentView().getBtnDisapprove().setVisible(false);
+				baseFrame.changePanel(secretaryController.getSecretaryStudentDisciplineManagmentView(), "Gerenciamento de inscrição em disciplinas");
+
+			}
 
 		}
 		

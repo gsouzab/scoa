@@ -179,10 +179,6 @@ public class SecretaryController implements ActionListener{
 			secretaryListView.getModel().addElement(secretary);
 		}
 	}
-	
-	private void deleteSecretary(Course course) {
 
-		
-	}
 	
 }

@@ -103,6 +103,33 @@ public class SecretaryStudentDisciplineManagmentView extends JPanel {
 			model.addRow(new Object[]{sd.getStudent().getStudentId(), sd.getStudentClass().getId(), sd.getStudent().getEntry(), sd.getStudent().getName(), sd.getStudentClass().getName(), sd.getStateString() });
 		}
 	}
+	
+	public void populateTableStudent(ArrayList<StudentDiscipline> studentDisciplines) {
+		table.removeAll();
+		
+		model.addColumn("ID Aluno");// coluna escondida da tabela
+		model.addColumn("ID Curso");// coluna escondida da tabela
+		model.addColumn("Matrícula");
+		model.addColumn("Nome");
+		model.addColumn("Turma");
+		model.addColumn("Situação");
+		
+		model.setColumnCount(6);
+		
+		table.getColumnModel().getColumn(2).setPreferredWidth(80);
+		table.getColumnModel().getColumn(3).setPreferredWidth(150);
+		table.getColumnModel().getColumn(4).setPreferredWidth(150);
+		table.getColumnModel().getColumn(5).setPreferredWidth(80);
+		
+		table.removeColumn(table.getColumnModel().getColumn(0));
+		table.removeColumn(table.getColumnModel().getColumn(0));
+		
+		model.setNumRows(0);
+		
+		for(StudentDiscipline sd : studentDisciplines) {
+			model.addRow(new Object[]{sd.getStudent().getStudentId(), sd.getStudentClass().getId(), sd.getStudent().getEntry(), sd.getStudent().getName(), sd.getStudentClass().getName(), sd.getStateString() });
+		}
+	}
 
 	public JTable getTable() {
 		return table;

@@ -131,7 +131,6 @@ public class StudentDAO {
 			ResultSet rs = ps.executeQuery();
 			
 			
-			System.out.println(ps.toString());
 			while(rs.next()) {
 				
 				CourseDAO courseDAO = new CourseDAO();

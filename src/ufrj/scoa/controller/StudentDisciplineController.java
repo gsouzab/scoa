@@ -60,7 +60,7 @@ public class StudentDisciplineController implements ActionListener {
 			
 			StudentDisciplineDAO.save(newStudentDiscipline);
 			
-			JOptionPane.showMessageDialog(null, "Aluno e Turma associados sucesso");
+			JOptionPane.showMessageDialog(null, "Aluno inscrito com sucesso!");
 
 			
 		} else {

@@ -144,4 +144,31 @@ public class StudentDisciplineDAO {
 		
 		return list;
 	}
+	
+	public static ArrayList<StudentDiscipline> getNewDisciplinesRequestsStudent(int studentId) {
+		ArrayList<StudentDiscipline> list = new ArrayList<StudentDiscipline>();
+		
+		try {
+			conn = Connect.connectDB();
+			
+			ps = conn.prepareStatement("SELECT class_id FROM student_class WHERE student_id = ?");
+			
+			ps.setInt(1, studentId);
+
+			ResultSet rs = ps.executeQuery();
+			
+			StudentDAO stdDAO = new StudentDAO();
+			ClassDAO cDAO = new ClassDAO();
+			
+			while(rs.next()) {
+				StudentDiscipline sd = new StudentDiscipline(stdDAO.getStudentById(studentId), cDAO.getClassById(rs.getInt("class_id")));
+				list.add(sd);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 }

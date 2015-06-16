@@ -52,7 +52,6 @@ public class ClassController implements ActionListener {
 		this.classSearchView.getBtnVoltar().addActionListener(this);
 		
 		this.classListView = new ClassListView();
-		this.classListView.getBtnExcluir().addActionListener(this);
 		this.classListView.getBtnInsertGrades().addActionListener(this);
 		this.classListView.getBtnInsertFrequencies().addActionListener(this);
 
@@ -89,14 +88,8 @@ public class ClassController implements ActionListener {
 		} else if(event.getSource() == this.classSearchView.getBtnVoltar()) {
 			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
 			
-		} else if(event.getSource() == this.classListView.getBtnExcluir()) {
-			int option = JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir a turma selecionada?", "Excluir turma", JOptionPane.YES_NO_OPTION);
-
-			if(option == 0) {
-				deleteClass(classListView.getList().getSelectedValue());
-			}
+		}  else if(event.getSource() == this.classListView.getBtnInsertGrades()) {
 			
-		} else if(event.getSource() == this.classListView.getBtnInsertGrades()) {
 			if(classListView.getList().getSelectedValue() != null) {
 				gradesDialog.openDialog(classListView.getList().getSelectedValue().getId());
 			} else {
@@ -180,13 +173,26 @@ public class ClassController implements ActionListener {
 		
 	}
 	
-	private void deleteClass(Class c) {
-		int classId = c.getId();
+	public void searchClassesProfessor(int person_id) {
 		
 		ClassDAO classDAO = new ClassDAO();
-		classDAO.delete(classId);
+		ProfessorDAO professorDAO = new ProfessorDAO();
 		
-		searchClasses();
+		String name = "";
+		String timeOfClass = "";
+		int credits = 0;
+		
+		int course_id = 0;
+		int discipline_id = 0;
+		int room_id = 0;
+		
+		Professor professor = professorDAO.getProfessorByPersonId(person_id);
+		int professor_id = professor.getProfessorID();
+		
+
+		ArrayList<Class> classList = classDAO.search(name, course_id, discipline_id, room_id, professor_id, credits, timeOfClass);
+		
+		this.classListView.setList(classList);
 		
 	}
 
@@ -222,5 +228,10 @@ public class ClassController implements ActionListener {
 		this.classCreationView.getTfCredits().setText("");
 		this.classCreationView.getTfTime().setText("");
 	}
+
+	public ClassListView getClassListView() {
+		return classListView;
+	}
+	
 
 }

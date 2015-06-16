@@ -27,7 +27,7 @@ public class InsertFrequenciesDialog extends JDialog {
 	public InsertFrequenciesDialog(JFrame frame, JPanel parent) {
         super(frame, true);
         setTitle("Lançamento de Frequências");
-        setBounds(100, 100, 450, 280);
+        setBounds(100, 100, 450, 300);
 
         getContentPane().setLayout(null);
 
@@ -56,7 +56,7 @@ public class InsertFrequenciesDialog extends JDialog {
         
         btnCancel = new JButton("Cancelar");
         btnCancel.setIcon(new ImageIcon(InsertFrequenciesDialog.class.getResource("/com/sun/java/swing/plaf/motif/icons/Error.gif")));
-        btnCancel.setBounds(141, 209, 117, 29);
+        btnCancel.setBounds(141, 209, 136, 29);
         getContentPane().add(btnCancel);
         
        
