@@ -57,7 +57,7 @@ public class SecretaryStudentDisciplineManagmentView extends JPanel {
         btnApprove.setBounds(6, 327, 117, 29);
         add(btnApprove);
         
-        btnDisapprove = new JButton("Cancelar");
+        btnDisapprove = new JButton("Rejeitar");
         btnDisapprove.setBounds(135, 327, 117, 29);
         add(btnDisapprove);
         
@@ -75,7 +75,7 @@ public class SecretaryStudentDisciplineManagmentView extends JPanel {
         setVisible(true);
 	}
 	
-	private void populateTable() {
+	public void populateTable() {
 		table.removeAll();
 		
 		model.addColumn("ID Aluno");// coluna escondida da tabela

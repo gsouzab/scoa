@@ -13,9 +13,11 @@ import javax.swing.JOptionPane;
 import ufrj.scoa.model.DAO.CourseDAO;
 import ufrj.scoa.model.DAO.ProfessorDAO;
 import ufrj.scoa.model.DAO.SecretaryDAO;
+import ufrj.scoa.model.DAO.StudentDisciplineDAO;
 import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Professor;
 import ufrj.scoa.model.VO.Secretary;
+import ufrj.scoa.util.Constants;
 import ufrj.scoa.util.Util;
 import ufrj.scoa.view.WelcomeView;
 import ufrj.scoa.view.course.CourseListView;
@@ -83,8 +85,56 @@ public class SecretaryController implements ActionListener{
 			}
 			else if (option == 1) {}
 			
+		} else if(event.getSource() == this.secretaryStudentDisciplineManagmentView.getBtnApprove()) {
+			
+			if(this.secretaryStudentDisciplineManagmentView.getTable().getSelectedRowCount() > 0) {
+				int[] selectedRows = secretaryStudentDisciplineManagmentView.getTable().getSelectedRows();
+				
+				approveInscrition(selectedRows);
+				this.secretaryStudentDisciplineManagmentView.populateTable();
+				JOptionPane.showMessageDialog(null, "Pedidos aprovados com sucesso");
+
+			} else {
+				JOptionPane.showMessageDialog(null, "Selecione pelo menos um aluno");
+			}
+			
+			this.secretaryStudentDisciplineManagmentView.populateTable();
+			
+		} else if(event.getSource() == this.secretaryStudentDisciplineManagmentView.getBtnDisapprove()) {
+			
+			if(this.secretaryStudentDisciplineManagmentView.getTable().getSelectedRowCount() > 0) {
+				int[] selectedRows = secretaryStudentDisciplineManagmentView.getTable().getSelectedRows();
+				
+				disapproveInscrition(selectedRows);
+				this.secretaryStudentDisciplineManagmentView.populateTable();
+				JOptionPane.showMessageDialog(null, "Pedidos rejeitados com sucesso");
+
+			} else {
+				JOptionPane.showMessageDialog(null, "Selecione pelo menos um aluno");
+			}
 		}
 
+	}
+	
+	private void approveInscrition(int[] selectedRows) {
+		
+		for(int selectedRowIndex : selectedRows) {
+			
+			int student_id = (int) this.secretaryStudentDisciplineManagmentView.getTable().getModel().getValueAt(selectedRowIndex, 0);
+			int course_id = (int) this.secretaryStudentDisciplineManagmentView.getTable().getModel().getValueAt(selectedRowIndex, 1);
+			
+			StudentDisciplineDAO.changeState(student_id,course_id,Constants.STUDENT_CLASS_APPROVED);
+		}
+	}
+	
+	private void disapproveInscrition(int[] selectedRows) {
+		for(int selectedRowIndex : selectedRows) {
+			
+			int student_id = (int) this.secretaryStudentDisciplineManagmentView.getTable().getModel().getValueAt(selectedRowIndex, 0);
+			int course_id = (int) this.secretaryStudentDisciplineManagmentView.getTable().getModel().getValueAt(selectedRowIndex, 1);
+			
+			StudentDisciplineDAO.changeState(student_id,course_id,Constants.STUDENT_CLASS_DENIED);
+		}
 	}
 	
 	private void saveSecretary() {

@@ -86,8 +86,6 @@ public class InsertGradesDialog extends JDialog {
 		
 		model.setColumnCount(4);
 		
-		
-		
 		table.getColumnModel().getColumn(1).setPreferredWidth(80);
 		table.getColumnModel().getColumn(2).setPreferredWidth(150);
 		table.getColumnModel().getColumn(3).setPreferredWidth(30);
