@@ -16,6 +16,7 @@ public class Connect {
 			Class.forName ("com.mysql.jdbc.Driver").newInstance();
 			conn = DriverManager.getConnection (url, userName, password);
 
+			
 		}
 		catch (Exception e)
 		{
