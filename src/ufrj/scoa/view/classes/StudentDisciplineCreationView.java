@@ -9,8 +9,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
+import ufrj.scoa.model.DAO.StudentDAO;
+import ufrj.scoa.model.VO.Person;
 import ufrj.scoa.model.VO.Student;
 import ufrj.scoa.model.VO.Class;
+import ufrj.scoa.util.Constants;
 
 public class StudentDisciplineCreationView extends JPanel {
 
@@ -26,16 +29,17 @@ public class StudentDisciplineCreationView extends JPanel {
     private ArrayList<Student> studentsList;
     private ArrayList<Class> classesList;
 
+    private Person currentUser = null;
     
     /**
      * Create the frame.
      */
     
-    public StudentDisciplineCreationView(ArrayList<Student> studentsList, ArrayList<Class> classesList) {
+    public StudentDisciplineCreationView(ArrayList<Student> studentsList, ArrayList<Class> classesList, Person currentUser) {
 		
 		this.studentsList = studentsList;
 		this.classesList = classesList;
-        
+		this.currentUser = currentUser;
 		        
         btnSalvar = new JButton("Salvar");
         btnSalvar.setFont(new Font("Arial", Font.BOLD, 12));
@@ -76,10 +80,17 @@ public class StudentDisciplineCreationView extends JPanel {
    	}
     
 	private void populateComboBoxes() {
-		
-		
-		for(Student r : studentsList) {
-			cbStudent.addItem(r);
+
+		if(currentUser != null && currentUser.getRole() == Constants.ROLE_STUDENT) {
+			StudentDAO dao = new StudentDAO();
+			
+			cbStudent.addItem(dao.getStudentByPersonId(currentUser.getPersonId()));
+			cbStudent.setEditable(false);
+			cbStudent.setEnabled(false);
+		} else {
+			for(Student r : studentsList) {
+				cbStudent.addItem(r);
+			}
 		}
 		
 		for(Class d : classesList) {
@@ -94,7 +105,6 @@ public class StudentDisciplineCreationView extends JPanel {
 	public JButton getBtnCancelar() {
 		return btnCancelar;
 	}
-
 	
 	public JComboBox<Student> getSelectedStudentComboBox() {
 		return cbStudent;
@@ -103,6 +113,5 @@ public class StudentDisciplineCreationView extends JPanel {
 	public JComboBox<Class> getSelectedClassComboBox() {
 		return cbClass;
 	}
-
 
 }

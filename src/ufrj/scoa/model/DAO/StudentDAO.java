@@ -117,6 +117,38 @@ public class StudentDAO {
 		return student; 
 	}
 	
+	public Student getStudentByPersonId(int person_id) {
+		
+		Student student = null;
+		
+		try {
+			
+			conn = Connect.connectDB();
+			
+			PreparedStatement ps = conn.prepareStatement("SELECT s.*, p.name, p.email, p.birthdate, p.cpf, p.entry, p.password FROM person p INNER JOIN student s ON s.person_id = p.id WHERE p.id = ? ");
+			ps.setInt(1, person_id);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			
+			System.out.println(ps.toString());
+			while(rs.next()) {
+				
+				CourseDAO courseDAO = new CourseDAO();
+				student = new Student(rs.getString("name"), rs.getString("cpf"), rs.getString("email"), rs.getDate("birthdate"), courseDAO.getCourseById(rs.getInt("course_id")), rs.getString("entry"), rs.getString("password"));
+				student.setStudentId(rs.getInt("id"));
+				student.setPersonId(rs.getInt("person_id"));
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return student; 
+	}
+	
 	public ArrayList<Student> getStudentsByClassId(int class_id) {
 		
 		ArrayList<Student> studentList = new ArrayList<Student>();

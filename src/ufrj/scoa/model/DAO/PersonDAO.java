@@ -109,9 +109,11 @@ public Person getCurrentUser(String entry, String password) {
 	        			String cpf = rs.getString("cpf");
 	        			String email = rs.getString("email");
 	        			Date birthdate = rs.getDate("birthdate");
+	        			int id = rs.getInt("id");
 	        			String passwordMD5 = rs.getString("password");
 	        			int role = rs.getInt("role_id");
 	        			currentUser = new Person(name, cpf, email, birthdate, entry, passwordMD5, role);
+	        			currentUser.setPersonId(id);
 	          }  
 			  
 			return currentUser;

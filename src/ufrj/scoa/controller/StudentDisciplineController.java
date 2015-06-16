@@ -27,7 +27,7 @@ public class StudentDisciplineController implements ActionListener {
 	public StudentDisciplineController(ScoaBaseController baseController) {
 
 		this.baseController = baseController;
-		this.studentDisciplineCreationView = new StudentDisciplineCreationView(studentDAO.searchStudent("","","","","",""),classDAO.list());
+		this.studentDisciplineCreationView = new StudentDisciplineCreationView(studentDAO.searchStudent("","","","","",""),classDAO.list(),baseController.getCurrentUser());
 		this.studentDisciplineCreationView.getBtnSalvar().addActionListener(this);
 		this.studentDisciplineCreationView.getBtnCancelar().addActionListener(this);
 		
