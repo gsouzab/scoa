@@ -23,6 +23,7 @@ public class ScoaBaseFrame extends JFrame {
 	private JMenu studentsMenu;
 	private JMenuItem listStudentsMenuItem;
 	private JMenuItem newStudentMenuItem;
+
 	//	
 	//	Itens do menu de Cursos	
 	//	
@@ -54,7 +55,7 @@ public class ScoaBaseFrame extends JFrame {
 	private JMenu secretaryMenu;
 	private JMenuItem newSecretaryMenuItem;
 	private JMenuItem mntmBuscarSecretaria;
-	private JMenuItem newStudentDisciplineMenuItem;
+	private JMenuItem manageStudentDisciplineMenuItem;
 	
 	//Itens menu Minha Conta
 	private JMenu mnMinhaConta;
@@ -62,7 +63,10 @@ public class ScoaBaseFrame extends JFrame {
 	private JMenuItem mntmLogout;
 	
 	JPanel contentPane;
-
+	
+	// Itens menu Pedidos	
+	private JMenu studentRequestsMenu;
+	private JMenuItem newStudentDisciplineMenuItem;
 	
 	public ScoaBaseFrame(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -131,9 +135,6 @@ public class ScoaBaseFrame extends JFrame {
         secretaryMenu.add(newSecretaryMenuItem);
         menuBar.add(courseMenu);
         menuBar.add(studentsMenu);
-        newStudentDisciplineMenuItem = new JMenuItem("Inscrever Aluno");
-        studentsMenu.add(newStudentDisciplineMenuItem);
-        newStudentDisciplineMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         menuBar.add(professorsMenu);
         menuBar.add(disciplinesMenu);
         menuBar.add(secretaryMenu);
@@ -141,6 +142,10 @@ public class ScoaBaseFrame extends JFrame {
         mntmBuscarSecretaria = new JMenuItem("Buscar Secretaria");
         mntmBuscarSecretaria.setFont(new Font("Arial", Font.PLAIN, 12));
         secretaryMenu.add(mntmBuscarSecretaria);
+        
+        manageStudentDisciplineMenuItem = new JMenuItem("Gerenciar inscrições");
+        secretaryMenu.add(manageStudentDisciplineMenuItem);
+        manageStudentDisciplineMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
 
         roomsMenu = new JMenu("Salas");
         roomsMenu.setHorizontalAlignment(SwingConstants.LEFT);
@@ -169,9 +174,17 @@ public class ScoaBaseFrame extends JFrame {
         searchClassMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         classesMenu.add(searchClassMenuItem);
         
+        studentRequestsMenu = new JMenu("Pedidos");
+        studentRequestsMenu.setFont(new Font("Arial", Font.PLAIN, 12));
+        menuBar.add(studentRequestsMenu);
+        newStudentDisciplineMenuItem = new JMenuItem("Inscrição em disciplina");
+        studentRequestsMenu.add(newStudentDisciplineMenuItem);
+        newStudentDisciplineMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
+        
         mnMinhaConta = new JMenu("Minha Conta");
-        mnMinhaConta.setHorizontalTextPosition(SwingConstants.LEFT);
         mnMinhaConta.setHorizontalAlignment(SwingConstants.RIGHT);
+        mnMinhaConta.setFont(new Font("Arial", Font.PLAIN, 12));
+        mnMinhaConta.setHorizontalTextPosition(SwingConstants.CENTER);
         menuBar.add(mnMinhaConta);
         
         mntmDetalharMenuItem = new JMenuItem("Detalhar");
@@ -277,6 +290,9 @@ public class ScoaBaseFrame extends JFrame {
 		return mntmBuscarSecretaria;
 	}
 	
+	public JMenuItem getManageStudentDisciplineMenuItem() {
+		return manageStudentDisciplineMenuItem;
+	}
 
 	public JMenu getSecretaryMenu() {
 		return secretaryMenu;
@@ -306,6 +322,10 @@ public class ScoaBaseFrame extends JFrame {
 	public JMenu getClassesMenu() {
 		return classesMenu;
 	}
+	
+	public JMenu getStudentRequestsMenu() {
+		return studentRequestsMenu;
+	}
 
 	public void changePanel(JPanel newPanel, String newTitle, boolean showMenu) {
 		if(showMenu) {
@@ -331,6 +351,7 @@ public class ScoaBaseFrame extends JFrame {
 		getRoomsMenu().setVisible(true);
 		getClassesMenu().setVisible(true);
 		getSecretaryMenu().setVisible(true);
+		getStudentRequestsMenu().setVisible(true);
 	}
 	
 	public void setAllMenusInvisible() {
@@ -341,5 +362,6 @@ public class ScoaBaseFrame extends JFrame {
 		getRoomsMenu().setVisible(false);
 		getClassesMenu().setVisible(false);
 		getSecretaryMenu().setVisible(false);
+		getStudentRequestsMenu().setVisible(false);
 	}
 }

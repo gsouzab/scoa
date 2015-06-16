@@ -106,7 +106,7 @@ public class StudentCreationView extends JPanel {
 		
 		btnCancelar = new JButton("Voltar");
 		btnCancelar.setFont(new Font("Arial", Font.BOLD, 12));
-		btnCancelar.setBounds(520, 420, 110, 29);
+		btnCancelar.setBounds(519, 418, 110, 29);
 		add(btnCancelar);
 		
 		tfEmail = new JTextField();

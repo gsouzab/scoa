@@ -1,16 +1,22 @@
 package ufrj.scoa.model.VO;
 
+import ufrj.scoa.util.Constants;
+
 public class StudentDiscipline {
 		
 	private int studentId;
 	private int classId;
 	private float grade;
+	private int state;
 	private int attendance;
+	private Student student;
+	private Class student_class;
 	
-	public StudentDiscipline(Student student, Class classId){
+	public StudentDiscipline(Student student, Class studentClass){
 		this.studentId = student.getStudentId();
-		this.classId = classId.getId();
-		
+		this.classId = studentClass.getId();
+		this.student = student;
+		this.student_class = studentClass;		
 	}
 
 	public int getStudentId() {
@@ -43,6 +49,26 @@ public class StudentDiscipline {
 
 	public void setAttendance(int attendance) {
 		this.attendance = attendance;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public Class getStudentClass() {
+		return student_class;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
+	public String getStateString() {
+		return Constants.STUDENT_CLASS_STRING[state];
 	}
 	
 }

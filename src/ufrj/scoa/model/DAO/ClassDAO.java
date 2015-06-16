@@ -134,6 +134,36 @@ public class ClassDAO {
 		return classList; 
 	}
 	
+	public Class getClassById(int class_id) {
+		
+		Class classToReturn = null;
+		
+		try {
+			
+			conn = Connect.connectDB();
+			
+			ps = conn.prepareStatement("SELECT * FROM class WHERE id = ?");
+			
+			ps.setInt(1, class_id);
+			ResultSet rs = ps.executeQuery();
+			
+			CourseDAO courseDao = new CourseDAO();
+			DisciplineDAO disciplineDao = new DisciplineDAO();
+			RoomDAO roomDao = new RoomDAO();
+			ProfessorDAO professorDAO = new ProfessorDAO();
+			
+			while(rs.next()) {
+				classToReturn = new Class(rs.getInt("id"), rs.getInt("credits"),rs.getString("name"), rs.getString("time_of_class"), courseDao.getCourseById(rs.getInt("course_id")), disciplineDao.getDisciplineById(rs.getInt("discipline_id")), roomDao.getRoomById(rs.getInt("room_id")), professorDAO.getProfessorById(rs.getInt("professor_id")));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return classToReturn; 
+	}
+	
 	public void delete(int classId) {
 		
 		PreparedStatement deleteStatement;

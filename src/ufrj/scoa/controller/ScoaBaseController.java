@@ -35,6 +35,7 @@ public class ScoaBaseController implements ActionListener {
 		baseFrame.getDetalharMenuItem().addActionListener(this);
 		baseFrame.getNewStudentDisciplineMenuItem().addActionListener(this);
 		baseFrame.getBuscarSecretariaMenuItem().addActionListener(this);
+		baseFrame.getManageStudentDisciplineMenuItem().addActionListener(this);
 	
 	}
 	
@@ -125,6 +126,11 @@ public class ScoaBaseController implements ActionListener {
 			
 			SecretaryController secretaryController = new SecretaryController(this);
 			baseFrame.changePanel(secretaryController.getSecretarySearchView(), "Buscar Secretários(as)");
+		} else if(event.getSource() ==  baseFrame.getManageStudentDisciplineMenuItem()) {
+			
+			SecretaryController secretaryController = new SecretaryController(this);
+			baseFrame.changePanel(secretaryController.getSecretaryStudentDisciplineManagmentView(), "Gerenciamento de inscrição em disciplinas");
+
 		}
 		
 		
@@ -177,6 +183,7 @@ public class ScoaBaseController implements ActionListener {
 	
 	private void generateStudentMenu() {
 		baseFrame.setAllMenusInvisible();
+		baseFrame.getStudentRequestsMenu().setVisible(true);
 	}
 
 	

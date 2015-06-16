@@ -23,6 +23,7 @@ import ufrj.scoa.view.course.CourseSearchView;
 import ufrj.scoa.view.secretary.SecretaryCreationView;
 import ufrj.scoa.view.secretary.SecretaryListView;
 import ufrj.scoa.view.secretary.SecretarySearchView;
+import ufrj.scoa.view.secretary.SecretaryStudentDisciplineManagmentView;
 
 
 
@@ -32,6 +33,7 @@ public class SecretaryController implements ActionListener{
 	private SecretaryCreationView secretaryCreationView;
 	private SecretarySearchView secretarySearchView;
 	private SecretaryListView secretaryListView;
+	private SecretaryStudentDisciplineManagmentView secretaryStudentDisciplineManagmentView;
 	
 	public SecretaryController(ScoaBaseController baseController) {
 
@@ -47,6 +49,11 @@ public class SecretaryController implements ActionListener{
 		
 		this.secretaryListView = new SecretaryListView();
 		this.secretaryListView.getBtnExcluir().addActionListener(this);
+		
+		this.secretaryStudentDisciplineManagmentView = new SecretaryStudentDisciplineManagmentView();
+		this.secretaryStudentDisciplineManagmentView.getBtnDisapprove().addActionListener(this);
+		this.secretaryStudentDisciplineManagmentView.getBtnApprove().addActionListener(this);
+		this.secretaryStudentDisciplineManagmentView.getBtnBack().addActionListener(this);		
 	}
 
 	@Override
@@ -56,7 +63,9 @@ public class SecretaryController implements ActionListener{
 		{
 			saveSecretary();
 			
-		} else if(event.getSource() == this.secretaryCreationView.getBtnCancelar()) {
+		} else if(event.getSource() == this.secretaryCreationView.getBtnCancelar() ||
+				event.getSource() == this.secretarySearchView.getBtnVoltar() || 
+				event.getSource() == this.secretaryStudentDisciplineManagmentView.getBtnBack()) {
 			
 			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
 			
@@ -64,10 +73,6 @@ public class SecretaryController implements ActionListener{
 			
 			searchSecretary();
 			this.baseController.getBaseFrame().changePanel(secretaryListView, "Resultado da busca por secretários(as)");
-			
-		} else if(event.getSource() == this.secretarySearchView.getBtnVoltar()) {
-			
-			this.baseController.getBaseFrame().changePanel(new WelcomeView(), "Bem vindo ao SCOA");
 			
 		} else if(event.getSource() == this.secretaryListView.getBtnExcluir()) {
 			
@@ -144,6 +149,10 @@ public class SecretaryController implements ActionListener{
 
 	public SecretaryListView getSecretaryListView() {
 		return secretaryListView;
+	}
+	
+	public SecretaryStudentDisciplineManagmentView getSecretaryStudentDisciplineManagmentView() {
+		return secretaryStudentDisciplineManagmentView;
 	}
 
 	private void searchSecretary() {

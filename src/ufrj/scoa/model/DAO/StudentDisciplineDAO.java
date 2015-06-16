@@ -1,9 +1,12 @@
 package ufrj.scoa.model.DAO;
 
+import ufrj.scoa.util.Constants;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import ufrj.scoa.model.VO.StudentDiscipline;
 
@@ -114,5 +117,31 @@ public class StudentDisciplineDAO {
 		}
 		
 		return attendance;
+	}
+	
+	public static ArrayList<StudentDiscipline> getNewDisciplinesRequests() {
+		ArrayList<StudentDiscipline> list = new ArrayList<StudentDiscipline>();
+		
+		try {
+			conn = Connect.connectDB();
+			
+			ps = conn.prepareStatement("SELECT student_id, class_id FROM student_class WHERE state = ?");
+			ps.setInt(1, Constants.STUDENT_CLASS_PENDENT);
+
+			ResultSet rs = ps.executeQuery();
+			
+			StudentDAO stdDAO = new StudentDAO();
+			ClassDAO cDAO = new ClassDAO();
+			
+			while(rs.next()) {
+				StudentDiscipline sd = new StudentDiscipline(stdDAO.getStudentById(rs.getInt("student_id")), cDAO.getClassById(rs.getInt("class_id")));
+				list.add(sd);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 }
