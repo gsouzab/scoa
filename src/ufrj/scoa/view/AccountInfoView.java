@@ -30,67 +30,67 @@ public class AccountInfoView extends JPanel {
 		JLabel lblMyProfile = new JLabel("Minha Conta");
 		lblMyProfile.setBounds(12, 12, 620, 29);
 		add(lblMyProfile);
-		lblMyProfile.setFont(new Font("Arial", Font.BOLD, 25));
+		lblMyProfile.setFont(new Font("Verdana", Font.BOLD, 25));
 		lblMyProfile.setHorizontalAlignment(JLabel.CENTER);
 		
 		JLabel lblName = new JLabel("Nome: ");
-		lblName.setFont(new Font("Arial", Font.BOLD, 15));
+		lblName.setFont(new Font("Verdana", Font.BOLD, 15));
 		lblName.setBounds(12, 67, 64, 15);
 		add(lblName);
 		
 		JLabel lblCpf = new JLabel("CPF: ");
-		lblCpf.setFont(new Font("Arial", Font.BOLD, 15));
-		lblCpf.setBounds(363, 165, 64, 15);
+		lblCpf.setFont(new Font("Verdana", Font.BOLD, 15));
+		lblCpf.setBounds(12, 165, 64, 15);
 		add(lblCpf);
 		
 		JLabel lblEmail = new JLabel("Email: ");
-		lblEmail.setFont(new Font("Arial", Font.BOLD, 15));
-		lblEmail.setBounds(12, 115, 70, 15);
+		lblEmail.setFont(new Font("Verdana", Font.BOLD, 15));
+		lblEmail.setBounds(12, 115, 64, 15);
 		add(lblEmail);
 		
-		JLabel lblDataDeNascimento = new JLabel("Data de Nascimento: ");
-		lblDataDeNascimento.setFont(new Font("Arial", Font.BOLD, 15));
-		lblDataDeNascimento.setBounds(12, 165, 177, 15);
+		JLabel lblDataDeNascimento = new JLabel("Data de Nasc.:");
+		lblDataDeNascimento.setFont(new Font("Verdana", Font.BOLD, 15));
+		lblDataDeNascimento.setBounds(335, 215, 129, 15);
 		add(lblDataDeNascimento);
 		
 		JLabel lblMatrcula = new JLabel("Matrícula: ");
-		lblMatrcula.setFont(new Font("Arial", Font.BOLD, 15));
-		lblMatrcula.setBounds(12, 215, 89, 15);
+		lblMatrcula.setFont(new Font("Verdana", Font.BOLD, 15));
+		lblMatrcula.setBounds(375, 165, 89, 15);
 		add(lblMatrcula);
 		
 		JLabel lblPapelNoSistema = new JLabel("Papel: ");
-		lblPapelNoSistema.setFont(new Font("Arial", Font.BOLD, 15));
-		lblPapelNoSistema.setBounds(357, 215, 70, 15);
+		lblPapelNoSistema.setFont(new Font("Verdana", Font.BOLD, 15));
+		lblPapelNoSistema.setBounds(12, 215, 64, 15);
 		add(lblPapelNoSistema);
 		
 		fieldName = new JLabel("Insira nome aqui");
-		fieldName.setFont(new Font("Arial", Font.PLAIN, 15));
+		fieldName.setFont(new Font("Verdana", Font.PLAIN, 15));
 		fieldName.setBounds(73, 67, 537, 15);
 		add(fieldName);
 		
 		fieldCPF = new JLabel("Insira cpf aqui");
-		fieldCPF.setFont(new Font("Arial", Font.PLAIN, 15));
-		fieldCPF.setBounds(414, 165, 152, 15);
+		fieldCPF.setFont(new Font("Verdana", Font.PLAIN, 15));
+		fieldCPF.setBounds(73, 165, 152, 15);
 		add(fieldCPF);
 		
 		fieldEmail = new JLabel("Insira email aqui");
-		fieldEmail.setFont(new Font("Arial", Font.PLAIN, 15));
+		fieldEmail.setFont(new Font("Verdana", Font.PLAIN, 15));
 		fieldEmail.setBounds(73, 115, 537, 15);
 		add(fieldEmail);
 		
 		fieldBirthdate = new JLabel("Insira data aqui");
-		fieldBirthdate.setFont(new Font("Arial", Font.PLAIN, 15));
-		fieldBirthdate.setBounds(169, 165, 152, 15);
+		fieldBirthdate.setFont(new Font("Verdana", Font.PLAIN, 15));
+		fieldBirthdate.setBounds(476, 215, 152, 15);
 		add(fieldBirthdate);
 		
 		fieldEntry = new JLabel("Insira matrícula aqui");
-		fieldEntry.setFont(new Font("Arial", Font.PLAIN, 15));
-		fieldEntry.setBounds(93, 215, 148, 15);
+		fieldEntry.setFont(new Font("Verdana", Font.PLAIN, 15));
+		fieldEntry.setBounds(476, 166, 156, 15);
 		add(fieldEntry);
 		
 		fieldRole = new JLabel("Insira papel aqui");
-		fieldRole.setFont(new Font("Arial", Font.PLAIN, 15));
-		fieldRole.setBounds(414, 215, 187, 15);
+		fieldRole.setFont(new Font("Verdana", Font.PLAIN, 15));
+		fieldRole.setBounds(73, 215, 187, 15);
 		add(fieldRole);
 		
 		btnTrocarSenha = new JButton("Trocar senha");

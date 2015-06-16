@@ -176,7 +176,7 @@ public class ScoaBaseController implements ActionListener {
 	}
 	
 	private void generateStudentMenu() {
-		baseFrame.getSecretaryMenu().setVisible(false);
+		baseFrame.setAllMenusInvisible();
 	}
 
 	
