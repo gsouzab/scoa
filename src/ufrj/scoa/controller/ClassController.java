@@ -23,6 +23,7 @@ import ufrj.scoa.view.classes.ClassListView;
 import ufrj.scoa.view.classes.ClassSearchView;
 import ufrj.scoa.view.student.StudentCreationView;
 import ufrj.scoa.view.student.StudentListView;
+import ufrj.scoa.view.InsertFrequenciesDialog;
 import ufrj.scoa.view.InsertGradesDialog;
 import ufrj.scoa.view.WelcomeView;
 
@@ -36,7 +37,8 @@ public class ClassController implements ActionListener {
 	private RoomDAO roomDAO = new RoomDAO();
 	private DisciplineDAO disciplineDAO = new DisciplineDAO();
 	private ProfessorDAO professorDAO = new ProfessorDAO();
-	private InsertGradesDialog dialog;
+	private InsertGradesDialog gradesDialog;
+	private InsertFrequenciesDialog frequenciesDialog;
 
 	public ClassController(ScoaBaseController baseController) {
 
@@ -52,10 +54,15 @@ public class ClassController implements ActionListener {
 		this.classListView = new ClassListView();
 		this.classListView.getBtnExcluir().addActionListener(this);
 		this.classListView.getBtnInsertGrades().addActionListener(this);
+		this.classListView.getBtnInsertFrequencies().addActionListener(this);
+
+		gradesDialog = new InsertGradesDialog(baseController.getBaseFrame(),this.classListView);			
+		gradesDialog.getBtnInsert().addActionListener(this);
+		gradesDialog.getBtnCancel().addActionListener(this);
 		
-		dialog = new InsertGradesDialog(baseController.getBaseFrame(),this.classListView);			
-		dialog.getBtnInsert().addActionListener(this);
-		dialog.getBtnCancel().addActionListener(this);
+		frequenciesDialog = new InsertFrequenciesDialog(baseController.getBaseFrame(),this.classListView);			
+		frequenciesDialog.getBtnInsert().addActionListener(this);
+		frequenciesDialog.getBtnCancel().addActionListener(this);
 		
 	}
 
@@ -91,36 +98,65 @@ public class ClassController implements ActionListener {
 			
 		} else if(event.getSource() == this.classListView.getBtnInsertGrades()) {
 			if(classListView.getList().getSelectedValue() != null) {
-				dialog.openDialog(classListView.getList().getSelectedValue().getId());
+				gradesDialog.openDialog(classListView.getList().getSelectedValue().getId());
 			} else {
 				JOptionPane.showMessageDialog(null, "Selecione uma turma");
 			}
 			
-			
-		} else if(event.getSource() == dialog.getBtnInsert()) {
-			
+		} else if(event.getSource() == gradesDialog.getBtnInsert()) {
 			JOptionPane.showMessageDialog(null, "Notas lançadas");
 			updateStudentsGrade();
-		} else if(event.getSource() == dialog.getBtnCancel()) {
-			dialog.setVisible(false);
+
+		} else if(event.getSource() == gradesDialog.getBtnCancel()) {
+			gradesDialog.setVisible(false);
+
+		} else if(event.getSource() == this.classListView.getBtnInsertFrequencies()) {
+			if(classListView.getList().getSelectedValue() != null) {
+				frequenciesDialog.openDialog(classListView.getList().getSelectedValue().getId());
+			} else {
+				JOptionPane.showMessageDialog(null, "Selecione uma turma");
+			}
+			
+		} else if(event.getSource() == frequenciesDialog.getBtnInsert()) {
+			JOptionPane.showMessageDialog(null, "Frequências lançadas");
+			updateStudentsFrequency();
+			
+		} else if(event.getSource() == frequenciesDialog.getBtnCancel()) {
+			frequenciesDialog.setVisible(false);
 		}
+		
 		
 		
 	}
 	
 	private void updateStudentsGrade() {
-		dialog.setVisible(false);
+		gradesDialog.setVisible(false);
 		
-		int rowcount = dialog.getTable().getModel().getRowCount();
+		int rowcount = gradesDialog.getTable().getModel().getRowCount();
 		float[] grades = new float[rowcount];
 		int[] student_ids = new int[rowcount];
 		
 		for(int i = 0 ; i < rowcount ; i++) {
-			student_ids[i] = (int) dialog.getTable().getModel().getValueAt(i, 0);
-			grades[i] = (float) dialog.getTable().getModel().getValueAt(i, 3);
+			student_ids[i] = (int) gradesDialog.getTable().getModel().getValueAt(i, 0);
+			grades[i] = (float) gradesDialog.getTable().getModel().getValueAt(i, 3);
 		}
 		
 		StudentDisciplineDAO.updateGrades(student_ids, grades);
+	}
+	
+	private void updateStudentsFrequency() {
+		frequenciesDialog.setVisible(false);
+		
+		int rowcount = frequenciesDialog.getTable().getModel().getRowCount();
+		int[] frequencies = new int[rowcount];
+		int[] student_ids = new int[rowcount];
+		
+		for(int i = 0 ; i < rowcount ; i++) {
+			student_ids[i] = (int) frequenciesDialog.getTable().getModel().getValueAt(i, 0);
+			frequencies[i] = (int) frequenciesDialog.getTable().getModel().getValueAt(i, 3);
+		}
+		
+		StudentDisciplineDAO.updateFrequencies(student_ids, frequencies);
 	}
 	
 	private void searchClasses() {

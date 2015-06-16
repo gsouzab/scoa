@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Student;
+import ufrj.scoa.util.Constants;
 
 public class StudentDAO {
 	
@@ -94,8 +95,9 @@ public class StudentDAO {
 			
 			conn = Connect.connectDB();
 			
-			PreparedStatement ps = conn.prepareStatement("SELECT s.*, p.name, p.email, p.birthdate, p.cpf, p.entry, p.password, sc.grade FROM student s INNER JOIN person p ON p.id = s.person_id INNER JOIN student_class sc ON sc.student_id = s.id WHERE sc.class_id = ?");
+			PreparedStatement ps = conn.prepareStatement("SELECT s.*, p.name, p.email, p.birthdate, p.cpf, p.entry, p.password, sc.grade FROM student s INNER JOIN person p ON p.id = s.person_id INNER JOIN student_class sc ON sc.student_id = s.id WHERE sc.class_id = ? AND sc.state = ? ");
 			ps.setInt(1, class_id);
+			ps.setInt(2, Constants.STUDENT_CLASS_APPROVED);
 			
 			ResultSet rs = ps.executeQuery();
 			

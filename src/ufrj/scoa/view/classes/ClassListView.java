@@ -66,6 +66,10 @@ public class ClassListView extends JPanel {
 		return btnInsertGrades;
 	}
 
+	public JButton getBtnInsertFrequencies() {
+		return btnInsertFrequencies;
+	}
+
 	public JList<Class> getList() {
 		return list;
 	}

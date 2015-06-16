@@ -12,6 +12,8 @@ public final class Constants {
 	public static final String STRING_PROFESSOR = "Professor(a)";
 	public static final String STRING_STUDENT = "Aluno(a)";
 
-	
-
+	//constantes para o estado do pedido de inscrição em disciplinas
+	public static final int STUDENT_CLASS_PENDENT = 0;
+	public static final int STUDENT_CLASS_APPROVED = 1;
+	public static final int STUDENT_CLASS_DENIED = 2;
 }
