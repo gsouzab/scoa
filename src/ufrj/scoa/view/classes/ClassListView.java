@@ -25,9 +25,8 @@ public class ClassListView extends JPanel {
 	JLabel lblCursos;
 	
 	private DefaultListModel<Class> model;
-	private JButton btnInsertGrades;
 	private JList<Class> list;
-	private JButton btnInsertFrequencies;
+	private JButton btnInsertGradesAndFrequencies;
 	
 	public ClassListView() {
 		setLayout(null);
@@ -45,22 +44,14 @@ public class ClassListView extends JPanel {
 		scrollPane.setBounds(12, 90, 616, 235);
 		add(scrollPane);
 		
-		btnInsertGrades = new JButton("Lançar notas");
-		btnInsertGrades.setBounds(12, 337, 133, 25);
-		add(btnInsertGrades);
-		
-		btnInsertFrequencies = new JButton("Lançar frequências");
-		btnInsertFrequencies.setBounds(157, 337, 187, 25);
-		add(btnInsertFrequencies);
+		btnInsertGradesAndFrequencies = new JButton("Lançar notas/frequências");
+		btnInsertGradesAndFrequencies.setBounds(12, 337, 247, 25);
+		add(btnInsertGradesAndFrequencies);
 		
 	}
 	
-	public JButton getBtnInsertGrades() {
-		return btnInsertGrades;
-	}
-
-	public JButton getBtnInsertFrequencies() {
-		return btnInsertFrequencies;
+	public JButton getBtnInsertGradesAndFrequencies() {
+		return btnInsertGradesAndFrequencies;
 	}
 
 	public JList<Class> getList() {

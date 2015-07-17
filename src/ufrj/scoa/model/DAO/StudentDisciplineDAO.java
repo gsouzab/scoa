@@ -37,16 +37,17 @@ public class StudentDisciplineDAO {
 	}
 	
 	
-	public static void updateGrades(int[] student_ids, float[] grades, int class_id) {
+	public static void updateGradesAndFrequencies(int[] student_ids, float[] grades, int[] frequencies, int class_id) {
 		
 		conn = Connect.connectDB();
 		
 		for(int i = 0  ; i < student_ids.length ; i++) {
 			try {
-				ps = conn.prepareStatement("UPDATE student_class SET grade = ? WHERE student_id = ? AND class_id = ?");
+				ps = conn.prepareStatement("UPDATE student_class SET grade = ?, frequency = ? WHERE student_id = ? AND class_id = ?");
 				ps.setFloat(1, grades[i]);
-				ps.setInt(2, student_ids[i]);
-				ps.setInt(3, class_id);
+				ps.setFloat(2, frequencies[i]);
+				ps.setInt(3, student_ids[i]);
+				ps.setInt(4, class_id);
 	
 				ps.executeUpdate();
 			} catch (SQLException e) {
@@ -94,26 +95,7 @@ public class StudentDisciplineDAO {
 			e.printStackTrace();
 		} 
 	}
-	
-	public static void updateFrequencies(int[] student_ids, int[] frequencies, int class_id) {
-		
-		conn = Connect.connectDB();
-		
-		for(int i = 0  ; i < student_ids.length ; i++) {
-			try {
-				ps = conn.prepareStatement("UPDATE student_class SET frequency = ? WHERE student_id = ? AND class_id = ?");
-				ps.setFloat(1, frequencies[i]);
-				ps.setInt(2, student_ids[i]);
-				ps.setInt(3, class_id);
-	
-				ps.executeUpdate();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-		}
-	}
-	
+
 	public static int getFrequency(int student_id, int class_id) {
 		int attendance = 0;
 		
