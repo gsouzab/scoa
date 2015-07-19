@@ -209,6 +209,7 @@ public class ScoaBaseController implements ActionListener {
 
 	private void generateSecretaryMenu() {
 		baseFrame.getSecretaryMenu().setVisible(false);
+		baseFrame.getNewClassMenuItem().setVisible(true);
 	}
 	
 	private void generateProfessorMenu() {
