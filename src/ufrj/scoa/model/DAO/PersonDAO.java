@@ -40,7 +40,8 @@ public class PersonDAO {
 			return canLogin;
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao validar login");
 			return canLogin;
 		}
 	}
@@ -57,7 +58,7 @@ public class PersonDAO {
 			updatePasswordStatement.executeUpdate();
 		}catch(SQLException e){
 			System.out.println("Failed to set new password");
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	
@@ -119,7 +120,8 @@ public Person getCurrentUser(String entry, String password) {
 			return currentUser;
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao pegar usuario corrente");
 			return null;
 		}
 	}

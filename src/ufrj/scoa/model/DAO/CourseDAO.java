@@ -28,7 +28,8 @@ public class CourseDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao salvar curso");
 		} 
 	}
 	
@@ -43,7 +44,8 @@ public class CourseDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao deletar curso.");
 		} 
 	}
 	
@@ -64,7 +66,8 @@ public class CourseDAO {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao pegar curso");
 		}
 		
 		return course;
@@ -92,7 +95,8 @@ public class CourseDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao listar cursos");
 		}
 		
 		return courseList; 
@@ -135,7 +139,8 @@ public class CourseDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao buscar cursos");
 		}
 		
 		return courseList; 

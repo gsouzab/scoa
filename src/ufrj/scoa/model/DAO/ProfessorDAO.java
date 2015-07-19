@@ -48,7 +48,8 @@ public class ProfessorDAO {
             insertProfessorStatement.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao salvar professor");
 		} 
 	}
 	
@@ -74,7 +75,8 @@ public class ProfessorDAO {
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao listar professor");
 		}
 		
 		return professorList; 
@@ -121,7 +123,8 @@ public class ProfessorDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao procurar professor");
 		}
 		
 		return professorList; 
@@ -144,7 +147,8 @@ public class ProfessorDAO {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao pegar professor por id");
 		}
 		
 		return professor;
@@ -167,7 +171,8 @@ public class ProfessorDAO {
 
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao pegar professor por id de pessoa");
 		}
 		
 		return professor;

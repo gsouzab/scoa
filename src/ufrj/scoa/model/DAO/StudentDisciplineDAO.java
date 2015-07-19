@@ -32,7 +32,8 @@ public class StudentDisciplineDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao salvar estudante-disciplina");
 		} 
 	}
 	
@@ -52,7 +53,8 @@ public class StudentDisciplineDAO {
 				ps.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("Erro ao atualizar notas e frequencia");
 			} 
 		}
 	}
@@ -74,7 +76,8 @@ public class StudentDisciplineDAO {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao pegar nota");
 		}
 		
 		return grade;
@@ -92,7 +95,8 @@ public class StudentDisciplineDAO {
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao mudar estado");
 		} 
 	}
 
@@ -113,7 +117,8 @@ public class StudentDisciplineDAO {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao pegar frequencia");
 		}
 		
 		return attendance;
@@ -139,7 +144,8 @@ public class StudentDisciplineDAO {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao pegar requisicao de inscricao em disciplinas");
 		}
 		
 		return list;
@@ -167,7 +173,8 @@ public class StudentDisciplineDAO {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao pegar requisicao de inscricao por estudante");
 		}
 		
 		return list;
