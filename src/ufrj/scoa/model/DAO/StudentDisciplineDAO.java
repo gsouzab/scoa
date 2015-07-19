@@ -169,7 +169,7 @@ public class StudentDisciplineDAO {
 		try {
 			conn = Connect.connectDB();
 			
-			ps = conn.prepareStatement("SELECT class_id FROM student_class WHERE student_id = ?");
+			ps = conn.prepareStatement("SELECT class_id, state FROM student_class WHERE student_id = ?");
 			
 			ps.setInt(1, studentId);
 
@@ -180,6 +180,7 @@ public class StudentDisciplineDAO {
 			
 			while(rs.next()) {
 				StudentDiscipline sd = new StudentDiscipline(stdDAO.getStudentById(studentId), cDAO.getClassById(rs.getInt("class_id")));
+				sd.setState(rs.getInt("state"));
 				list.add(sd);
 			}
 			
