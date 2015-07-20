@@ -11,6 +11,11 @@ public class StudentDiscipline {
 	private int attendance;
 	private Student student;
 	private Class student_class;
+	private int period;
+	
+	public StudentDiscipline() {
+		
+	}
 	
 	public StudentDiscipline(Student student, Class studentClass){
 		this.studentId = student.getStudentId();
@@ -58,6 +63,11 @@ public class StudentDiscipline {
 	public Class getStudentClass() {
 		return student_class;
 	}
+	
+
+	public void setStudentClass(Class student_class) {
+		this.student_class = student_class;
+	}
 
 	public int getState() {
 		return state;
@@ -70,5 +80,14 @@ public class StudentDiscipline {
 	public String getStateString() {
 		return Constants.STUDENT_CLASS_STRING[state];
 	}
+
+	public int getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(int period) {
+		this.period = period;
+	}
+	
 	
 }

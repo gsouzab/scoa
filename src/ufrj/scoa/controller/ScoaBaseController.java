@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import ufrj.scoa.model.DAO.StudentDAO;
 import ufrj.scoa.model.DAO.StudentDisciplineDAO;
@@ -14,6 +15,8 @@ import ufrj.scoa.model.VO.Student;
 import ufrj.scoa.model.VO.StudentDiscipline;
 import ufrj.scoa.util.Constants;
 import ufrj.scoa.view.ScoaBaseFrame;
+import ufrj.scoa.view.classes.ScheduleView;
+import ufrj.scoa.view.student.HistoryView;
 
 public class ScoaBaseController implements ActionListener {
 
@@ -44,6 +47,9 @@ public class ScoaBaseController implements ActionListener {
 		baseFrame.getNewStudentDisciplineMenuItem().addActionListener(this);
 		baseFrame.getBuscarSecretariaMenuItem().addActionListener(this);
 		baseFrame.getManageStudentDisciplineMenuItem().addActionListener(this);
+		baseFrame.getScheduleMenu().addActionListener(this);
+		baseFrame.getHistoryMenu().addActionListener(this);
+		baseFrame.getMntmInicarNovoPeriodo().addActionListener(this);
 	
 	}
 	
@@ -107,8 +113,8 @@ public class ScoaBaseController implements ActionListener {
 			
 			if(currentUser.getRole() == Constants.ROLE_PROFESSOR) {
 				classController.searchClassesProfessor(currentUser.getPersonId());
-				classController.getClassListView().getLblCursos().setText("Suas Turmas");
-				baseFrame.changePanel(classController.getClassListView(), "Suas Turmas");
+				classController.getClassListView().getLblCursos().setText("Suas turmas");
+				baseFrame.changePanel(classController.getClassListView(), "Turmas");
 			}
 			else {
 				
@@ -145,6 +151,7 @@ public class ScoaBaseController implements ActionListener {
 			
 			SecretaryController secretaryController = new SecretaryController(this);
 			baseFrame.changePanel(secretaryController.getSecretarySearchView(), "Buscar Secretários(as)");
+			
 		} else if(event.getSource() ==  baseFrame.getManageStudentDisciplineMenuItem()) {
 			
 			SecretaryController secretaryController = new SecretaryController(this);
@@ -167,6 +174,49 @@ public class ScoaBaseController implements ActionListener {
 
 			}
 
+		} else if(event.getSource() ==  baseFrame.getScheduleMenu()) {
+			
+			StudentDAO studentDAO = new StudentDAO();
+			Student student = studentDAO.getStudentByPersonId(currentUser.getPersonId());
+			int studentId = student.getStudentId();
+			StudentDAO sDAO = new StudentDAO();
+			ArrayList<ufrj.scoa.model.VO.Class> classesList = sDAO.getTimeOfClassByStudentId(studentId);
+			String studentName = currentUser.getName();
+			
+			ScheduleView sv = new ScheduleView();
+			sv.populateTable(classesList, studentName);
+			
+			ClassController classController = new ClassController(this);
+			classController.setScheduleView(sv);
+			baseFrame.changePanel(classController.getScheduleView(), "Horários");
+			
+			
+		} else if(event.getSource() ==  baseFrame.getMntmInicarNovoPeriodo()) {
+			if(currentUser.getRole() == Constants.ROLE_ADMINISTRATOR) {
+				int dialogResult = JOptionPane.showConfirmDialog (null, "Você tem certeza que quer iniciar um novo período?", "Atenção!", JOptionPane.YES_NO_OPTION);
+				
+				if(dialogResult == JOptionPane.YES_OPTION){
+					StudentDAO sd = new StudentDAO();
+					if(sd.newPeriod()) {
+						JOptionPane.showMessageDialog(null, "Um novo período foi iniciado!");
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Algo de errado aconteceu. O período não foi criado.");
+					}
+				}
+			}
+			
+		} else if(event.getSource() ==  baseFrame.getHistoryMenu()) {
+			
+			String studentName = currentUser.getName();
+			StudentDAO sdao = new StudentDAO();
+			ArrayList<StudentDiscipline> disciplines = sdao.getHistory(sdao.getStudentByPersonId(currentUser.getPersonId()).getStudentId());
+			HistoryView hv = new HistoryView();
+			hv.populateTable(disciplines, studentName);
+			
+			StudentController sc = new StudentController(this);
+			sc.setHistoryView(hv);
+			baseFrame.changePanel(sc.getHistoryView(), "Histórico");
 		}
 		
 		
@@ -188,6 +238,7 @@ public class ScoaBaseController implements ActionListener {
 		
 		switch (currentUser.getRole()) {
 			case Constants.ROLE_ADMINISTRATOR:
+				generateAdmMenu();
 				break;
 		
 			case Constants.ROLE_SECRETARY:
@@ -207,9 +258,17 @@ public class ScoaBaseController implements ActionListener {
 		}
 	}
 
+	private void generateAdmMenu() {
+		baseFrame.setAllMenusVisible();
+		baseFrame.getMnConsultas().setVisible(false);
+		
+	}
+	
 	private void generateSecretaryMenu() {
+		baseFrame.setAllMenusVisible();
 		baseFrame.getSecretaryMenu().setVisible(false);
-		baseFrame.getNewClassMenuItem().setVisible(true);
+		baseFrame.getMnPeriodo().setVisible(false);;
+		baseFrame.getMnConsultas().setVisible(false);
 	}
 	
 	private void generateProfessorMenu() {
@@ -221,6 +280,7 @@ public class ScoaBaseController implements ActionListener {
 	private void generateStudentMenu() {
 		baseFrame.setAllMenusInvisible();
 		baseFrame.getStudentRequestsMenu().setVisible(true);
+		baseFrame.getMnConsultas().setVisible(true);
 	}
 
 	

@@ -11,6 +11,7 @@ import ufrj.scoa.model.DAO.CourseDAO;
 import ufrj.scoa.model.DAO.DisciplineDAO;
 import ufrj.scoa.model.DAO.ProfessorDAO;
 import ufrj.scoa.model.DAO.RoomDAO;
+import ufrj.scoa.model.DAO.StudentDAO;
 import ufrj.scoa.model.DAO.StudentDisciplineDAO;
 import ufrj.scoa.model.VO.Class;
 import ufrj.scoa.model.VO.Course;
@@ -18,9 +19,11 @@ import ufrj.scoa.model.VO.Discipline;
 import ufrj.scoa.model.VO.Professor;
 import ufrj.scoa.model.VO.Room;
 import ufrj.scoa.model.VO.Student;
+import ufrj.scoa.view.classes.ClassBookView;
 import ufrj.scoa.view.classes.ClassCreationView;
 import ufrj.scoa.view.classes.ClassListView;
 import ufrj.scoa.view.classes.ClassSearchView;
+import ufrj.scoa.view.classes.ScheduleView;
 import ufrj.scoa.view.student.StudentCreationView;
 import ufrj.scoa.view.student.StudentListView;
 import ufrj.scoa.view.InsertGradesAndFrequenciesDialog;
@@ -31,12 +34,15 @@ public class ClassController implements ActionListener {
 	private ClassCreationView classCreationView;
 	private ClassSearchView classSearchView;
 	private ClassListView classListView;
+	private ClassBookView classBookView;
 	private ScoaBaseController baseController;
 	private CourseDAO courseDAO = new CourseDAO();
 	private RoomDAO roomDAO = new RoomDAO();
 	private DisciplineDAO disciplineDAO = new DisciplineDAO();
 	private ProfessorDAO professorDAO = new ProfessorDAO();
 	private InsertGradesAndFrequenciesDialog gradesAndFrequenciesDialog;
+	private ScheduleView scheduleView;
+	
 
 	public ClassController(ScoaBaseController baseController) {
 
@@ -51,10 +57,15 @@ public class ClassController implements ActionListener {
 		
 		this.classListView = new ClassListView();
 		this.classListView.getBtnInsertGradesAndFrequencies().addActionListener(this);
+		this.classListView.getBtnConsultaDiarioClasse().addActionListener(this);
+		
+		this.classBookView = new ClassBookView();
 
 		gradesAndFrequenciesDialog = new InsertGradesAndFrequenciesDialog(baseController.getBaseFrame(),this.classListView);			
 		gradesAndFrequenciesDialog.getBtnInsert().addActionListener(this);
 		gradesAndFrequenciesDialog.getBtnCancel().addActionListener(this);
+		
+		this.scheduleView = new ScheduleView();
 		
 	}
 
@@ -66,6 +77,17 @@ public class ClassController implements ActionListener {
 		return classSearchView;
 	}
 	
+	
+	public ScheduleView getScheduleView() {
+		return scheduleView;
+	}
+	
+	
+
+	public void setScheduleView(ScheduleView scheduleView) {
+		this.scheduleView = scheduleView;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == this.classCreationView.getBtnSalvar()) {
@@ -96,9 +118,20 @@ public class ClassController implements ActionListener {
 		} else if(event.getSource() == gradesAndFrequenciesDialog.getBtnCancel()) {
 			gradesAndFrequenciesDialog.setVisible(false);
 
+		} else if(event.getSource() == this.classListView.getBtnConsultaDiarioClasse()) {
+			loadClassBook(classListView.getList().getSelectedValue().getId());
+			this.baseController.getBaseFrame().changePanel(classBookView, "Diário de Classe");
 		}
 		
 		
+	}
+	
+	private void loadClassBook(int classId) {
+		StudentDAO studentDAO = new StudentDAO();
+		ClassDAO classDAO = new ClassDAO();
+		ArrayList<Student> studentList = studentDAO.getStudentsByClassId(classId);
+		String className = classDAO.getClassById(classId).getName();
+		classBookView.populateTable(studentList, className);
 	}
 	
 	private void updateStudentsGradeAndFrequencie() {

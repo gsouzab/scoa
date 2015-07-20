@@ -9,7 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import ufrj.scoa.model.VO.Course;
+import ufrj.scoa.model.VO.Room;
 import ufrj.scoa.model.VO.Student;
+import ufrj.scoa.model.VO.StudentDiscipline;
 import ufrj.scoa.util.Constants;
 
 public class StudentDAO {
@@ -254,5 +256,105 @@ public class StudentDAO {
 			e.printStackTrace();
 		} 
 	}
+	
+	public ArrayList<ufrj.scoa.model.VO.Class> getTimeOfClassByStudentId(int student_id) {
+		
+		ArrayList<ufrj.scoa.model.VO.Class> classList = null;
+		
+		try {
+			
+			classList = new ArrayList<ufrj.scoa.model.VO.Class>();
+			
+			conn = Connect.connectDB();
+			
+			PreparedStatement ps = conn.prepareStatement("SELECT c.name, c.time_of_class, r.building, r.floor, r.number FROM student_class sc, student s, class c, room r " +
+														 " WHERE sc.student_id = ? " +
+												 		 " AND sc.student_id = s.id " +
+												 		 " AND sc.period =  s.currentPeriod " +
+												 		 " AND sc.class_id = c.id" +
+												 		 " AND c.room_id = r.id ");
+			ps.setInt(1, student_id);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				ufrj.scoa.model.VO.Class theClass = new ufrj.scoa.model.VO.Class();
+				theClass.setName(rs.getString("name"));
+				theClass.setTimeOfClass(rs.getString("time_of_class"));
+				Room room = new Room(rs.getString("building"), rs.getInt("number"), rs.getInt("floor"));
+				theClass.setRoom(room);
+				classList.add(theClass);
+
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return classList; 
+	}
+
+	public boolean newPeriod() {
+	
+		PreparedStatement newPeriod;
+		
+		try {
+			conn = Connect.connectDB();
+			
+			newPeriod = conn.prepareStatement("UPDATE student SET currentPeriod = currentPeriod + 1 ");
+			newPeriod.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} 
+		
+		return true;
+	}
+	
+public ArrayList<StudentDiscipline> getHistory(int student_id) {
+		
+		ArrayList<StudentDiscipline> disciplinesList = null;
+		
+		try {
+			
+			disciplinesList = new ArrayList<StudentDiscipline>();
+			conn = Connect.connectDB();
+			
+			PreparedStatement ps = conn.prepareStatement(" SELECT c.name, c.credits, sc.grade, sc.frequency, sc.period FROM student_class sc, class c " +
+														 " WHERE sc.student_id = ? " +
+														 " AND sc.class_id = c.id "+
+														 " ORDER BY  sc.period ASC ");
+
+			ps.setInt(1, student_id);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+
+				StudentDiscipline sd = new StudentDiscipline();
+ 				ufrj.scoa.model.VO.Class theClass = new ufrj.scoa.model.VO.Class();
+ 				
+				theClass.setName(rs.getString("name"));
+				theClass.setCredits(rs.getInt("credits"));
+				sd.setGrade(rs.getFloat("grade"));
+				sd.setAttendance(rs.getInt("frequency"));
+				sd.setPeriod(rs.getInt("period"));
+				sd.setStudentClass(theClass);
+				disciplinesList.add(sd);
+
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return disciplinesList; 
+	}
+
 
 }

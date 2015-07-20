@@ -67,6 +67,11 @@ public class ScoaBaseFrame extends JFrame {
 	// Itens menu Pedidos	
 	private JMenu studentRequestsMenu;
 	private JMenuItem newStudentDisciplineMenuItem;
+	private JMenu mnConsultas;
+	private JMenuItem scheduleMenu;
+	private JMenuItem historyMenu;
+	private JMenu mnPeriodo;
+	private JMenuItem mntmInicarNovoPeriodo;
 	
 	public ScoaBaseFrame(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -181,6 +186,26 @@ public class ScoaBaseFrame extends JFrame {
         studentRequestsMenu.add(manageStudentDisciplineMenuItem);
         manageStudentDisciplineMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         
+        mnConsultas = new JMenu("Consultas");
+        mnConsultas.setFont(new Font("Arial", Font.PLAIN, 12));
+        menuBar.add(mnConsultas);
+        
+        scheduleMenu = new JMenuItem("Consultar horários");
+        scheduleMenu.setFont(new Font("Arial", Font.PLAIN, 12));
+        mnConsultas.add(scheduleMenu);
+        
+        historyMenu = new JMenuItem("Consultar histórico");
+        historyMenu.setFont(new Font("Arial", Font.PLAIN, 12));
+        mnConsultas.add(historyMenu);
+        
+        mnPeriodo = new JMenu("Período");
+        mnPeriodo.setFont(new Font("Arial", Font.PLAIN, 12));
+        menuBar.add(mnPeriodo);
+        
+        mntmInicarNovoPeriodo = new JMenuItem("Inicar novo período");
+        mntmInicarNovoPeriodo.setFont(new Font("Arial", Font.PLAIN, 12));
+        mnPeriodo.add(mntmInicarNovoPeriodo);
+        
         mnMinhaConta = new JMenu("Minha Conta");
         mnMinhaConta.setHorizontalAlignment(SwingConstants.RIGHT);
         mnMinhaConta.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -272,12 +297,22 @@ public class ScoaBaseFrame extends JFrame {
 		return searchRoomMenuItem;
 	}
 	
-	public JMenuItem getSearchClassMenuItem() {
-		return searchClassMenuItem;
-	}
-	
+
 	public JMenuItem getDetalharMenuItem() {
 		return mntmDetalharMenuItem;
+	}
+
+	public JMenu getMnConsultas() {
+		return mnConsultas;
+	}
+	
+
+	public JMenu getMnPeriodo() {
+		return mnPeriodo;
+	}
+
+	public JMenuItem getMntmInicarNovoPeriodo() {
+		return mntmInicarNovoPeriodo;
 	}
 
 	public void changePanel(JPanel newPanel, String newTitle) {
@@ -326,6 +361,21 @@ public class ScoaBaseFrame extends JFrame {
 	public JMenu getStudentRequestsMenu() {
 		return studentRequestsMenu;
 	}
+	
+	
+	
+
+	public JMenuItem getSearchClassMenuItem() {
+		return searchClassMenuItem;
+	}
+
+	public JMenuItem getScheduleMenu() {
+		return scheduleMenu;
+	}
+
+	public JMenuItem getHistoryMenu() {
+		return historyMenu;
+	}
 
 	public void changePanel(JPanel newPanel, String newTitle, boolean showMenu) {
 		if(showMenu) {
@@ -352,6 +402,10 @@ public class ScoaBaseFrame extends JFrame {
 		getClassesMenu().setVisible(true);
 		getSecretaryMenu().setVisible(true);
 		getStudentRequestsMenu().setVisible(true);
+		getMnConsultas().setVisible(true);
+		getMnPeriodo().setVisible(true);
+		getNewClassMenuItem().setVisible(true);
+		
 	}
 	
 	public void setAllMenusInvisible() {
@@ -363,5 +417,7 @@ public class ScoaBaseFrame extends JFrame {
 		getClassesMenu().setVisible(false);
 		getSecretaryMenu().setVisible(false);
 		getStudentRequestsMenu().setVisible(false);
+		getMnConsultas().setVisible(false);
+		getMnPeriodo().setVisible(false);
 	}
 }

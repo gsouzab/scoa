@@ -16,6 +16,7 @@ import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Student;
 import ufrj.scoa.util.Util;
 import ufrj.scoa.view.WelcomeView;
+import ufrj.scoa.view.student.HistoryView;
 import ufrj.scoa.view.student.StudentCreationView;
 import ufrj.scoa.view.student.StudentListView;
 import ufrj.scoa.view.student.StudentSearchView;
@@ -27,6 +28,7 @@ public class StudentController implements ActionListener {
 	private ScoaBaseController baseController;
 	private CourseDAO courseDAO = new CourseDAO();
 	private StudentSearchView studentSearchView;
+	private HistoryView historyView;
 	ArrayList<Course> coursesList;
 
 	public StudentController(ScoaBaseController baseController) {
@@ -47,6 +49,8 @@ public class StudentController implements ActionListener {
 		
 		this.studentListView = new StudentListView();
 		this.studentListView.getBtnExcluir().addActionListener(this);
+		
+		this.historyView = new HistoryView();
 	}
 
 	@Override
@@ -185,6 +189,15 @@ public class StudentController implements ActionListener {
 		searchStudents();
 		
 	}
+
+	public HistoryView getHistoryView() {
+		return historyView;
+	}
+
+	public void setHistoryView(HistoryView historyView) {
+		this.historyView = historyView;
+	}
+	
 	
 
 }

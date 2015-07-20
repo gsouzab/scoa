@@ -13,6 +13,8 @@ import javax.swing.SwingConstants;
 import ufrj.scoa.model.VO.Class;
 
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ClassListView extends JPanel {
 
@@ -27,6 +29,7 @@ public class ClassListView extends JPanel {
 	private DefaultListModel<Class> model;
 	private JList<Class> list;
 	private JButton btnInsertGradesAndFrequencies;
+	private JButton btnConsultaDiarioClasse;
 	
 	public ClassListView() {
 		setLayout(null);
@@ -48,10 +51,19 @@ public class ClassListView extends JPanel {
 		btnInsertGradesAndFrequencies.setBounds(12, 337, 247, 25);
 		add(btnInsertGradesAndFrequencies);
 		
+		btnConsultaDiarioClasse = new JButton("Consultar diário de classe");
+		btnConsultaDiarioClasse.setBounds(282, 337, 232, 25);
+		add(btnConsultaDiarioClasse);
+		
 	}
 	
 	public JButton getBtnInsertGradesAndFrequencies() {
 		return btnInsertGradesAndFrequencies;
+	}
+	
+
+	public JButton getBtnConsultaDiarioClasse() {
+		return btnConsultaDiarioClasse;
 	}
 
 	public JList<Class> getList() {
@@ -78,7 +90,4 @@ public class ClassListView extends JPanel {
 	public JLabel getLblCursos() {
 		return lblCursos;
 	}
-	
-	
-	
 }
