@@ -32,7 +32,8 @@ public class ClassDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao salva turma");
 		} 
 	}
 	
@@ -97,7 +98,8 @@ public class ClassDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao buscar turmas");
 		}
 		
 		return classList; 
@@ -128,7 +130,8 @@ public class ClassDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao listar turma.");
 		}
 		
 		return classList; 
@@ -158,7 +161,8 @@ public class ClassDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao pegar turma por id");
 		}
 		
 		return classToReturn; 
@@ -177,7 +181,8 @@ public class ClassDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao deletar turma");
 		} 
 	}
 

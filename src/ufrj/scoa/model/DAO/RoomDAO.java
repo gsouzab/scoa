@@ -28,7 +28,8 @@ public class RoomDAO {
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("Erro ao salvar sala");
 			} 
 		}
 		
@@ -48,7 +49,8 @@ public class RoomDAO {
 				}
 				
 			} catch (SQLException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("Erro ao pegar sala por id");
 			}
 			
 			return room;
@@ -72,7 +74,8 @@ public class RoomDAO {
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("Erro ao listar salas");
 			}
 			
 			return roomList; 
@@ -114,7 +117,8 @@ public class RoomDAO {
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("Erro ao procurar salas");
 			}
 			
 			return roomList; 
@@ -133,7 +137,8 @@ public class RoomDAO {
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("Erro ao deletar sala");
 			} 
 		}
 

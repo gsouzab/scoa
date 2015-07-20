@@ -45,7 +45,8 @@ public class SecretaryDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao salvar secretaria");
 		} 
 	}
 	
@@ -90,7 +91,8 @@ public class SecretaryDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao procurar secretaria");
 		}
 		
 		return secretaryList; 

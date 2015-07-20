@@ -29,7 +29,8 @@ public class DisciplineDAO {
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("Erro ao salvar disciplina");
 			} 
 		}
 		
@@ -50,7 +51,8 @@ public class DisciplineDAO {
 				}
 				
 			} catch (SQLException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("Erro ao pegar disciplina por id");
 			}
 			
 			return discipline;
@@ -76,7 +78,8 @@ public class DisciplineDAO {
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("Erro ao listar disciplinas");
 			}
 			
 			return disciplineList; 
@@ -117,7 +120,8 @@ public class DisciplineDAO {
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("Erro ao procurar disciplina");
 			}
 			
 			return disciplineList; 

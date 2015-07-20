@@ -55,7 +55,8 @@ public class StudentDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao salvar estudante");
 		} 
 	}
 	
@@ -83,7 +84,8 @@ public class StudentDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao listar estudantes");
 		}
 		
 		return studentList; 
@@ -113,7 +115,8 @@ public class StudentDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao pegar estudante por id");
 		}
 		
 		return student; 
@@ -144,7 +147,8 @@ public class StudentDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao pegar estudante por id de pessoa");
 		}
 		
 		return student; 
@@ -176,7 +180,8 @@ public class StudentDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao pegar estudante por id");
 		}
 		
 		return studentList; 
@@ -230,7 +235,8 @@ public class StudentDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao buscar estudante");
 		}
 		
 		return studentList; 
@@ -253,7 +259,8 @@ public class StudentDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro ao deletar estudante");
 		} 
 	}
 	
