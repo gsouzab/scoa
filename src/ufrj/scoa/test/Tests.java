@@ -11,11 +11,12 @@ import ufrj.scoa.controller.*;
 import ufrj.scoa.model.DAO.*;
 import ufrj.scoa.model.VO.Course;
 import ufrj.scoa.model.VO.Professor;
+import ufrj.scoa.model.VO.Room;
 import ufrj.scoa.model.VO.Student;
 import ufrj.scoa.util.Util;
 
 public class Tests {
-
+	
 	@Test
 	public void test_generatedPassword() {
 		
@@ -36,14 +37,18 @@ public class Tests {
 	public void test_comparePasswd() {
 		PersonDAO person = new PersonDAO();
 		String password =  Util.generateNewPassword("11111111111");
+		String password2 = Util.generateNewPassword("2222222222");
 		
 		String passwordBd = person.getPassword("11111111111");
 		
 		Boolean passwd = false;
+		Boolean passwd2 = false;
 		
 		passwd = password.equalsIgnoreCase(passwordBd);
+		passwd2 = password2.equalsIgnoreCase(passwordBd);
 		
 		assertEquals(passwd, true);
+		assertEquals(passwd2,false);
 		
 	}
 	
@@ -52,12 +57,16 @@ public class Tests {
 				
 		String string1 = "123";
 		String string2 = "456";
+		String string3 = "";
+		String string4 = "123";
 		
 		boolean test = string1.length() > 0 && string2.length() > 0;
-		
+		boolean test2 = string3.length() > 0 && string4.length() > 0;
+		boolean test3 = string3.length() > 0 && string3.length() > 0;
+
 		assertEquals(test,true);
-		
-		
+		assertEquals(test2,false);
+		assertEquals(test3,false);
 	}
 	
 	@Test
@@ -78,7 +87,7 @@ public class Tests {
 		
 		assertEquals(stud,null);
 	}
-	
+
 	@Test
 	public void test_getCourseById_null(){
 		CourseDAO course = new CourseDAO();
@@ -99,14 +108,31 @@ public class Tests {
 	}
 	
 	@Test
-	public void test_getPersonById(){
+	public void test_validateLogin(){
 		PersonDAO person = new PersonDAO();
 		boolean teste;
 		
 		teste = person.validateLogin("00000000000", "0000");
 		
 		assertEquals(teste,true);
+	}
+	
+	@Test
+	public void test_PersonPasswdLenght(){
+		PersonDAO person = new PersonDAO();
+		String passwd;
 		
+		passwd = person.getPassword("00000000000");
+		
+		assertEquals(passwd.length(),32);
+	}
+	
+	@Test
+	public void test_getRoomById(){
+		RoomDAO room = new RoomDAO();
+		Room r = null;
+		r = room.getRoomById(0);
+		assertEquals(r,null);
 	}
 	
 
