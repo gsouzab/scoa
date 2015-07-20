@@ -15,7 +15,7 @@ public class StudentDisciplineDAO {
 	private static Connection conn;
 	private static PreparedStatement ps;
 	
-	public static void save(StudentDiscipline studentDiscipline) {
+	public static void save(StudentDiscipline studentDiscipline, int userRole) {
 		
 		try {
 			
@@ -27,8 +27,14 @@ public class StudentDisciplineDAO {
 			ps.setFloat(3, 0);
 			ps.setInt(4, 0);
 			ps.setInt(5, studentDiscipline.getStudentId());
-			ps.setInt(6,0);
-			System.out.println(ps);
+			
+			if(userRole == Constants.ROLE_STUDENT) {
+				ps.setInt(6, Constants.STUDENT_CLASS_PENDENT);
+			}
+			else {
+				ps.setInt(6, Constants.STUDENT_CLASS_APPROVED);
+			}
+			
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -36,6 +42,33 @@ public class StudentDisciplineDAO {
 			//e.printStackTrace();
 			System.out.println("Erro ao salvar estudante-disciplina");
 		} 
+	}
+	
+	public static boolean jaInscrito(StudentDiscipline studentDiscipline) {
+		
+		try {
+			
+			conn = Connect.connectDB();
+			
+			ps = conn.prepareStatement(" SELECT * FROM scoa.student_class " +
+									   " WHERE student_id = ? " +
+									   " AND class_id = ? " +
+									   " AND period = (SELECT currentPeriod FROM student WHERE id = ?) ");
+			ps.setInt(1, studentDiscipline.getStudentId());
+			ps.setInt(2, studentDiscipline.getClassId());
+			ps.setInt(3, studentDiscipline.getStudentId());
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		} 
+		
+		return false;
 	}
 	
 	
@@ -179,5 +212,47 @@ public class StudentDisciplineDAO {
 		}
 		
 		return list;
+	}
+	
+	public static boolean releaseGrades(int class_id) {
+		
+		try {
+			conn = Connect.connectDB();
+			
+			ps = conn.prepareStatement(" UPDATE scoa.student_class SET state = ? WHERE class_id = ? AND state = ? ");
+			ps.setInt(1, Constants.STUDENT_CLASS_GRADES_RELEASED);
+			ps.setInt(2, class_id);
+			ps.setInt(3, Constants.STUDENT_CLASS_APPROVED);
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			//e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public static boolean notasLiberadas(int class_id) {
+		
+		try {
+			conn = Connect.connectDB();
+			
+			ps = conn.prepareStatement(" SELECT state FROM scoa.student_class WHERE class_id = ? AND state = ? ");
+			ps.setInt(1, class_id);
+			ps.setInt(2, Constants.STUDENT_CLASS_GRADES_RELEASED);
+
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			//e.printStackTrace();
+		}
+		
+		return false;
 	}
 }

@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import ufrj.scoa.model.VO.StudentDiscipline;
+import ufrj.scoa.util.Constants;
 
 public class HistoryView extends JPanel {
 
@@ -80,7 +81,7 @@ public class HistoryView extends JPanel {
 		int currentPeriod = 0;
 		
 		for(StudentDiscipline sd : disciplinesList) {
-			
+	
 			if(sd.getPeriod() > currentPeriod) {
 				currentPeriod = sd.getPeriod();
 				
@@ -100,8 +101,14 @@ public class HistoryView extends JPanel {
 				situacaoFinal = "RM";
 			}
 			
-			model.addRow(new Object[]{sd.getStudentClass().getName(), sd.getStudentClass().getCredits(), sd.getGrade(), sd.getAttendance(), situacaoFinal});
-						
+			if(sd.getState() == Constants.STUDENT_CLASS_GRADES_RELEASED) {
+				model.addRow(new Object[]{sd.getStudentClass().getName(), sd.getStudentClass().getCredits(), sd.getGrade(), sd.getAttendance(), situacaoFinal});
+			}
+			else if(sd.getState() == Constants.STUDENT_CLASS_APPROVED) {
+				model.addRow(new Object[]{sd.getStudentClass().getName(), sd.getStudentClass().getCredits(), "", "", ""});
+			}
+
+					
 		}
 		
 	}

@@ -16,6 +16,7 @@ public final class Constants {
 	public static final int STUDENT_CLASS_PENDENT = 0;
 	public static final int STUDENT_CLASS_APPROVED = 1;
 	public static final int STUDENT_CLASS_DENIED = 2;
+	public static final int STUDENT_CLASS_GRADES_RELEASED = 3;
 	
-	public static final String[] STUDENT_CLASS_STRING = {"Pendente","Aprovado", "Negado"};
+	public static final String[] STUDENT_CLASS_STRING = {"Pendente", "Aprovado", "Reprovado", "Notas Liberadas"};
 }

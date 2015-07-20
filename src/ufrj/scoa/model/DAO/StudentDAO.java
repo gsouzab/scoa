@@ -162,10 +162,11 @@ public class StudentDAO {
 			
 			conn = Connect.connectDB();
 			
-			PreparedStatement ps = conn.prepareStatement("SELECT s.*, p.name, p.email, p.birthdate, p.cpf, p.entry, p.password, sc.grade FROM student s INNER JOIN person p ON p.id = s.person_id INNER JOIN student_class sc ON sc.student_id = s.id WHERE sc.class_id = ? AND sc.state = ? ");
+			PreparedStatement ps = conn.prepareStatement("SELECT s.*, p.name, p.email, p.birthdate, p.cpf, p.entry, p.password, sc.grade FROM student s INNER JOIN person p ON p.id = s.person_id INNER JOIN student_class sc ON sc.student_id = s.id WHERE sc.class_id = ? AND sc.state in (?,?) ");
 			ps.setInt(1, class_id);
 			ps.setInt(2, Constants.STUDENT_CLASS_APPROVED);
-			
+			ps.setInt(3, Constants.STUDENT_CLASS_GRADES_RELEASED);
+
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -278,9 +279,12 @@ public class StudentDAO {
 														 " WHERE sc.student_id = ? " +
 												 		 " AND sc.student_id = s.id " +
 												 		 " AND sc.period =  s.currentPeriod " +
+												 		 " AND sc.state in  (?, ?) " +
 												 		 " AND sc.class_id = c.id" +
 												 		 " AND c.room_id = r.id ");
 			ps.setInt(1, student_id);
+			ps.setInt(2, Constants.STUDENT_CLASS_APPROVED);
+			ps.setInt(3, Constants.STUDENT_CLASS_GRADES_RELEASED);
 			
 			ResultSet rs = ps.executeQuery();
 			
@@ -332,7 +336,7 @@ public ArrayList<StudentDiscipline> getHistory(int student_id) {
 			disciplinesList = new ArrayList<StudentDiscipline>();
 			conn = Connect.connectDB();
 			
-			PreparedStatement ps = conn.prepareStatement(" SELECT c.name, c.credits, sc.grade, sc.frequency, sc.period FROM student_class sc, class c " +
+			PreparedStatement ps = conn.prepareStatement(" SELECT c.name, c.credits, sc.grade, sc.frequency, sc.period, sc.state FROM student_class sc, class c " +
 														 " WHERE sc.student_id = ? " +
 														 " AND sc.class_id = c.id "+
 														 " ORDER BY  sc.period ASC ");
@@ -350,6 +354,7 @@ public ArrayList<StudentDiscipline> getHistory(int student_id) {
 				sd.setGrade(rs.getFloat("grade"));
 				sd.setAttendance(rs.getInt("frequency"));
 				sd.setPeriod(rs.getInt("period"));
+				sd.setState(rs.getInt("state"));
 				sd.setStudentClass(theClass);
 				disciplinesList.add(sd);
 

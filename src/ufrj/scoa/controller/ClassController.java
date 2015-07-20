@@ -64,6 +64,7 @@ public class ClassController implements ActionListener {
 		gradesAndFrequenciesDialog = new InsertGradesAndFrequenciesDialog(baseController.getBaseFrame(),this.classListView);			
 		gradesAndFrequenciesDialog.getBtnInsert().addActionListener(this);
 		gradesAndFrequenciesDialog.getBtnCancel().addActionListener(this);
+		gradesAndFrequenciesDialog.getBtnLiberarNotas().addActionListener(this);
 		
 		this.scheduleView = new ScheduleView();
 		
@@ -106,7 +107,14 @@ public class ClassController implements ActionListener {
 		}  else if(event.getSource() == this.classListView.getBtnInsertGradesAndFrequencies()) {
 			
 			if(classListView.getList().getSelectedValue() != null) {
-				gradesAndFrequenciesDialog.openDialog(classListView.getList().getSelectedValue().getId());
+				
+				int class_id = classListView.getList().getSelectedValue().getId();
+				if(StudentDisciplineDAO.notasLiberadas(class_id)) {
+					gradesAndFrequenciesDialog.getBtnLiberarNotas().setVisible(false);
+				} else {
+					gradesAndFrequenciesDialog.getBtnLiberarNotas().setVisible(true);
+				}
+				gradesAndFrequenciesDialog.openDialog(class_id);
 			} else {
 				JOptionPane.showMessageDialog(null, "Selecione uma turma");
 			}
@@ -119,8 +127,29 @@ public class ClassController implements ActionListener {
 			gradesAndFrequenciesDialog.setVisible(false);
 
 		} else if(event.getSource() == this.classListView.getBtnConsultaDiarioClasse()) {
-			loadClassBook(classListView.getList().getSelectedValue().getId());
-			this.baseController.getBaseFrame().changePanel(classBookView, "Diário de Classe");
+			if(classListView.getList().getSelectedValue() != null) {
+				loadClassBook(classListView.getList().getSelectedValue().getId());
+				this.baseController.getBaseFrame().changePanel(classBookView, "Diário de Classe");
+				
+			} else {
+				JOptionPane.showMessageDialog(null, "Selecione uma turma");
+			}
+			
+		} else if(event.getSource() == gradesAndFrequenciesDialog.getBtnLiberarNotas()) {
+		
+			int class_id = classListView.getList().getSelectedValue().getId();
+			int dialogResult = JOptionPane.showConfirmDialog (null, "Você tem certeza que deseja liberar as notas para os alunos?", "Atenção!", JOptionPane.YES_NO_OPTION);
+			
+			if(dialogResult == JOptionPane.YES_OPTION){
+				if(StudentDisciplineDAO.releaseGrades(class_id)) {
+					gradesAndFrequenciesDialog.getBtnLiberarNotas().setVisible(false);
+					JOptionPane.showMessageDialog(null, "As notas foram liberadas com sucesso!");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Algo de errado aconteceu, as notas não foram liberadas.");
+				}
+			}
+			
 		}
 		
 		

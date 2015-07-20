@@ -23,6 +23,7 @@ public class InsertGradesAndFrequenciesDialog extends JDialog {
 	private DefaultTableModel model;
 	private JButton btnInsert;
 	private JButton btnCancel;
+	private JButton btnLiberarNotas;
 	
 	public InsertGradesAndFrequenciesDialog(JFrame frame, JPanel parent) {
         super(frame, true);
@@ -65,6 +66,10 @@ public class InsertGradesAndFrequenciesDialog extends JDialog {
         btnCancel.setBounds(141, 209, 136, 29);
         getContentPane().add(btnCancel);
         
+        btnLiberarNotas = new JButton("Liberar notas");
+        btnLiberarNotas.setBounds(289, 211, 136, 25);
+        getContentPane().add(btnLiberarNotas);
+        
        
         setLocationRelativeTo(parent);
         setResizable(false);
@@ -81,7 +86,7 @@ public class InsertGradesAndFrequenciesDialog extends JDialog {
 	private void populateTable(ArrayList<Student> studentsList, int class_id) {
 		table.removeAll();
 		
-		model.addColumn("ID Aluno");// coluna escondida da tabela
+		model.addColumn("ID Aluno");// Coluna escondida da tabela
 		model.addColumn("Matrícula");
 		model.addColumn("Nome");
 		model.addColumn("Nota (0..10)");
@@ -113,5 +118,11 @@ public class InsertGradesAndFrequenciesDialog extends JDialog {
 	public JButton getBtnCancel() {
 		return btnCancel;
 	}
+
+	public JButton getBtnLiberarNotas() {
+		return btnLiberarNotas;
+	}
+	
+	
 		
 }
