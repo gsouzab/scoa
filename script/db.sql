@@ -223,6 +223,22 @@ CREATE TABLE IF NOT EXISTS `scoa`.`student_class` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+-- -----------------------------------------------------
+-- Table `scoa`.`complaint_suggestion`
+-- -----------------------------------------------------
+
+CREATE  TABLE `scoa`.`complaint_suggestion` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `complaint_or_suggestion` TINYINT NOT NULL COMMENT 'SUGESTAO = 0\nRECLAMACAO = 1' ,
+  `text` TEXT NOT NULL ,
+  PRIMARY KEY (`id`) ),
+  CONSTRAINT `fk_complaint_suggestion_student`
+    FOREIGN KEY (`student_id`)
+    REFERENCES `scoa`.`student` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

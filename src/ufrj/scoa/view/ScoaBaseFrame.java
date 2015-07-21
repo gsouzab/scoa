@@ -73,6 +73,12 @@ public class ScoaBaseFrame extends JFrame {
 	private JMenu mnPeriodo;
 	private JMenuItem mntmInicarNovoPeriodo;
 	
+	//Itens menu sugestões/reclamacoes	
+	
+	private JMenu complaintSuggestionMenu;
+	private JMenuItem newComplaintSuggestionMenuItem;
+	private JMenuItem listComplaintSuggestionMenuItem;
+	
 	public ScoaBaseFrame(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 640, 520);
@@ -138,6 +144,20 @@ public class ScoaBaseFrame extends JFrame {
         newSecretaryMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
         
         secretaryMenu.add(newSecretaryMenuItem);
+        
+        complaintSuggestionMenu = new JMenu("Sugestões/Reclamações");
+        complaintSuggestionMenu.setFont(new Font("Arial", Font.PLAIN, 12));
+        
+        newComplaintSuggestionMenuItem = new JMenuItem("Nova Sugestão/Reclamação");
+        newComplaintSuggestionMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
+        
+        listComplaintSuggestionMenuItem = new JMenuItem("Listar Sugestões/Reclamações");
+        listComplaintSuggestionMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
+
+        complaintSuggestionMenu.add(newComplaintSuggestionMenuItem);
+        complaintSuggestionMenu.add(listComplaintSuggestionMenuItem);
+        
+        menuBar.add(complaintSuggestionMenu);
         menuBar.add(courseMenu);
         menuBar.add(studentsMenu);
         menuBar.add(professorsMenu);
@@ -362,9 +382,6 @@ public class ScoaBaseFrame extends JFrame {
 		return studentRequestsMenu;
 	}
 	
-	
-	
-
 	public JMenuItem getSearchClassMenuItem() {
 		return searchClassMenuItem;
 	}
@@ -377,6 +394,18 @@ public class ScoaBaseFrame extends JFrame {
 		return historyMenu;
 	}
 
+	public JMenu getComplaintSuggestionMenu() {
+		return complaintSuggestionMenu;
+	}
+
+	public JMenuItem getNewComplaintSuggestionMenuItem() {
+		return newComplaintSuggestionMenuItem;
+	}
+
+	public JMenuItem getListComplaintSuggestionMenuItem() {
+		return listComplaintSuggestionMenuItem;
+	}
+	
 	public void changePanel(JPanel newPanel, String newTitle, boolean showMenu) {
 		if(showMenu) {
 			this.showMenu();
@@ -405,6 +434,9 @@ public class ScoaBaseFrame extends JFrame {
 		getMnConsultas().setVisible(true);
 		getMnPeriodo().setVisible(true);
 		getNewClassMenuItem().setVisible(true);
+		getComplaintSuggestionMenu().setVisible(true);
+		getNewComplaintSuggestionMenuItem().setVisible(true);
+		getListComplaintSuggestionMenuItem().setVisible(true);
 		
 	}
 	
@@ -419,5 +451,8 @@ public class ScoaBaseFrame extends JFrame {
 		getStudentRequestsMenu().setVisible(false);
 		getMnConsultas().setVisible(false);
 		getMnPeriodo().setVisible(false);
+		getComplaintSuggestionMenu().setVisible(false);
+		getNewComplaintSuggestionMenuItem().setVisible(false);
+		getListComplaintSuggestionMenuItem().setVisible(false);
 	}
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import ufrj.scoa.model.DAO.ComplaintSuggestionDAO;
 import ufrj.scoa.model.DAO.StudentDAO;
 import ufrj.scoa.model.DAO.StudentDisciplineDAO;
 import ufrj.scoa.model.VO.Discipline;
@@ -16,6 +17,7 @@ import ufrj.scoa.model.VO.StudentDiscipline;
 import ufrj.scoa.util.Constants;
 import ufrj.scoa.view.ScoaBaseFrame;
 import ufrj.scoa.view.classes.ScheduleView;
+import ufrj.scoa.view.complaint_suggestion.ComplaintSuggestionCreationView;
 import ufrj.scoa.view.student.HistoryView;
 
 public class ScoaBaseController implements ActionListener {
@@ -50,6 +52,9 @@ public class ScoaBaseController implements ActionListener {
 		baseFrame.getScheduleMenu().addActionListener(this);
 		baseFrame.getHistoryMenu().addActionListener(this);
 		baseFrame.getMntmInicarNovoPeriodo().addActionListener(this);
+		baseFrame.getNewComplaintSuggestionMenuItem().addActionListener(this);
+		baseFrame.getListComplaintSuggestionMenuItem().addActionListener(this);
+		
 	
 	}
 	
@@ -217,6 +222,16 @@ public class ScoaBaseController implements ActionListener {
 			StudentController sc = new StudentController(this);
 			sc.setHistoryView(hv);
 			baseFrame.changePanel(sc.getHistoryView(), "Histórico");
+		} else if (event.getSource() == baseFrame.getNewComplaintSuggestionMenuItem()) {
+			ComplaintSuggestionController csController = new ComplaintSuggestionController(this);
+			
+			baseFrame.changePanel(csController.getCreationView(), "Nova Sugestão/Reclamação");
+		} else if (event.getSource() == baseFrame.getListComplaintSuggestionMenuItem()) {
+			ComplaintSuggestionController csController = new ComplaintSuggestionController(this);
+			
+			csController.getListView().populateTable(ComplaintSuggestionDAO.list());
+			
+			baseFrame.changePanel(csController.getListView(), "Listar Sugestões/Reclamações");
 		}
 		
 		
@@ -269,6 +284,8 @@ public class ScoaBaseController implements ActionListener {
 		baseFrame.getSecretaryMenu().setVisible(false);
 		baseFrame.getMnPeriodo().setVisible(false);;
 		baseFrame.getMnConsultas().setVisible(false);
+		baseFrame.getComplaintSuggestionMenu().setVisible(true);
+		baseFrame.getNewComplaintSuggestionMenuItem().setVisible(false);
 	}
 	
 	private void generateProfessorMenu() {
@@ -281,6 +298,9 @@ public class ScoaBaseController implements ActionListener {
 		baseFrame.setAllMenusInvisible();
 		baseFrame.getStudentRequestsMenu().setVisible(true);
 		baseFrame.getMnConsultas().setVisible(true);
+		baseFrame.getComplaintSuggestionMenu().setVisible(true);
+		baseFrame.getNewComplaintSuggestionMenuItem().setVisible(true);
+		baseFrame.getListComplaintSuggestionMenuItem().setVisible(false);
 	}
 
 	

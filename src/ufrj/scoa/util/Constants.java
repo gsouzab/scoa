@@ -18,5 +18,11 @@ public final class Constants {
 	public static final int STUDENT_CLASS_DENIED = 2;
 	public static final int STUDENT_CLASS_GRADES_RELEASED = 3;
 	
+	public static final int COMPLAINT = 0;
+	public static final int SUGGESTION = 1;
+	
+	public static final String[] COMPLAINT_SUGGESTION_STRING = {"Reclamação", "Sugestão"};
+
+	
 	public static final String[] STUDENT_CLASS_STRING = {"Pendente", "Aprovado", "Reprovado", "Notas Liberadas"};
 }
