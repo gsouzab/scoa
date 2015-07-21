@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import ufrj.scoa.model.DAO.ClassDAO;
 import ufrj.scoa.model.DAO.ComplaintSuggestionDAO;
 import ufrj.scoa.model.DAO.StudentDAO;
 import ufrj.scoa.model.DAO.StudentDisciplineDAO;
@@ -161,7 +162,7 @@ public class ScoaBaseController implements ActionListener {
 			
 			SecretaryController secretaryController = new SecretaryController(this);
 			
-			if(currentUser.getRole() == Constants.ROLE_SECRETARY) {
+			if(currentUser.getRole() == Constants.ROLE_SECRETARY  || currentUser.getRole() == Constants.ROLE_ADMINISTRATOR) {
 
 				baseFrame.changePanel(secretaryController.getSecretaryStudentDisciplineManagmentView(), "Gerenciamento de inscrição em disciplinas");
 			}
@@ -203,6 +204,8 @@ public class ScoaBaseController implements ActionListener {
 				if(dialogResult == JOptionPane.YES_OPTION){
 					StudentDAO sd = new StudentDAO();
 					if(sd.newPeriod()) {
+						ClassDAO cDAO = new ClassDAO();
+						cDAO.desativarTurmas();
 						JOptionPane.showMessageDialog(null, "Um novo período foi iniciado!");
 					}
 					else {

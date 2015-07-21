@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import ufrj.scoa.model.VO.Class;
 import ufrj.scoa.model.VO.StudentDiscipline;
 
 public class StudentDisciplineDAO {
@@ -227,7 +228,7 @@ public class StudentDisciplineDAO {
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 			return false;
 		}
 		
@@ -250,9 +251,47 @@ public class StudentDisciplineDAO {
 			}
 			
 		} catch (SQLException e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 		
 		return false;
+	}
+	
+	public static ArrayList<StudentDiscipline> getGrauCreditosDisciplinasCursadas(int studentId, int period) {
+		ArrayList<StudentDiscipline> list = new ArrayList<StudentDiscipline>();
+		
+		try {
+			conn = Connect.connectDB();
+			
+			String query = "";
+			
+			query += " SELECT sc.grade, c.credits FROM scoa.student_class sc, class c WHERE sc.student_id = " + studentId +
+					 " AND sc.class_id = c.id " +
+					 " AND sc.state = " + Constants.STUDENT_CLASS_GRADES_RELEASED ;
+			
+
+			if(period > 0) {
+				query +=  " AND sc.period = " + period;
+			}
+
+			ps = conn.prepareStatement(query);
+
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				StudentDiscipline sd = new StudentDiscipline();
+				ufrj.scoa.model.VO.Class theClass = new Class();
+				
+				sd.setGrade(rs.getFloat("grade"));
+				theClass.setCredits(rs.getInt("credits"));
+				sd.setStudentClass(theClass);
+				list.add(sd);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 }

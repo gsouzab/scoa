@@ -78,7 +78,7 @@ public class ScheduleView extends JPanel {
 		model.setNumRows(0);
 		
 		for(ufrj.scoa.model.VO.Class c : classesList) {
-			model.addRow(new Object[]{c.getName(), c.getTimeOfClass(), c.getRoom().getBuilding(), c.getRoom().getFloor(), c.getRoom().getNumber()});
+			model.addRow(new Object[]{c.getDiscipline().getName(), c.getTimeOfClass(), c.getRoom().getBuilding(), c.getRoom().getFloor(), c.getRoom().getNumber()});
 		}
 	}
 

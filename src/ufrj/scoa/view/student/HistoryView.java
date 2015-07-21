@@ -1,6 +1,7 @@
 package ufrj.scoa.view.student;
 
 import java.awt.Font;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -11,6 +12,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import ufrj.scoa.model.DAO.StudentDisciplineDAO;
 import ufrj.scoa.model.VO.StudentDiscipline;
 import ufrj.scoa.util.Constants;
 
@@ -56,24 +58,32 @@ public class HistoryView extends JPanel {
 	}
 	
 	public void populateTable(ArrayList<StudentDiscipline> disciplinesList, String studentName) {
+		
+		int studentId = disciplinesList.get(0).getStudentId();
+		DecimalFormat df =  new DecimalFormat("0.00");
 		table.removeAll();
 		
 		lblInsertStudent.setText(studentName);
 		
 		model.addColumn("Disciplina");
-		model.addColumn("Creditos");
-		model.addColumn("Grau");
-		model.addColumn("Frequencia");
-		model.addColumn("Situacao Final");
+		model.addColumn("Cred");
+		model.addColumn("Grau Final");
+		model.addColumn("Frequência");
+		model.addColumn("Sit. Fin.");
 		model.setColumnCount(5);
 		
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-		table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
 		table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+		table.getColumnModel().getColumn(1).setMaxWidth(40);
 		table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+		table.getColumnModel().getColumn(2).setMaxWidth(80);
+		table.getColumnModel().getColumn(3).setPreferredWidth(80);
 		table.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+		table.getColumnModel().getColumn(3).setMaxWidth(150);
+		table.getColumnModel().getColumn(3).setPreferredWidth(150);
 		table.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+		table.getColumnModel().getColumn(4).setMaxWidth(60);
 		
 		
 		model.setNumRows(0);
@@ -86,10 +96,15 @@ public class HistoryView extends JPanel {
 				currentPeriod = sd.getPeriod();
 				
 				if(currentPeriod > 1) {
+					float periodCr = 0.0f;
+					ArrayList<StudentDiscipline> list = StudentDisciplineDAO.getGrauCreditosDisciplinasCursadas(sd.getStudentId(), currentPeriod-1);
+					periodCr = calculateCR(list);
+					model.addRow(new Object[]{"", "", "", "CR período:", df.format(periodCr)});
 					model.addRow(new Object[]{"", "", "", "", ""});
 				}
 				
-				model.addRow(new Object[]{currentPeriod + "o período", "", "", "", ""});
+				model.addRow(new Object[]{currentPeriod +"° período", "", "", "", ""});
+				model.addRow(new Object[]{"", "", "", "", ""});
 			}
 			
 			String situacaoFinal;
@@ -102,15 +117,43 @@ public class HistoryView extends JPanel {
 			}
 			
 			if(sd.getState() == Constants.STUDENT_CLASS_GRADES_RELEASED) {
-				model.addRow(new Object[]{sd.getStudentClass().getName(), sd.getStudentClass().getCredits(), sd.getGrade(), sd.getAttendance(), situacaoFinal});
+				model.addRow(new Object[]{sd.getStudentClass().getDiscipline().getName(), sd.getStudentClass().getCredits(), sd.getGrade(), sd.getAttendance() + "%", situacaoFinal});
 			}
 			else if(sd.getState() == Constants.STUDENT_CLASS_APPROVED) {
-				model.addRow(new Object[]{sd.getStudentClass().getName(), sd.getStudentClass().getCredits(), "", "", ""});
+				model.addRow(new Object[]{sd.getStudentClass().getDiscipline().getName(), sd.getStudentClass().getCredits(), "", "", ""});
 			}
 
 					
 		}
 		
+		float periodCr = 0.0f;
+		ArrayList<StudentDiscipline> listPeriod = StudentDisciplineDAO.getGrauCreditosDisciplinasCursadas(studentId, currentPeriod);
+		periodCr = calculateCR(listPeriod);
+		model.addRow(new Object[]{"", "", "", "CR período:", listPeriod.size() > 0 ? df.format(periodCr): ""});
+		
+		float totalCr = 0.0f;
+		ArrayList<StudentDiscipline> list = StudentDisciplineDAO.getGrauCreditosDisciplinasCursadas(studentId, 0);
+		totalCr = calculateCR(list);
+		model.addRow(new Object[]{"", "", "", "", ""});
+		model.addRow(new Object[]{"", "", "", "CR acumulado:", list.size() > 0 ? df.format(totalCr): ""});
+		
+		
 	}
+	
+	private float calculateCR(ArrayList<StudentDiscipline> disciplinesList) {
+		float sumCR = 0.0f;
+		int sumCredits = 0;
+		float returnCR = 0.0f;
+		
+		for(StudentDiscipline sd : disciplinesList) {
+			sumCR += (sd.getGrade() * sd.getStudentClass().getCredits());
+			sumCredits += sd.getStudentClass().getCredits();
+		}
+		
+		returnCR = sumCR/sumCredits;
+		
+		return returnCR;
+	}
+	
 
 }

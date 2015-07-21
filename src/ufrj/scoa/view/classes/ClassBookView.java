@@ -12,6 +12,7 @@ import ufrj.scoa.model.VO.Student;
 
 import java.awt.Font;
 import java.util.ArrayList;
+import javax.swing.JButton;
 
 public class ClassBookView extends JPanel {
 
@@ -22,6 +23,7 @@ public class ClassBookView extends JPanel {
 	private JTable table;
 	private DefaultTableModel model;
 	JLabel lblInsertClass;
+	private JButton btnVoltar;
 
 	/**
 	 * Create the panel.
@@ -39,7 +41,7 @@ public class ClassBookView extends JPanel {
 	    table.setFont(new Font("Arial", Font.PLAIN, 12));
 
 	    JScrollPane scrollPane = new JScrollPane(table);
-	    scrollPane.setBounds(12, 96, 616, 331);
+	    scrollPane.setBounds(12, 96, 616, 304);
 	    add(scrollPane);
 	    
 	    JLabel lblDirioDeClasse = new JLabel("Diário de Classe");
@@ -53,6 +55,10 @@ public class ClassBookView extends JPanel {
 	    lblInsertClass.setBounds(12, 50, 616, 19);
 	    lblInsertClass.setHorizontalAlignment(SwingConstants.CENTER);
 	    add(lblInsertClass);
+	    
+	    btnVoltar = new JButton("Voltar");
+	    btnVoltar.setBounds(511, 416, 117, 25);
+	    add(btnVoltar);
 
 	}
 	
@@ -78,6 +84,12 @@ public class ClassBookView extends JPanel {
 			model.addRow(new Object[]{s.getEntry(), s.getName()});
 		}
 	}
+
+	public JButton getBtnVoltar() {
+		return btnVoltar;
+	}
+	
+	
 	
 	
 }

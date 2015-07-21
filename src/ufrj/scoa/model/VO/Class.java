@@ -112,6 +112,6 @@ public class Class {
 
 	@Override
     public String toString() {
-        return name;
+        return name + " - " + this.professor.getName();
     }
 }

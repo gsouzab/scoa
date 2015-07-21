@@ -23,7 +23,6 @@ public class InsertGradesAndFrequenciesDialog extends JDialog {
 	private DefaultTableModel model;
 	private JButton btnInsert;
 	private JButton btnCancel;
-	private JButton btnLiberarNotas;
 	
 	public InsertGradesAndFrequenciesDialog(JFrame frame, JPanel parent) {
         super(frame, true);
@@ -65,10 +64,6 @@ public class InsertGradesAndFrequenciesDialog extends JDialog {
         btnCancel.setIcon(new ImageIcon(InsertGradesAndFrequenciesDialog.class.getResource("/com/sun/java/swing/plaf/motif/icons/Error.gif")));
         btnCancel.setBounds(141, 209, 136, 29);
         getContentPane().add(btnCancel);
-        
-        btnLiberarNotas = new JButton("Liberar notas");
-        btnLiberarNotas.setBounds(289, 211, 136, 25);
-        getContentPane().add(btnLiberarNotas);
         
        
         setLocationRelativeTo(parent);
@@ -117,10 +112,6 @@ public class InsertGradesAndFrequenciesDialog extends JDialog {
 
 	public JButton getBtnCancel() {
 		return btnCancel;
-	}
-
-	public JButton getBtnLiberarNotas() {
-		return btnLiberarNotas;
 	}
 	
 	

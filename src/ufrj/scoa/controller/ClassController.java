@@ -19,6 +19,7 @@ import ufrj.scoa.model.VO.Discipline;
 import ufrj.scoa.model.VO.Professor;
 import ufrj.scoa.model.VO.Room;
 import ufrj.scoa.model.VO.Student;
+import ufrj.scoa.util.Constants;
 import ufrj.scoa.view.classes.ClassBookView;
 import ufrj.scoa.view.classes.ClassCreationView;
 import ufrj.scoa.view.classes.ClassListView;
@@ -58,13 +59,14 @@ public class ClassController implements ActionListener {
 		this.classListView = new ClassListView();
 		this.classListView.getBtnInsertGradesAndFrequencies().addActionListener(this);
 		this.classListView.getBtnConsultaDiarioClasse().addActionListener(this);
+		this.classListView.getBtnReleaseGrades().addActionListener(this);
 		
 		this.classBookView = new ClassBookView();
+		this.classBookView.getBtnVoltar().addActionListener(this);
 
 		gradesAndFrequenciesDialog = new InsertGradesAndFrequenciesDialog(baseController.getBaseFrame(),this.classListView);			
 		gradesAndFrequenciesDialog.getBtnInsert().addActionListener(this);
 		gradesAndFrequenciesDialog.getBtnCancel().addActionListener(this);
-		gradesAndFrequenciesDialog.getBtnLiberarNotas().addActionListener(this);
 		
 		this.scheduleView = new ScheduleView();
 		
@@ -109,11 +111,6 @@ public class ClassController implements ActionListener {
 			if(classListView.getList().getSelectedValue() != null) {
 				
 				int class_id = classListView.getList().getSelectedValue().getId();
-				if(StudentDisciplineDAO.notasLiberadas(class_id)) {
-					gradesAndFrequenciesDialog.getBtnLiberarNotas().setVisible(false);
-				} else {
-					gradesAndFrequenciesDialog.getBtnLiberarNotas().setVisible(true);
-				}
 				gradesAndFrequenciesDialog.openDialog(class_id);
 			} else {
 				JOptionPane.showMessageDialog(null, "Selecione uma turma");
@@ -135,21 +132,44 @@ public class ClassController implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Selecione uma turma");
 			}
 			
-		} else if(event.getSource() == gradesAndFrequenciesDialog.getBtnLiberarNotas()) {
+		} else if(event.getSource() == classListView.getBtnReleaseGrades()) {
 		
-			int class_id = classListView.getList().getSelectedValue().getId();
-			int dialogResult = JOptionPane.showConfirmDialog (null, "Você tem certeza que deseja liberar as notas para os alunos?", "Atenção!", JOptionPane.YES_NO_OPTION);
 			
-			if(dialogResult == JOptionPane.YES_OPTION){
-				if(StudentDisciplineDAO.releaseGrades(class_id)) {
-					gradesAndFrequenciesDialog.getBtnLiberarNotas().setVisible(false);
-					JOptionPane.showMessageDialog(null, "As notas foram liberadas com sucesso!");
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Algo de errado aconteceu, as notas não foram liberadas.");
+			if(classListView.getList().getSelectedValue() != null) {
+				
+				int class_id = classListView.getList().getSelectedValue().getId();
+			
+				if(StudentDisciplineDAO.notasLiberadas(class_id)) {
+					JOptionPane.showMessageDialog(null, "As notas já foram liberadas para esta turma!");
+				} else {
+				
+					int dialogResult = JOptionPane.showConfirmDialog (null, "Você tem certeza que deseja liberar as notas para os alunos?", "Atenção!", JOptionPane.YES_NO_OPTION);
+					
+					if(dialogResult == JOptionPane.YES_OPTION){
+						if(StudentDisciplineDAO.releaseGrades(class_id)) {
+							classListView.getBtnReleaseGrades().setVisible(false);
+							JOptionPane.showMessageDialog(null, "As notas foram liberadas com sucesso!");
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Algo de errado aconteceu, as notas não foram liberadas.");
+						}
+					}
 				}
 			}
 			
+			else {
+				JOptionPane.showMessageDialog(null, "Selecione uma turma!");
+			}
+			
+		} else if(event.getSource() == classBookView.getBtnVoltar()) {
+			
+			if(baseController.getCurrentUser().getRole() == Constants.ROLE_PROFESSOR) {
+				this.baseController.getBaseFrame().changePanel(classListView, "Turmas");
+			}
+			else {
+				
+				this.baseController.getBaseFrame().changePanel(classListView, "Buscar Turma");
+			}
 		}
 		
 		

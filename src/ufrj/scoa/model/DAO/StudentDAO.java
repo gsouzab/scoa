@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import ufrj.scoa.model.VO.Course;
+import ufrj.scoa.model.VO.Discipline;
 import ufrj.scoa.model.VO.Room;
 import ufrj.scoa.model.VO.Student;
 import ufrj.scoa.model.VO.StudentDiscipline;
@@ -275,12 +276,13 @@ public class StudentDAO {
 			
 			conn = Connect.connectDB();
 			
-			PreparedStatement ps = conn.prepareStatement("SELECT c.name, c.time_of_class, r.building, r.floor, r.number FROM student_class sc, student s, class c, room r " +
+			PreparedStatement ps = conn.prepareStatement("SELECT d.name, c.time_of_class, r.building, r.floor, r.number FROM student_class sc, student s, class c, room r, discipline d " +
 														 " WHERE sc.student_id = ? " +
 												 		 " AND sc.student_id = s.id " +
 												 		 " AND sc.period =  s.currentPeriod " +
 												 		 " AND sc.state in  (?, ?) " +
 												 		 " AND sc.class_id = c.id" +
+												 		 " AND c.discipline_id = d.id" +
 												 		 " AND c.room_id = r.id ");
 			ps.setInt(1, student_id);
 			ps.setInt(2, Constants.STUDENT_CLASS_APPROVED);
@@ -293,8 +295,13 @@ public class StudentDAO {
 				ufrj.scoa.model.VO.Class theClass = new ufrj.scoa.model.VO.Class();
 				theClass.setName(rs.getString("name"));
 				theClass.setTimeOfClass(rs.getString("time_of_class"));
+				
+				Discipline discipline = new Discipline(rs.getString("name"), "", "");
 				Room room = new Room(rs.getString("building"), rs.getInt("number"), rs.getInt("floor"));
+				
 				theClass.setRoom(room);
+				theClass.setDiscipline(discipline);
+				
 				classList.add(theClass);
 
 			}
@@ -336,9 +343,10 @@ public ArrayList<StudentDiscipline> getHistory(int student_id) {
 			disciplinesList = new ArrayList<StudentDiscipline>();
 			conn = Connect.connectDB();
 			
-			PreparedStatement ps = conn.prepareStatement(" SELECT c.name, c.credits, sc.grade, sc.frequency, sc.period, sc.state FROM student_class sc, class c " +
+			PreparedStatement ps = conn.prepareStatement(" SELECT d.name, c.credits, sc.grade, sc.frequency, sc.period, sc.state FROM student_class sc, class c, discipline d " +
 														 " WHERE sc.student_id = ? " +
 														 " AND sc.class_id = c.id "+
+														 " AND c.discipline_id = d.id "+
 														 " ORDER BY  sc.period ASC ");
 
 			ps.setInt(1, student_id);
@@ -348,14 +356,19 @@ public ArrayList<StudentDiscipline> getHistory(int student_id) {
 
 				StudentDiscipline sd = new StudentDiscipline();
  				ufrj.scoa.model.VO.Class theClass = new ufrj.scoa.model.VO.Class();
+ 				Discipline discipline = new Discipline(rs.getString("name"), "", "");
  				
-				theClass.setName(rs.getString("name"));
 				theClass.setCredits(rs.getInt("credits"));
+				theClass.setDiscipline(discipline);
+				
 				sd.setGrade(rs.getFloat("grade"));
 				sd.setAttendance(rs.getInt("frequency"));
 				sd.setPeriod(rs.getInt("period"));
 				sd.setState(rs.getInt("state"));
+				sd.setStudentId(student_id);
+				
 				sd.setStudentClass(theClass);
+				
 				disciplinesList.add(sd);
 
 			}

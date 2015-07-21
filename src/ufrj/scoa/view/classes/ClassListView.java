@@ -30,6 +30,7 @@ public class ClassListView extends JPanel {
 	private JList<Class> list;
 	private JButton btnInsertGradesAndFrequencies;
 	private JButton btnConsultaDiarioClasse;
+	private JButton btnReleaseGrades;
 	
 	public ClassListView() {
 		setLayout(null);
@@ -52,8 +53,12 @@ public class ClassListView extends JPanel {
 		add(btnInsertGradesAndFrequencies);
 		
 		btnConsultaDiarioClasse = new JButton("Consultar diário de classe");
-		btnConsultaDiarioClasse.setBounds(282, 337, 232, 25);
+		btnConsultaDiarioClasse.setBounds(22, 374, 232, 25);
 		add(btnConsultaDiarioClasse);
+		
+		btnReleaseGrades = new JButton("Liberar Notas");
+		btnReleaseGrades.setBounds(271, 337, 163, 25);
+		add(btnReleaseGrades);
 		
 	}
 	
@@ -90,4 +95,9 @@ public class ClassListView extends JPanel {
 	public JLabel getLblCursos() {
 		return lblCursos;
 	}
+
+	public JButton getBtnReleaseGrades() {
+		return btnReleaseGrades;
+	}
+	
 }

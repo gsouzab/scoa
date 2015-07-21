@@ -137,6 +137,38 @@ public class ClassDAO {
 		return classList; 
 	}
 	
+	public ArrayList<Class> listActiveClasses() {
+		
+		ArrayList<Class> classList = new ArrayList<Class>();
+		
+		try {
+			
+			conn = Connect.connectDB();
+			
+			ps = conn.prepareStatement("SELECT * FROM class WHERE state = 1 ");
+			
+			ResultSet rs = ps.executeQuery();
+			
+			CourseDAO courseDao = new CourseDAO();
+			DisciplineDAO disciplineDao = new DisciplineDAO();
+			RoomDAO roomDao = new RoomDAO();
+			ProfessorDAO professorDAO = new ProfessorDAO();
+			
+			while(rs.next()) {
+				
+				Class c = new Class(rs.getInt("id"), rs.getInt("credits"),rs.getString("name"), rs.getString("time_of_class"), courseDao.getCourseById(rs.getInt("course_id")), disciplineDao.getDisciplineById(rs.getInt("discipline_id")), roomDao.getRoomById(rs.getInt("room_id")), professorDAO.getProfessorById(rs.getInt("professor_id")));
+				classList.add(c);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			System.out.println("Erro ao listar turma.");
+		}
+		
+		return classList; 
+	}
+	
 	public Class getClassById(int class_id) {
 		
 		Class classToReturn = null;
@@ -183,6 +215,22 @@ public class ClassDAO {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 			System.out.println("Erro ao deletar turma");
+		} 
+	}
+	
+	public void desativarTurmas() {
+		
+		PreparedStatement updateStatement;
+		
+		try {
+			conn = Connect.connectDB();
+			
+			updateStatement = conn.prepareStatement(" UPDATE scoa.class SET state = 2 ");
+			updateStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 	}
 
