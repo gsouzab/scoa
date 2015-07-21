@@ -58,6 +58,9 @@ public class StudentDisciplineController implements ActionListener {
 			
 			if(StudentDisciplineDAO.jaInscrito(newStudentDiscipline)) {
 				JOptionPane.showMessageDialog(null, "Já existe uma requisição de inscrição nessa matéria.");
+				
+			} else if(StudentDisciplineDAO.notasLiberadas(selectedClass.getId())){
+				JOptionPane.showMessageDialog(null, "Não é possível se inscrever nessa matéria pois as notas finais já foram liberadas!");
 			}
 			else {
 				

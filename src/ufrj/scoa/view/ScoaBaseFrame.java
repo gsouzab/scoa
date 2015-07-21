@@ -145,7 +145,7 @@ public class ScoaBaseFrame extends JFrame {
         
         secretaryMenu.add(newSecretaryMenuItem);
         
-        complaintSuggestionMenu = new JMenu("Sugestões/Reclamações");
+        complaintSuggestionMenu = new JMenu("Ouvidoria");
         complaintSuggestionMenu.setFont(new Font("Arial", Font.PLAIN, 12));
         
         newComplaintSuggestionMenuItem = new JMenuItem("Nova Sugestão/Reclamação");
